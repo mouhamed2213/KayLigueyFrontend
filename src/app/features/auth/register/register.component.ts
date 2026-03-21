@@ -34,13 +34,13 @@ export class RegisterComponent {
 
   readonly form = this.fb.group(
     {
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      company_name: [''],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', Validators.required],
-      terms: [false, Validators.requiredTrue],
+      first_name: ['moussa', Validators.required],
+      last_name: ['fall', Validators.required],
+      email: ['fall@email.com', [Validators.required, Validators.email]],
+      company_name: ['mycompany'],
+      password: ['12345678', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['12345678', Validators.required],
+      terms: [true, Validators.requiredTrue],
     },
     { validators: passwordMatchValidator },
   );
@@ -125,6 +125,9 @@ export class RegisterComponent {
     }
     const { confirmPassword, terms, ...rest } = this.form.value;
     const payload = { ...rest, role: this.selectedRole()! };
+    this.authService.error();
+
+    console.log(payload);
     // this.authService.register(payload as any).subscribe({
     //   next: () =>
     //     this.router.navigate(['/auth/login'], {
