@@ -1,2 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+@theme {
+  /* ── Couleurs Kay Liguey ── */
+  --color-kl-red: #c0152a;
+  --color-kl-red-dark: #96101f;
+  --color-kl-red-light: #e8354a;
+  --color-kl-red-50: #fff5f5;
+  --color-kl-red-100: #fcd0d0;
+  --color-kl-red-200: #f9a8a8;
+
+  --color-kl-bg: #f7f4f4;
+  --color-kl-surface: #ffffff;
+  --color-kl-border: #e8dede;
+  --color-kl-border-red: rgba(192, 21, 42, 0.2);
+
+  --color-kl-text: #1a1a1a;
+  --color-kl-muted: #6b6b6b;
+  --color-kl-hint: #aaaaaa;
+
+  /* ── Typographie ── */
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-display: "Syne", system-ui, sans-serif;
+
+  /* ── Border radius ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+}
+
+/* ── Base globale ── */
+@layer base {
+  html,
+  body {
+    height: 100%;
+    font-family: var(--font-sans);
+    background-color: var(--color-kl-bg);
+    color: var(--color-kl-text);
+    -webkit-font-smoothing: antialiased;
+  }
+}

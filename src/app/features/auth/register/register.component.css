@@ -1,0 +1,40 @@
+/* ── Input de base Kay Liguey ─────────────────────────────── */
+.kl-input {
+  width: 100%;
+  background: white;
+  border: 1px solid #e8dede;
+  border-radius: 10px;
+  padding: 11px 12px 11px 38px;
+  font-size: 13px;
+  font-family: "DM Sans", system-ui, sans-serif;
+  color: #1a1a1a;
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.kl-input::placeholder {
+  color: #aaa;
+}
+
+.kl-input:focus {
+  border-color: #c0152a;
+  box-shadow: 0 0 0 3px rgba(192, 21, 42, 0.1);
+}
+
+/* Champ en erreur — appliqué sur le parent via .kl-field-error */
+.kl-field-error .kl-input {
+  border-color: #c0152a;
+  background-color: #fff8f8;
+}
+
+/* Input sans icône gauche (si besoin) */
+.kl-input.no-icon {
+  padding-left: 12px;
+}
+
+/* Padding droit pour laisser place au bouton toggle mdp */
+.kl-input.pr-10 {
+  padding-right: 40px;
+}
