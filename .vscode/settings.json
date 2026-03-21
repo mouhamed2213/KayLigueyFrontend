@@ -1,4 +1,15 @@
 {
+      "css.customData": [],
+  "css.validate": false,
+  "scss.validate": false,
+  "less.validate": false,
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.experimental.configFile": null,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
     "prisma-smart-formatter.typescript.defaultFormatter": "esbenp.prettier-vscode",
     "prisma-smart-formatter.typescriptreact.defaultFormatter": "esbenp.prettier-vscode"
 }
