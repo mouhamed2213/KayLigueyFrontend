@@ -202,7 +202,7 @@
       }
 
       <!-- Bouton Google -->
-      <button
+      <!-- <button
         type="button"
         class="w-full flex items-center justify-center gap-3 bg-white border border-[#e8dede] rounded-[10px] px-4 py-2.75 text-[13px] font-medium text-[#1a1a1a] hover:border-[#C0152A] transition-colors cursor-pointer mb-5"
       >
@@ -225,7 +225,7 @@
           />
         </svg>
         Continuer avec Google
-      </button>
+      </button> -->
 
       <!-- Séparateur -->
       <div class="flex items-center gap-3 mb-5">
@@ -439,13 +439,49 @@
                 class="kl-input"
               />
             </div>
+            <!-- Ferr -->
             @if (hasError("last_name")) {
               <p class="text-[11px] text-[#C0152A]">Nom requis</p>
             }
           </div>
         </div>
 
-        <!-- Entreprise (rECRUTER) -->
+        <!-- Phone and city -->
+        <div class="grid grid-cols-2 gap-4 mt-2">
+          <div class="flex flex-col gap-1.5">
+            <label
+              class="text-[11px] font-semibold text-[#6b6b6b] uppercase tracking-[.5px]"
+              for="phone"
+              >Telephone</label
+            >
+
+            <div>
+              <!-- add span  -->
+              <input
+                type="text"
+                formControlName="phone"
+                placeholder="77xxxxx"
+                autocomplete="given-name"
+                class="kl-input"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label
+              class="text-[11px] font-semibold text-[#6b6b6b] uppercase tracking-[.5px]"
+              >Region</label
+            >
+            <input
+              type="text"
+              class="kl-input"
+              placeholder=""
+              formControlName="phone"
+            />
+          </div>
+        </div>
+
+        <!-- Entreprise (RECRUTER) -->
         @if (selectedRole() === "RECRUTER") {
           <div
             class="flex flex-col gap-1.5 mt-3"

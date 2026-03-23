@@ -32,14 +32,17 @@ export class RegisterComponent {
   readonly selectedRole = signal<string | null>(null);
   readonly showPwd = signal(false);
 
+  public error = this.authService.error();
   readonly form = this.fb.group(
     {
       first_name: ['moussa', Validators.required],
       last_name: ['fall', Validators.required],
       email: ['fall@email.com', [Validators.required, Validators.email]],
       company_name: ['mycompany'],
-      password: ['12345678', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['12345678', Validators.required],
+      phone: ['772214081', [Validators.required]],
+      city: ['Dakar', [Validators.required]],
+      password: ['12345678sS#', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['12345678sS#', Validators.required],
       terms: [true, Validators.requiredTrue],
     },
     { validators: passwordMatchValidator },
@@ -125,14 +128,14 @@ export class RegisterComponent {
     }
     const { confirmPassword, terms, ...rest } = this.form.value;
     const payload = { ...rest, role: this.selectedRole()! };
-    this.authService.error();
+    // this.authService.error();
 
-    console.log(payload);
-    // this.authService.register(payload as any).subscribe({
-    //   next: () =>
-    //     this.router.navigate(['/auth/login'], {
-    //       queryParams: { registered: 'true' },
-    //     }),
-    // });
+    // console.log(payload);
+    this.authService.register(payload as any).subscribe({
+      next: () =>
+        this.router.navigate(['/auth/login'], {
+          queryParams: { registered: 'true' },
+        }),
+    });
   }
 }
