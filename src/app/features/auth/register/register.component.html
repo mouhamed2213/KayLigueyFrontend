@@ -472,12 +472,18 @@
               class="text-[11px] font-semibold text-[#6b6b6b] uppercase tracking-[.5px]"
               >Region</label
             >
-            <input
-              type="text"
+
+            <select class="kl-input" formControlName="city">
+              @for (region of regions; track region) {
+                <option value="{{ region }}">{{ region }}</option>
+              }
+            </select>
+            <!-- <input
+              type="selec"
               class="kl-input"
               placeholder=""
-              formControlName="phone"
-            />
+              formControlName="city"
+            /> -->
           </div>
         </div>
 

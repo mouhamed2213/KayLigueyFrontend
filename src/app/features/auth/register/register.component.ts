@@ -1,6 +1,7 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
+import { SN_REGIONS } from '../../../shared/constants';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -57,6 +58,10 @@ export class RegisterComponent {
     if (/[^A-Za-z0-9]/.test(v)) s++;
     return s;
   });
+
+  // Region
+
+  regions: string[] = SN_REGIONS;
 
   readonly pwdColor = computed(
     () =>
@@ -130,7 +135,8 @@ export class RegisterComponent {
     const payload = { ...rest, role: this.selectedRole()! };
     // this.authService.error();
 
-    // console.log(payload);
+    console.log(payload);
+    console.log(this.regions.length);
     this.authService.register(payload as any).subscribe({
       next: () =>
         this.router.navigate(['/auth/login'], {
