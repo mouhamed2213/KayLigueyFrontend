@@ -17,7 +17,7 @@ export class AuthService {
         // get error from the API
         error: (err) => {
           this.getError = err.error.message;
-          // console.log(this.getError);
+          console.log(this.getError);
         },
       }),
     );
