@@ -2,6 +2,7 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { SN_REGIONS } from '../../../shared/constants';
+
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -10,6 +11,7 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
+import { LucideAngularModule, User } from 'lucide-angular';
 // import { UserRole } from '../../../core/models/auth.models';
 
 function passwordMatchValidator(g: AbstractControl): ValidationErrors | null {
@@ -21,7 +23,7 @@ function passwordMatchValidator(g: AbstractControl): ValidationErrors | null {
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
