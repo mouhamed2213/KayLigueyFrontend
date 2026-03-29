@@ -8,4 +8,6 @@ export const routes: Routes = [
   // register
   { path: 'auth/register', component: RegisterComponent },
   { path: 'auth/login', component: LoginComponent },
+
+  // lazy loader
 ];
