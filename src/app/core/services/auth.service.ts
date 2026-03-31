@@ -7,6 +7,7 @@ import { Observable, tap } from 'rxjs';
 export class AuthService {
   private apiUrl = environment.apiUrl;
   private http = inject(HttpClient);
+  private token!: string;
 
   getError!: string;
   load: boolean = false;
@@ -23,6 +24,23 @@ export class AuthService {
     );
   }
 
+  // login
+  login(data: any): Observable<any> {
+    console.log(data);
+    return this.http.post<any>(`${this.apiUrl}/auth/login`, data).pipe(
+      tap({
+        error: (err) => {
+          this.getError = err.error.message;
+          console.log(this.getError);
+        },
+      }),
+    );
+
+    return data;
+  }
+
+  // redirect after login
+  redirectAfterLogin() {}
   error() {
     return this.getError;
   }

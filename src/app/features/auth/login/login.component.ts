@@ -41,16 +41,17 @@ export class LoginComponent {
     }
     const { email, password } = this.form.value;
 
-    console.log(this.form.value);
-    // this.authService.login({ email: email!, password: password! }).subscribe({
-    //   next: () => {
-    //     const returnUrl = this.route.snapshot.queryParams['returnUrl'];
-    //     if (returnUrl) {
-    //       this.router.navigateByUrl(returnUrl);
-    //     } else {
-    //       this.authService.redirectAfterLogin();
-    //     }
-    //   },
-    // });
+    this.authService.login({ email: email!, password: password! }).subscribe({
+      next: () => {
+        // this is for user who came from unauthorize page without login.
+        // after login he's automatically redirect on this
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'];
+        if (returnUrl) {
+          this.router.navigateByUrl(returnUrl);
+        } else {
+          this.authService.redirectAfterLogin();
+        }
+      },
+    });
   }
 }
