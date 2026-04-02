@@ -26,7 +26,7 @@ export class AuthService {
 
   // login
   login(data: any): Observable<any> {
-    console.log(data);
+    // console.log(data);
     return this.http.post<any>(`${this.apiUrl}/auth/login`, data).pipe(
       tap({
         error: (err) => {
