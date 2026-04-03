@@ -5,7 +5,7 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { LucideAngularModule, User, Phone, Building } from 'lucide-angular';
-import { errorInterceptor } from './core/interceptor/error-interceptor';
+import { errorInterceptor } from './core/interceptor/errors/error-interceptor';
 
 import { provideRouter } from '@angular/router';
 import {
