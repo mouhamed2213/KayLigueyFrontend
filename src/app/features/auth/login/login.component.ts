@@ -24,8 +24,8 @@ export class LoginComponent {
   );
 
   readonly form = this.fb.group({
-    email: ['test@test.test', [Validators.required, Validators.email]],
-    password: ['MyPassword123!#', Validators.required],
+    email: ['test@test.com', [Validators.required, Validators.email]],
+    password: ['MyPassword123!', Validators.required],
     rememberMe: [false],
   });
 
@@ -42,16 +42,30 @@ export class LoginComponent {
     const { email, password } = this.form.value;
 
     this.authService.login({ email: email!, password: password! }).subscribe({
-      next: () => {
-        // this is for user who came from unauthorize page without login.
-        // after login he's automatically redirect on this
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'];
-        if (returnUrl) {
-          this.router.navigateByUrl(returnUrl);
-        } else {
-          this.authService.redirectAfterLogin();
-        }
+      // next: () => {
+      //   console.log('logged');
+      // },
+      error(err) {
+        console.log(err);
       },
     });
+
+    const authenticated = this.authService.isAuthenticated();
+    // console.log(authenticated);
+    if (authenticated) {
+      this.authService.getMe().subscribe({
+        next: () => {
+          // this is for user who came from unauthorize page without login.
+          // after login he's automatically redirect on this
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'];
+          if (returnUrl) {
+            this.router.navigateByUrl(returnUrl);
+          } else {
+            this.authService.redirectAfterLogin();
+          }
+        },
+      });
+      return;
+    }
   }
 }
