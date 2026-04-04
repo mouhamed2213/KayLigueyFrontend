@@ -50,6 +50,7 @@ export class AuthService {
 
         // console.log(token);
         localStorage.setItem('token', tokenString);
+        this.isAuthenticated();
       }),
 
       catchError((err) => {
@@ -61,8 +62,16 @@ export class AuthService {
     );
   }
 
-  isAuthenticated() {
-    return !!localStorage.getItem('token');
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const exp = payload.exp * 1000 > Date.now();
+      return exp;
+    } catch {
+      return false;
+    }
   }
   // get user
   getMe() {
