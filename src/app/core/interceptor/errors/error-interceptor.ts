@@ -23,6 +23,8 @@ export const errorInterceptor: HttpInterceptorFn = (
         userMessage = 'Le serveur est momentanément indisponible';
       } else if (err.status >= 500) {
         userMessage = 'Erreur serveur';
+      } else {
+        return throwError(() => err);
       }
 
       const customError = { ...err, error: { message: userMessage } };
