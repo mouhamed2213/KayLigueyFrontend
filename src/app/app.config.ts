@@ -14,11 +14,15 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { routes } from './app.routes';
+import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withFetch(), withInterceptors([errorInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([errorInterceptor, authInterceptor]),
+    ),
     importProvidersFrom(LucideAngularModule.pick({ Phone, Building })),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
