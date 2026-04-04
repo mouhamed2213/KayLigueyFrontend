@@ -3,9 +3,9 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, throwError } from 'rxjs';
 import { UserRole } from '../constant/roles';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Login, Token } from '../models/auth.models';
+import { Login, Register, Token } from '../models/auth.models';
 import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
@@ -15,12 +15,12 @@ export class AuthService {
   private route = inject(Router);
   private token!: Token;
   private getError!: string;
-  private load: boolean = false;
+  readonly loading = signal<boolean>(false);
 
-  user = signal<User | null | undefined>(null);
+  private user = signal<User | null | undefined>(null);
 
   // register
-  register(data: any): Observable<string> {
+  register(data: Register): Observable<string> {
     return this.http.post<string>(`${this.apiUrl}/register`, data).pipe(
       tap((result) => console.log('Registered', result)),
 
@@ -35,23 +35,29 @@ export class AuthService {
   // login
   login(data: Login): Observable<Token> {
     // console.log(data);
+    this.loading.set(true);
+
     return this.http.post<Token>(`${this.apiUrl}/login`, data).pipe(
       tap((token) => {
         this.token = token;
         const tokenString = this.token.token;
+
         if (!tokenString) {
           throw new Error(
             'Login response did not include a valid token Or token is null',
           );
         }
+
+        // console.log(token);
         localStorage.setItem('token', tokenString);
       }),
 
       catchError((err) => {
         this.getError = err?.error?.message ?? err.message ?? 'Unknown error';
-        console.log(this.getError);
+        // console.log(this.getError);
         return throwError(() => err);
       }),
+      finalize(() => this.loading.set(false)),
     );
   }
 
@@ -89,15 +95,13 @@ export class AuthService {
     return;
   }
 
-  // logout() {
-  //   this.token = null;
-  //   return localStorage.removeItem('token');
-  // }
+  logout(): void {
+    this.token = null!;
+    this.user.set(null);
+    localStorage.removeItem('token');
+    this.route.navigate(['/login']);
+  }
   error() {
     return this.getError;
-  }
-
-  isLoading() {
-    return this.load;
   }
 }
