@@ -1,8 +1,8 @@
-// Assuming UserRole is defined elsewhere, e.g., in a shared types file
-export enum UserRole {
-  ADMIN = 'ADMIN',
-  CANDIDAT = 'CANDIDAT',
-  RECRUTER = 'RECRUTER',
+export interface Login {
+  email: string;
+  password: string;
 }
 
-// In register.component.ts
+export interface Token {
+  token: string;
+}
