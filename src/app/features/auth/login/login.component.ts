@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
+import { Login } from '../../../core/models/auth.models';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,7 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  readonly authService = inject(AuthService);
+  private authService = inject(AuthService);
   private readonly fb = inject(FormBuilder);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
@@ -34,38 +36,33 @@ export class LoginComponent {
     return !!ctrl && ctrl.invalid && (ctrl.dirty || ctrl.touched);
   }
 
+  public loading() {
+    return this.authService.loading();
+  }
+
+  error() {
+    return this.authService.error();
+  }
+
+  // on submitting forms
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-    const { email, password } = this.form.value;
+    const { email, password } = this.form.value as Login;
 
-    this.authService.login({ email: email!, password: password! }).subscribe({
-      // next: () => {
-      //   console.log('logged');
-      // },
-      error(err) {
-        console.log(err);
-      },
-    });
-
-    const authenticated = this.authService.isAuthenticated();
-    // console.log(authenticated);
-    if (authenticated) {
-      this.authService.getMe().subscribe({
+    const creds: Login = { email, password };
+    this.authService
+      .login(creds)
+      .pipe(switchMap(() => this.authService.getMe()))
+      .subscribe({
         next: () => {
-          // this is for user who came from unauthorize page without login.
-          // after login he's automatically redirect on this
           const returnUrl = this.route.snapshot.queryParams['returnUrl'];
-          if (returnUrl) {
-            this.router.navigateByUrl(returnUrl);
-          } else {
-            this.authService.redirectAfterLogin();
-          }
+          returnUrl
+            ? this.router.navigateByUrl(returnUrl)
+            : this.authService.redirectAfterLogin();
         },
       });
-      return;
-    }
   }
 }
