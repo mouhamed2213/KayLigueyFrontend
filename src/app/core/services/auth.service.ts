@@ -5,38 +5,46 @@ import { Observable, tap, throwError } from 'rxjs';
 import { UserRole } from '../constant/roles';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Login, Token } from '../models/auth.models';
+import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private apiUrl = `${environment.apiUrl}/auth`;
   private http = inject(HttpClient);
   private route = inject(Router);
-  private token!: string;
-
-  private getError: string = '';
+  private token!: Token;
+  private getError!: string;
   private load: boolean = false;
 
-  user = signal<any | null | undefined>(''); // create user model
+  user = signal<User | null | undefined>(null);
+
   // register
-  register(data: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/register`, data).pipe(
-      tap({
-        // get error from the API
-        error: (err) => {
-          this.getError = err.error.message;
-          console.log(this.getError);
-        },
+  register(data: any): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}/register`, data).pipe(
+      tap((result) => console.log('Registered', result)),
+
+      catchError((err) => {
+        this.getError = err?.error?.message;
+        console.log(this.getError);
+        return throwError(() => err);
       }),
     );
   }
 
   // login
-  login(data: any): Observable<string> {
+  login(data: Login): Observable<Token> {
     // console.log(data);
-    return this.http.post<any>(`${this.apiUrl}/login`, data).pipe(
-      tap((jwtToken) => {
-        this.token = jwtToken.token;
-        localStorage.setItem('token', this.token);
+    return this.http.post<Token>(`${this.apiUrl}/login`, data).pipe(
+      tap((token) => {
+        this.token = token;
+        const tokenString = this.token.token;
+        if (!tokenString) {
+          throw new Error(
+            'Login response did not include a valid token Or token is null',
+          );
+        }
+        localStorage.setItem('token', tokenString);
       }),
 
       catchError((err) => {
@@ -52,24 +60,24 @@ export class AuthService {
   }
   // get user
   getMe() {
-    return this.http.get<any>(`${this.apiUrl}/me`).pipe(
+    return this.http.get<User>(`${this.apiUrl}/me`).pipe(
       tap((user) => {
         // console.log(user);
         this.user.set(user);
       }),
       catchError((err) => {
-        this.error = err.error?.message;
+        this.getError = err.error?.message;
         return throwError(() => err);
       }),
     );
   }
 
   hasRole() {
-    return this.user().role;
+    return this.user()?.role;
   }
   // redirect after login
   redirectAfterLogin() {
-    const userRole: UserRole = this.hasRole();
+    const userRole = this.hasRole();
     // console.log(userRole);
     if (userRole === UserRole.CANDIDAT) {
       return this.route.navigate(['/candidat']);
@@ -81,10 +89,10 @@ export class AuthService {
     return;
   }
 
-  logout() {
-    this.token = '';
-    localStorage.removeItem('token');
-  }
+  // logout() {
+  //   this.token = null;
+  //   return localStorage.removeItem('token');
+  // }
   error() {
     return this.getError;
   }
