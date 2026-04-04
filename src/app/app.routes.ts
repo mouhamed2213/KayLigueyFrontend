@@ -9,5 +9,17 @@ export const routes: Routes = [
   { path: 'auth/register', component: RegisterComponent },
   { path: 'auth/login', component: LoginComponent },
 
-  // lazy loader
+  // Candidat
+  {
+    path: 'candidat',
+    loadComponent: () =>
+      import('./features/candidat/pages/home/home.component').then(
+        (h) => h.HomeComponent,
+      ),
+
+    loadChildren: () =>
+      import('./features/candidat/candidat.routes').then(
+        (c) => c.CANDIDAT_ROUTES,
+      ),
+  },
 ];

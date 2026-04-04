@@ -779,12 +779,10 @@
         <!-- Bouton submit -->
         <button
           type="submit"
-          [disabled]="
-            form.invalid || !selectedRole() || authService.isLoading()
-          "
+          [disabled]="form.invalid || !selectedRole() || authService.loading()"
           class="w-full flex items-center justify-center gap-2 mt-5 bg-[#C0152A] text-white font-display font-bold text-[15px] rounded-[10px] py-3. 25 px-4 hover:bg-[#96101F] active:scale-[.99] disabled:bg-[#ccc] disabled:cursor-not-allowed transition-all duration-150 cursor-pointer"
         >
-          @if (authService.isLoading()) {
+          @if (authService.loading()) {
             <svg
               class="animate-spin w-4 h-4 shrink-0"
               viewBox="0 0 16 16"
