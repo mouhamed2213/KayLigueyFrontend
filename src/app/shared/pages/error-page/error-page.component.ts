@@ -7,6 +7,6 @@ import { Component, input } from '@angular/core';
   styleUrl: './error-page.component.css',
 })
 export class ErrorPageComponent {
-  code = input<number>();
+  code = input<string>();
   message = input<string>();
 }
