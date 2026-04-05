@@ -59,7 +59,7 @@ export class LoginComponent {
       .subscribe({
         next: () => {
           const returnUrl = this.route.snapshot.queryParams['returnUrl'];
-          console.log('RETURN : ', returnUrl);
+          // console.log('RETURN : ', returnUrl);
           returnUrl
             ? this.router.navigateByUrl(returnUrl)
             : this.authService.redirectAfterLogin();
