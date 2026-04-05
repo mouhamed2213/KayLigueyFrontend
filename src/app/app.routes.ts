@@ -4,11 +4,23 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { authGuard } from './core/guard/auth/auth.guard';
 import { candidatGuard } from './core/guard/roles/user.guard';
 import { ErrorPageComponent } from './shared/pages/error-page/error-page.component';
+import { HomeComponent } from './features/public/pages/home/home.component';
 
 export const routes: Routes = [
-  // landing page
-  { path: '', component: LoginComponent, pathMatch: 'full' },
-  // register
+  // Public page
+  {
+    path: '',
+    loadComponent: () =>
+      import('./features/public/pages/home/home.component').then(
+        (pb) => pb.HomeComponent,
+      ),
+    loadChildren: () =>
+      import('./features/public/public.route').then((r) => r.PUBLIC_ROUTE),
+
+    pathMatch: 'full',
+  },
+
+  // Authentication
   { path: 'auth/register', component: RegisterComponent },
   { path: 'auth/login', component: LoginComponent },
 
@@ -28,7 +40,6 @@ export const routes: Routes = [
   },
 
   // ERROR PAGE
-
   {
     path: 'unauthorized',
     component: ErrorPageComponent,
