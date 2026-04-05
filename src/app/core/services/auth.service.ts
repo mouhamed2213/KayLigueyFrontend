@@ -1,9 +1,9 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, throwError } from 'rxjs';
 import { UserRole } from '../constant/roles';
-import { catchError, finalize } from 'rxjs/operators';
+import { catchError, finalize, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Login, Register, Token } from '../models/auth.models';
 import { User } from '../models/user.model';
@@ -16,8 +16,7 @@ export class AuthService {
   private token!: Token;
   private getError!: string;
   readonly loading = signal<boolean>(false);
-
-  private user = signal<User | null | undefined>(null);
+  private user = signal<User | null | undefined>(undefined);
 
   // register
   register(data: Register): Observable<string> {
@@ -50,7 +49,7 @@ export class AuthService {
 
         // console.log(token);
         localStorage.setItem('token', tokenString);
-        this.isAuthenticated();
+        // this.isAuthenticated();
       }),
 
       catchError((err) => {
@@ -64,6 +63,7 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
+
     if (!token) return false;
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
@@ -74,26 +74,30 @@ export class AuthService {
     }
   }
   // get user
-  getMe() {
+  getMe(): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/me`).pipe(
       tap((user) => {
-        // console.log(user);
         this.user.set(user);
+        console.log(this.user()?.role);
       }),
       catchError((err) => {
+        this.user.set(null);
         this.getError = err.error?.message;
         return throwError(() => err);
       }),
     );
   }
+  userRole = computed(() => this.user()?.role);
 
   hasRole() {
-    return this.user()?.role;
+    return this.userRole();
   }
+
   // redirect after login
   redirectAfterLogin() {
     const userRole = this.hasRole();
-    // console.log(userRole);
+    console.log(userRole);
+
     if (userRole === UserRole.CANDIDAT) {
       return this.route.navigate(['/candidat']);
     } else if (userRole === UserRole.RECRUTER) {
