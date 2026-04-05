@@ -9,7 +9,7 @@ export const CANDIDAT_ROUTES: Routes = [
   },
 
   {
-    path: 'home',
+    path: 'homeCandidat',
     component: HomeComponent,
   },
 ];
