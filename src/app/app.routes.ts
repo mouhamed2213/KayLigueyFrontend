@@ -3,6 +3,7 @@ import { RegisterComponent } from './features/auth/register/register.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { authGuard } from './core/guard/auth/auth.guard';
 import { candidatGuard } from './core/guard/roles/user.guard';
+import { ErrorPageComponent } from './shared/pages/error-page/error-page.component';
 
 export const routes: Routes = [
   // landing page
@@ -24,5 +25,18 @@ export const routes: Routes = [
         (c) => c.CANDIDAT_ROUTES,
       ),
     canActivate: [authGuard, candidatGuard],
+  },
+
+  // ERROR PAGE
+
+  {
+    path: '404',
+    component: ErrorPageComponent,
+    data: { code: 404, message: 'Not Found' },
+  },
+  {
+    path: '403',
+    component: ErrorPageComponent,
+    data: { code: 403, message: 'Fobidden' },
   },
 ];
