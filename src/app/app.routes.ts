@@ -30,13 +30,27 @@ export const routes: Routes = [
   // ERROR PAGE
 
   {
-    path: '404',
+    path: 'unauthorized',
     component: ErrorPageComponent,
-    data: { code: 404, message: 'Not Found' },
+    data: {
+      code: '403',
+      message: "Accès refusé : vous n'avez pas les droits nécessaires.",
+    },
   },
   {
-    path: '403',
+    path: 'server-error',
     component: ErrorPageComponent,
-    data: { code: 403, message: 'Fobidden' },
+    data: {
+      code: '500',
+      message: 'Le serveur rencontre un problème. Réessayez plus tard.',
+    },
   },
+  {
+    path: 'not-found',
+    component: ErrorPageComponent,
+    data: { code: '404', message: "Oups ! Cette page n'existe pas." },
+  },
+
+  // Wildcard pour attraper toutes les URLs inconnues
+  { path: '**', redirectTo: 'not-found' },
 ];
