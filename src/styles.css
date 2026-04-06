@@ -24,9 +24,9 @@
   /* ── Typographie ── */
   --font-sans: "DM Inter", system-ui, sans-serif;
   --font-display: "Syne", system-ui, sans-serif;
-  --font-headline: "Manrope system-ui, sans-serif";
-  --font-content: "Inter system-ui, sans-serif";
-  --font-label: "Inter system-ui, sans-serif";
+  --font-headline: "Manrope", system-ui, sans-serif;
+  --font-content: "Inter", system-ui, sans-serif;
+  --font-label: "Inter", system-ui, sans-serif;
 
   /* ── Border radius ── */
   --radius-sm: 6px;
@@ -48,11 +48,18 @@
   }
 }
 
-/* --- CUSTOM REUSE */
+/* @layer components {
+  .font-headline {
+    font-family: var(--font-headline);
+  }
+} */
 
-.nav-link {
-  @apply text-kl-muted font-headline font-semibold p-1 
-         border-b-2 border-transparent 
-         transition duration-150 ease-in-out hover:scale-105
-         hover:text-kl-red-light hover:border-kl-red-light;
+/* --- CUSTOM REUSE */
+@layer components {
+  .nav-link {
+    @apply text-kl-muted font-headline font-semibold p-1 
+           border-b-2 border-transparent 
+           transition duration-150 ease-in-out hover:scale-105
+           hover:text-kl-red-light hover:border-kl-red-light;
+  }
 }
