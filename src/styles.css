@@ -47,3 +47,12 @@
     -webkit-font-smoothing: antialiased;
   }
 }
+
+/* --- CUSTOM REUSE */
+
+.nav-link {
+  @apply text-kl-muted font-headline font-semibold p-1 
+         border-b-2 border-transparent 
+         transition duration-150 ease-in-out hover:scale-105
+         hover:text-kl-red-light hover:border-kl-red-light;
+}
