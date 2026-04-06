@@ -1,10 +1,10 @@
 <div class="bg-kl-bg grid grid-cols-3 gap-15 rounded-sm p-3 shadow-lg">
-  <div class="font-headline mt-2 flex space-x-2 text-2xl font-bold">
-    <h2 class="">Kay</h2>
+  <div class="font-headline flex space-x-2 text-2xl font-bold">
+    <h2>Kay</h2>
     <h2 class="text-kl-red-light">Liguey</h2>
   </div>
   <div>
-    <ul class="mt-2 flex items-center justify-between">
+    <ul class="flex items-center justify-between">
       <li>
         <a
           routerLink="/public/home"
@@ -56,16 +56,16 @@
   <div
     class="font-headline flex flex-row-reverse gap-2.5 text-center font-semibold"
   >
-    <a
+    <app-login-button variant="primary" routerLink="/register">
+      S'incrire
+    </app-login-button>
+    <!-- <a
       routerLink="/register"
       class="bg-kl-primary-red border-kl-primary-red text-kl-surface hover:bg-kl-red-btn-hover hover:text-kl-text focus:ring-kl-primary-red min-w-28 flex-none rounded-sm border px-4 py-2 transition duration-150 ease-in-out hover:shadow-md focus:ring-2 focus:ring-offset-2 focus:outline-none active:scale-95"
-      >S'inscrire</a
-    >
+    ></a> -->
 
-    <a
-      routerLink="/login"
-      class="border-kl-primary-red text-kl-primary-red hover:bg-kl-primary-red hover:text-kl-surface focus:ring-kl-primary-red min-w-28 rounded-sm border px-4 py-2 transition duration-150 ease-in-out hover:shadow-md focus:ring-2 focus:ring-offset-2 focus:outline-none active:scale-95"
-      >Se connecter</a
-    >
+    <app-login-button variant="outline" routerLink="/login">
+      Se connecter
+    </app-login-button>
   </div>
 </div>
