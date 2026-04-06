@@ -22,8 +22,8 @@ export const routes: Routes = [
   },
 
   // Authentication
-  { path: 'auth/register', component: RegisterComponent },
-  { path: 'auth/login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
 
   // Candidat
   {
