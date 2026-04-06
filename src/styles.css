@@ -2,8 +2,8 @@
 
 @theme {
   /* ── Couleurs Kay Liguey ── */
-  --color-kl-red: #c0152a;
-  --color-kl-red-dark: #96101f;
+  --color-kl-primary-red: #c0152a;
+  --color-kl-secondary-red-dark: #96101f; /* //kl-red-dark */
   --color-kl-red-light: #e8354a;
   --color-kl-red-50: #fff5f5;
   --color-kl-red-100: #fcd0d0;
@@ -12,21 +12,28 @@
   --color-kl-bg: #f7f4f4;
   --color-kl-surface: #ffffff;
   --color-kl-border: #e8dede;
-  --color-kl-border-red: rgba(192, 21, 42, 0.2);
-
+  --color-kl-red-btn-hover: hsla(0, 16%, 96%, 0.643);
   --color-kl-text: #1a1a1a;
   --color-kl-muted: #6b6b6b;
-  --color-kl-hint: #aaaaaa;
+  --color-kl-hint: #2c1d1d;
+
+  /* Couleur button */
+  --color-kl-border-red: #f4f4f46e;
+  --color-kl-primary-trans: #f4f4f46e;
 
   /* ── Typographie ── */
-  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-sans: "DM Inter", system-ui, sans-serif;
   --font-display: "Syne", system-ui, sans-serif;
+  --font-headline: "Manrope system-ui, sans-serif";
+  --font-content: "Inter system-ui, sans-serif";
+  --font-label: "Inter system-ui, sans-serif";
 
   /* ── Border radius ── */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-xl: 20px;
+  --radius-default: 4px;
 }
 
 /* ── Base globale ── */
