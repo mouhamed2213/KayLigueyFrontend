@@ -16,4 +16,11 @@ export class NavbarPublicComponent {
   isActive(): string {
     return `text-kl-red-light border-kl-red-light`;
   }
+  get class(): string {
+    return `
+      text-kl-muted font-headline hover:border-kl-red-light 
+      hover:text-kl-red-light border-b-2 border-transparent 
+      p-1 font-semibold transition duration-150 ease-in-out hover:scale-105
+`;
+  }
 }

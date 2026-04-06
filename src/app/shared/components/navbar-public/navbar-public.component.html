@@ -10,7 +10,7 @@
           routerLink="/public/home"
           [routerLinkActive]="isActive()"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="text-kl-muted font-headline hover:border-kl-red-light hover:text-kl-red-light border-b-2 border-transparent p-1 font-semibold transition duration-150 ease-in-out hover:scale-105"
+          [class]="class"
           >Accueil</a
         >
       </li>
@@ -19,7 +19,7 @@
           routerLink="/public/offres"
           [routerLinkActive]="isActive()"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="text-kl-muted font-headline hover:border-kl-red-light hover:text-kl-red-light border-b-2 border-transparent p-1 font-semibold transition duration-150 ease-in-out hover:scale-105"
+          [class]="class"
           >Offres</a
         >
       </li>
@@ -29,7 +29,7 @@
           routerLink="/public/service"
           [routerLinkActive]="isActive()"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="text-kl-muted font-headline hover:border-kl-red-light hover:text-kl-red-light border-b-2 border-transparent p-1 font-semibold transition duration-150 ease-in-out hover:scale-105"
+          [class]="class"
           >Nos Service</a
         >
       </li>
@@ -38,7 +38,7 @@
           routerLink="/public/blog"
           [routerLinkActive]="isActive()"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="text-kl-muted font-headline hover:border-kl-red-light hover:text-kl-red-light border-b-2 border-transparent p-1 font-semibold transition duration-150 ease-in-out hover:scale-105"
+          [class]="class"
           >Blog</a
         >
       </li>
@@ -47,7 +47,7 @@
           routerLink="/public/contact"
           [routerLinkActive]="isActive()"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="text-kl-muted font-headline hover:border-kl-red-light hover:text-kl-red-light border-b-2 border-transparent p-1 font-semibold transition duration-150 ease-in-out hover:scale-105"
+          [class]="class"
           >Contact</a
         >
       </li>
@@ -59,10 +59,6 @@
     <app-login-button variant="primary" routerLink="/register">
       S'incrire
     </app-login-button>
-    <!-- <a
-      routerLink="/register"
-      class="bg-kl-primary-red border-kl-primary-red text-kl-surface hover:bg-kl-red-btn-hover hover:text-kl-text focus:ring-kl-primary-red min-w-28 flex-none rounded-sm border px-4 py-2 transition duration-150 ease-in-out hover:shadow-md focus:ring-2 focus:ring-offset-2 focus:outline-none active:scale-95"
-    ></a> -->
 
     <app-login-button variant="outline" routerLink="/login">
       Se connecter
