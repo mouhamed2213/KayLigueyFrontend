@@ -4,20 +4,21 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { authGuard } from './core/guard/auth/auth.guard';
 import { candidatGuard } from './core/guard/roles/user.guard';
 import { ErrorPageComponent } from './shared/pages/error-page/error-page.component';
-import { HomeComponent } from './features/public/pages/home/home.component';
-
 export const routes: Routes = [
   // Public page
   {
-    path: '',
+    path: 'public',
     loadComponent: () =>
-      import('./features/public/pages/home/home.component').then(
-        (pb) => pb.HomeComponent,
+      import('./layouts/public-layout/public-layout.component').then(
+        (m) => m.PublicLayoutComponent,
       ),
-    loadChildren: () =>
-      import('./features/public/public.route').then((r) => r.PUBLIC_ROUTE),
-
-    pathMatch: 'full',
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./features/public/public.route').then((r) => r.PUBLIC_ROUTE),
+      },
+    ],
   },
 
   // Authentication
@@ -63,5 +64,6 @@ export const routes: Routes = [
   },
 
   // Wildcard pour attraper toutes les URLs inconnues
+  { path: '', redirectTo: 'public/home', pathMatch: 'full' },
   { path: '**', redirectTo: 'not-found' },
 ];
