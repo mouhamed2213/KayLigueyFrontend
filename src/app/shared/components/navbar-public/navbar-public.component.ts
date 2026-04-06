@@ -13,10 +13,7 @@ import { LoginButtonComponent } from '../login-button/login-button.component';
 export class NavbarPublicComponent {
   private route = inject(Router);
 
-  isActive(route: string): boolean {
-    if (this.route.url === route) {
-      console.log('true');
-    }
-    return true;
+  isActive(): string {
+    return `text-kl-red-light border-kl-red-light`;
   }
 }

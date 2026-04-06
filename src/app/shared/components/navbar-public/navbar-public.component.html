@@ -8,7 +8,7 @@
       <li>
         <a
           routerLink="/public/home"
-          routerLinkActive="text-kl-red-light border-kl-red-light"
+          [routerLinkActive]="isActive()"
           [routerLinkActiveOptions]="{ exact: true }"
           class="text-kl-muted font-headline hover:border-kl-red-light hover:text-kl-red-light border-b-2 border-transparent p-1 font-semibold transition duration-150 ease-in-out hover:scale-105"
           >Accueil</a
@@ -17,7 +17,7 @@
       <li>
         <a
           routerLink="/public/offres"
-          routerLinkActive="text-kl-red-light border-kl-red-light"
+          [routerLinkActive]="isActive()"
           [routerLinkActiveOptions]="{ exact: true }"
           class="text-kl-muted font-headline hover:border-kl-red-light hover:text-kl-red-light border-b-2 border-transparent p-1 font-semibold transition duration-150 ease-in-out hover:scale-105"
           >Offres</a
@@ -27,7 +27,7 @@
       <li>
         <a
           routerLink="/public/service"
-          routerLinkActive="text-kl-red-light border-kl-red-light"
+          [routerLinkActive]="isActive()"
           [routerLinkActiveOptions]="{ exact: true }"
           class="text-kl-muted font-headline hover:border-kl-red-light hover:text-kl-red-light border-b-2 border-transparent p-1 font-semibold transition duration-150 ease-in-out hover:scale-105"
           >Nos Service</a
@@ -36,7 +36,7 @@
       <li>
         <a
           routerLink="/public/blog"
-          routerLinkActive="text-kl-red-light border-kl-red-light"
+          [routerLinkActive]="isActive()"
           [routerLinkActiveOptions]="{ exact: true }"
           class="text-kl-muted font-headline hover:border-kl-red-light hover:text-kl-red-light border-b-2 border-transparent p-1 font-semibold transition duration-150 ease-in-out hover:scale-105"
           >Blog</a
@@ -45,7 +45,7 @@
       <li>
         <a
           routerLink="/public/contact"
-          routerLinkActive="text-kl-red-light border-kl-red-light"
+          [routerLinkActive]="isActive()"
           [routerLinkActiveOptions]="{ exact: true }"
           class="text-kl-muted font-headline hover:border-kl-red-light hover:text-kl-red-light border-b-2 border-transparent p-1 font-semibold transition duration-150 ease-in-out hover:scale-105"
           >Contact</a
