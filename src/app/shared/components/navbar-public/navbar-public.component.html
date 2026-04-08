@@ -1,90 +1,94 @@
-<div
-  class="flex w-full flex-col p-4 md:grid md:grid-cols-3 md:items-center shadow-xl"
+<header
+  class="w-full transition-all duration-300 md:rounded-sm p-3 md:shadow-lg"
+  [class.bg-white]="scrolled()"
+  [class.shadow-lg]="scrolled()"
 >
-  <!-- LEFT -->
-  <div class="flex items-center justify-between">
-    <div class="text-kl-text hidden text-3xl font-bold md:block md:flex-col">
-      <h2>Kay</h2>
-      <h2 class="text-kl-red-light">Liguey</h2>
+  <div class="flex items-center justify-between p-4 md:grid md:grid-cols-3">
+    <!-- LOGO -->
+    <div class="flex items-center justify-between">
+      <div class="hidden text-3xl font-bold md:flex md:flex-row space-x-1">
+        <h2>Kay</h2>
+        <h2 class="text-kl-red-light">Liguey</h2>
+      </div>
+
+      <!-- BURGER -->
+      <button
+        class="text-2xl md:hidden"
+        aria-label="Toggle menu"
+        (click)="toggleMenu()"
+      >
+        <!-- {{ isOpen() ? "ss " : "☰" }} -->
+
+        @if (!isOpen()) {
+          <lucide-icon
+            name="menu"
+            [size]="40"
+            [strokeWidth]="2.25"
+          ></lucide-icon>
+        }
+      </button>
     </div>
 
-    <div class="md:hidden">
-      <span (click)="open()" class="cursor-pointer" [class.hidden]="isOpenMenu"
-        >☰</span
+    <!-- NAV DESKTOP -->
+    <nav class="hidden gap-6 md:flex">
+      <a routerLink="/public/home" routerLinkActive="active" class="nav-link"
+        >Accueil</a
       >
-
-      <span
-        (click)="close()"
-        class="cursor-pointer"
-        [class.hidden]="!isOpenMenu"
-        >❌</span
+      <a routerLink="/public/offres" routerLinkActive="active" class="nav-link"
+        >Offres</a
       >
-    </div>
-  </div>
+      <a routerLink="/public/service" routerLinkActive="active" class="nav-link"
+        >Services</a
+      >
+      <a routerLink="/public/blog" routerLinkActive="active" class="nav-link"
+        >Blog</a
+      >
+      <a routerLink="/public/contact" routerLinkActive="active" class="nav-link"
+        >Contact</a
+      >
+    </nav>
 
-  <!-- NAV -->
-  <nav class="mt-4 md:mt-0 md:block" [class.hidden]="!isOpen && true">
-    <ul class="flex flex-col space-y-3 md:flex-row md:justify-start md:gap-5">
-      <li>
-        <a
-          routerLink="/public/home"
-          routerLinkActive="text-kl-red-light border-kl-red-light"
-          [routerLinkActiveOptions]="{ exact: true }"
-          class="nav-link"
-          >Accueil</a
-        >
-      </li>
-      <li>
-        <a
-          routerLink="/public/offres"
-          routerLinkActive="text-kl-red-light border-kl-red-light"
-          [routerLinkActiveOptions]="{ exact: true }"
-          class="nav-link"
-          >Offres</a
-        >
-      </li>
-
-      <li>
-        <a
-          routerLink="/public/service"
-          routerLinkActive="text-kl-red-light border-kl-red-light "
-          [routerLinkActiveOptions]="{ exact: true }"
-          class="nav-link"
-          >Services</a
-        >
-      </li>
-      <li>
-        <a
-          routerLink="/public/blog"
-          routerLinkActive="text-kl-red-light border-kl-red-light"
-          [routerLinkActiveOptions]="{ exact: true }"
-          class="nav-link"
-          >Blog</a
-        >
-      </li>
-      <li>
-        <a
-          routerLink="/public/contact"
-          routerLinkActive="text-kl-red-light border-kl-red-light"
-          [routerLinkActiveOptions]="{ exact: true }"
-          >Contact</a
-        >
-      </li>
-    </ul>
-  </nav>
-
-  <!-- BUTTONS -->
-  <div class="mt-4 md:mt-0 md:block" [class.hidden]="!isOpen && true">
-    <div
-      class="font-headline flex gap-4 text-center font-semibold md:justify-end"
-    >
+    <!-- BUTTONS -->
+    <div class="hidden justify-end gap-4 md:flex">
       <app-button variant="primary" routerLink="/register"
-        >S'incrire</app-button
+        >S'inscrire</app-button
       >
-
       <app-button variant="outline" routerLink="/login"
         >Se connecter</app-button
       >
     </div>
+  </div>
+</header>
+
+<!-- OVERLAY -->
+@if (isOpen()) {
+  <div class="fixed inset-0 z-40 bg-black/50" (click)="closeMenu()"></div>
+}
+<!-- SIDEBAR MOBILE -->
+<div
+  class="fixed top-0 left-0 z-50 h-full w-64 transform bg-white transition-transform duration-300 md:hidden rounded-sm p-3 shadow-lg"
+  [class.translate-x-0]="isOpen()"
+  [class.-translate-x-full]="!isOpen()"
+>
+  <div class="flex items-center border-b p-4 justify-start">
+    <span class="font-bold"> </span>
+    <button (click)="closeMenu()">
+      <lucide-icon name="x" [size]="40" [strokeWidth]="2.25"></lucide-icon>
+    </button>
+  </div>
+
+  <nav
+    class="flex flex-col gap-10 p-4 justify-center items-center mt-10 rounded-sm shadow-lg"
+  >
+    <a (click)="closeMenu()" routerLink="/public/home">Accueil</a>
+    <a (click)="closeMenu()" routerLink="/public/offres">Offres</a>
+    <a (click)="closeMenu()" routerLink="/public/service">Services</a>
+    <a (click)="closeMenu()" routerLink="/public/blog">Blog</a>
+    <a (click)="closeMenu()" routerLink="/public/contact">Contact</a>
+  </nav>
+
+  <div class="flex flex-col gap-3 p-4 justify-center items-center mt-7">
+    <app-button variant="primary" routerLink="/register">S'inscrire</app-button>
+    <!-- <app-button variant="outline" routerLink="/login">Se connecter</app-button> -->
   </div>
 </div>

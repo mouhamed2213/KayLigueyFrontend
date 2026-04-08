@@ -2,7 +2,6 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { SN_REGIONS } from '../../../shared/constants';
-
 import {
   ReactiveFormsModule,
   FormBuilder,

@@ -1,25 +1,29 @@
-import { NgClass } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ButtonComponent } from '../button/button.component';
+import { HostListener } from '@angular/core';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-navbar-public',
-  imports: [RouterLink, RouterLinkActive, ButtonComponent],
+  imports: [RouterLink, RouterLinkActive, ButtonComponent, LucideAngularModule],
   templateUrl: './navbar-public.component.html',
   styleUrl: './navbar-public.component.css',
 })
 export class NavbarPublicComponent {
-  isOpenMenu: boolean = false;
-  isOpen = false;
+  readonly isOpen = signal(false);
+  readonly scrolled = signal(false);
 
-  open() {
-    this.isOpen = !this.isOpen;
-    this.isOpenMenu = true;
+  toggleMenu() {
+    this.isOpen.update((v) => !v);
   }
 
-  close() {
-    this.isOpen = !this.isOpen;
-    this.isOpenMenu = !this.isOpenMenu;
+  closeMenu() {
+    this.isOpen.set(false);
+  }
+
+  @HostListener('window:scroll')
+  onScroll() {
+    this.scrolled.set(window.scrollY > 10);
   }
 }
