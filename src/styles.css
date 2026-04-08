@@ -5,10 +5,9 @@
   --color-kl-primary-red: #c0152a;
   --color-kl-secondary-red-dark: #96101f; /* //kl-red-dark */
   --color-kl-red-light: #e8354a;
-  --color-kl-red-50: #fff5f5;
+  --color-kl-red-50: #fff5f5; /* color for text btn with bg red light*/
   --color-kl-red-100: #fcd0d0;
   --color-kl-red-200: #f9a8a8;
-
   --color-kl-bg: #f7f4f4;
   --color-kl-surface: #ffffff;
   --color-kl-border: #e8dede;
@@ -59,7 +58,7 @@
   .nav-link {
     @apply text-kl-muted font-headline font-semibold p-1 
            border-b-2 border-transparent 
-           transition duration-150 ease-in-out hover:scale-105
+           transition duration-150 ease-in-out hover:scale-110
            hover:text-kl-red-light hover:border-kl-red-light;
   }
 }

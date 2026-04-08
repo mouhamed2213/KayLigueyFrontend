@@ -1,9 +1,9 @@
 <header
-  class="w-full transition-all duration-300 md:rounded-sm p-3 md:shadow-lg"
+  class="w-full transition-all duration-300 md:rounded-sm md:shadow-lg"
   [class.bg-white]="scrolled()"
   [class.shadow-lg]="scrolled()"
 >
-  <div class="flex items-center justify-between p-4 md:grid md:grid-cols-3">
+  <div class="flex items-center justify-between p-4">
     <!-- LOGO -->
     <div class="flex items-center justify-between">
       <div class="hidden text-3xl font-bold md:flex md:flex-row space-x-1">
@@ -49,12 +49,14 @@
     </nav>
 
     <!-- BUTTONS -->
-    <div class="hidden justify-end gap-4 md:flex">
-      <app-button variant="primary" routerLink="/register"
-        >S'inscrire</app-button
-      >
-      <app-button variant="outline" routerLink="/login"
+    <div
+      class="hidden gap-4 md:flex md:flex-row items-center whitespace-nowrap"
+    >
+      <app-button variant="outineLoginBtn" routerLink="/login"
         >Se connecter</app-button
+      >
+      <app-button variant="primary_light" routerLink="/register"
+        >S'inscrire</app-button
       >
     </div>
   </div>

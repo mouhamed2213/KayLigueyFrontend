@@ -4,7 +4,14 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
-import { LucideAngularModule, User, Phone, Building } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  User,
+  Phone,
+  Building,
+  Menu,
+  X,
+} from 'lucide-angular';
 import { provideRouter } from '@angular/router';
 import {
   provideHttpClient,
@@ -24,7 +31,7 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([errorInterceptor, authInterceptor]),
     ),
-    importProvidersFrom(LucideAngularModule.pick({ Phone, Building })),
+    importProvidersFrom(LucideAngularModule.pick({ Phone, Building, Menu, X })),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
   ],
