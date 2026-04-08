@@ -1,10 +1,30 @@
-<div class="bg-kl-bg grid grid-cols-3 gap-15 rounded-sm p-3 shadow-lg">
-  <div class="font-headline flex space-x-2 text-2xl font-bold">
-    <h2>Kay</h2>
-    <h2 class="text-kl-red-light">Liguey</h2>
+<div
+  class="flex w-full flex-col p-4 md:grid md:grid-cols-3 md:items-center shadow-xl"
+>
+  <!-- LEFT -->
+  <div class="flex items-center justify-between">
+    <div class="text-kl-text hidden text-3xl font-bold md:block md:flex-col">
+      <h2>Kay</h2>
+      <h2 class="text-kl-red-light">Liguey</h2>
+    </div>
+
+    <div class="md:hidden">
+      <span (click)="open()" class="cursor-pointer" [class.hidden]="isOpenMenu"
+        >☰</span
+      >
+
+      <span
+        (click)="close()"
+        class="cursor-pointer"
+        [class.hidden]="!isOpenMenu"
+        >❌</span
+      >
+    </div>
   </div>
-  <div>
-    <ul class="flex items-center justify-between">
+
+  <!-- NAV -->
+  <nav class="mt-4 md:mt-0 md:block" [class.hidden]="!isOpen && true">
+    <ul class="flex flex-col space-y-3 md:flex-row md:justify-start md:gap-5">
       <li>
         <a
           routerLink="/public/home"
@@ -27,10 +47,10 @@
       <li>
         <a
           routerLink="/public/service"
-          routerLinkActive="text-kl-red-light border-kl-red-light"
+          routerLinkActive="text-kl-red-light border-kl-red-light "
           [routerLinkActiveOptions]="{ exact: true }"
           class="nav-link"
-          >Nos Service</a
+          >Services</a
         >
       </li>
       <li>
@@ -51,16 +71,20 @@
         >
       </li>
     </ul>
-  </div>
-  <div
-    class="font-headline flex flex-row-reverse gap-2.5 text-center font-semibold"
-  >
-    <app-button variant="primary" routerLink="/register">
-      S'incrire
-    </app-button>
+  </nav>
 
-    <app-button variant="outline" routerLink="/login">
-      Se connecter
-    </app-button>
+  <!-- BUTTONS -->
+  <div class="mt-4 md:mt-0 md:block" [class.hidden]="!isOpen && true">
+    <div
+      class="font-headline flex gap-4 text-center font-semibold md:justify-end"
+    >
+      <app-button variant="primary" routerLink="/register"
+        >S'incrire</app-button
+      >
+
+      <app-button variant="outline" routerLink="/login"
+        >Se connecter</app-button
+      >
+    </div>
   </div>
 </div>
