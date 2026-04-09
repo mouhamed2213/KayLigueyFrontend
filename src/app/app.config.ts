@@ -11,7 +11,6 @@ import {
   Building,
   Menu,
   X,
-  MapPin,
   Search,
   MoveRight,
   Scale,
@@ -25,8 +24,8 @@ import {
 import { routes } from './app.routes';
 import { errorInterceptor } from './core/interceptor/errors/error-interceptor';
 import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
-
 import { withComponentInputBinding } from '@angular/router';
+import icons from './shared/icons/icons';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -35,17 +34,7 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([errorInterceptor, authInterceptor]),
     ),
-    importProvidersFrom(
-      LucideAngularModule.pick({
-        MoveRight,
-        Phone,
-        Search,
-        Building,
-        Menu,
-        X,
-        Scale,
-      }),
-    ),
+    importProvidersFrom(LucideAngularModule.pick(icons())),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
   ],

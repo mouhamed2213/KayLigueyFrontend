@@ -1,25 +1,25 @@
 import {
-  LucideAngularModule,
   User,
   Phone,
   Building,
   Menu,
   X,
-  MapPin,
   Search,
   MoveRight,
   Scale,
+  MapPin,
 } from 'lucide-angular';
 
-export const Icons = {
-  incons: () => LucideAngularModule,
-  User,
-  Phone,
-  Building,
-  Menu,
-  X,
-  MapPin,
-  Search,
-  MoveRight,
-  Scale,
+export default () => {
+  return {
+    User,
+    Phone,
+    Building,
+    Menu,
+    X,
+    Search,
+    MoveRight,
+    Scale,
+    MapPin,
+  };
 };
