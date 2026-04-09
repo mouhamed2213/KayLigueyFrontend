@@ -11,6 +11,9 @@ import {
   Building,
   Menu,
   X,
+  MapPin,
+  Search,
+  MoveRight,
 } from 'lucide-angular';
 import { provideRouter } from '@angular/router';
 import {
@@ -31,7 +34,9 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([errorInterceptor, authInterceptor]),
     ),
-    importProvidersFrom(LucideAngularModule.pick({ Phone, Building, Menu, X })),
+    importProvidersFrom(
+      LucideAngularModule.pick({ MoveRight, Phone, Search, Building, Menu, X }),
+    ),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
   ],

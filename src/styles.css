@@ -8,12 +8,20 @@
   --color-kl-red-50: #fff5f5; /* color for text btn with bg red light*/
   --color-kl-red-100: #fcd0d0;
   --color-kl-red-200: #f9a8a8;
+
   --color-kl-bg: #f7f4f4;
-  --color-kl-surface: #ffffff;
-  --color-kl-border: #e8dede;
+  --color-kl-primary-brand-dark: #97001b;
+  --color-kl-primary-brand: #c0152a; /*For button*/
+
+  /* Surface */
+  --color-kl-surface-bg: #fbf8ff; /*Surface default*/
+  --color-kl-surface-container-low: #f2f2fd; /* divider*/
+  --color-kl-surface-container-height: #f2f2fd; /* input background*/
+  --color-kl-surface-container-dark: #1a1b22; /* input background*/
+
   --color-kl-red-btn-hover: hsla(0, 16%, 96%, 0.643);
   --color-kl-text: #1a1a1a;
-  --color-kl-muted: #6b6b6b;
+  --color-kl-muted: #6b6b6b; /* default text color with small text*/
   --color-kl-hint: #2c1d1d;
 
   /* Couleur button */
@@ -24,7 +32,7 @@
   --font-sans: "DM Inter", system-ui, sans-serif;
   --font-display: "Syne", system-ui, sans-serif;
   --font-headline: "Manrope", system-ui, sans-serif;
-  --font-content: "Inter", system-ui, sans-serif;
+  --font-kl-content: "Inter";
   --font-label: "Inter", system-ui, sans-serif;
 
   /* ── Border radius ── */
@@ -33,6 +41,10 @@
   --radius-lg: 14px;
   --radius-xl: 20px;
   --radius-default: 4px;
+
+  /* --text-kl-display: "lg", // gross titre;
+  --text-kl-headline: "md", // par ex. basé sur md;
+  --text-kl-headline: "md", // par ex. basé sur md; */
 }
 
 /* ── Base globale ── */
