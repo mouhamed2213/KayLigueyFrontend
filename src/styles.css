@@ -3,32 +3,39 @@
 @theme {
   /* ── Couleurs Kay Liguey ── */
   --color-kl-primary-red: #c0152a;
-  --color-kl-primary-brand: #c0152a; /*For primary action*/
-  --color-kl-secondary-dark: #97001b; /*hover, Icons*/
+  --color-kl-primary-brand: #c0152a; /* For primary action */
+  --color-kl-primary-brand-dark: #97001b;
 
-  --color-kl-secondary-red-dark: #96101f; /* //kl-red-dark */
+  --color-kl-secondary-dark: #97001b; /* hover, Icons */
+  --color-kl-secondary-red-dark: #96101f; /* kl-red-dark */
+
   --color-kl-red-light: #e8354a;
-  --color-kl-red-50: #fff5f5; /* color for text btn with bg red light*/
+  --color-kl-red-50: #fff5f5; /* text for btn with bg red light */
   --color-kl-red-100: #fcd0d0;
   --color-kl-red-200: #f9a8a8;
 
   --color-kl-bg: #f7f4f4;
-  --color-kl-primary-brand-dark: #97001b; /**/
 
   /* Surface */
-  --color-kl-surface-bg: #fbf8ff; /*Surface default*/
-  --color-kl-surface-container-low: #f2f2fd; /* divider*/
-  --color-kl-surface-container-height: #f2f2fd; /* input background*/
-  --color-kl-surface-container-dark: #1a1b22; /* input background*/
+  --color-kl-surface-base: #ffffff; /* Surface default */
+  --color-kl-surface-bg: #fbf8ff; /* Surface default */
+  --color-kl-surface-container-low: #f2f2fd; /* divider */
+  --color-kl-surface-container-height: #f2f2fd; /* input background */
+  --color-kl-surface-container-dark: #1a1b22; /* input background dark */
 
   --color-kl-red-btn-hover: hsla(0, 16%, 96%, 0.643);
-  --color-kl-text: #1a1a1a;
-  --color-kl-muted: #6b6b6b; /* default text color with small text*/
+  /* --color-kl-text: #1a1a1a; */
+  --color-kl-text: #18181b; /*Gros et moyen titre*/
+  --color-kl-muted: #6b6b6b; /* default small text */
   --color-kl-hint: #2c1d1d;
 
-  /* Couleur button */
+  /* Button colors */
   --color-kl-border-red: #f4f4f46e;
   --color-kl-primary-trans: #f4f4f46e;
+
+  /* Cards */
+  --color-kl-card-surface: #ffffff;
+  --color-kl-card-hover: #97001b;
 
   /* ── Typographie ── */
   --font-sans: "DM Inter", system-ui, sans-serif;
@@ -43,10 +50,6 @@
   --radius-lg: 14px;
   --radius-xl: 20px;
   --radius-default: 4px;
-
-  /* --text-kl-display: "lg", // gross titre;
-  --text-kl-headline: "md", // par ex. basé sur md;
-  --text-kl-headline: "md", // par ex. basé sur md; */
 }
 
 /* ── Base globale ── */
@@ -61,13 +64,7 @@
   }
 }
 
-/* @layer components {
-  .font-headline {
-    font-family: var(--font-headline);
-  }
-} */
-
-/* --- CUSTOM REUSE */
+/* ── Composants réutilisables ── */
 @layer components {
   .nav-link {
     @apply text-kl-muted font-headline font-semibold p-1 

@@ -65,6 +65,13 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+
+          "options": {
+            "allowedHosts": [
+              "b9be-41-82-207-97.ngrok-free.app",
+              ".ngrok-free.app"
+            ]
+          },
           "configurations": {
             "production": {
               "buildTarget": "kay_liguey_front:build:production"
