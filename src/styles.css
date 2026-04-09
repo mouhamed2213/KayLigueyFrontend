@@ -3,6 +3,9 @@
 @theme {
   /* ── Couleurs Kay Liguey ── */
   --color-kl-primary-red: #c0152a;
+  --color-kl-primary-brand: #c0152a; /*For primary action*/
+  --color-kl-secondary-dark: #97001b; /*hover, Icons*/
+
   --color-kl-secondary-red-dark: #96101f; /* //kl-red-dark */
   --color-kl-red-light: #e8354a;
   --color-kl-red-50: #fff5f5; /* color for text btn with bg red light*/
@@ -10,8 +13,7 @@
   --color-kl-red-200: #f9a8a8;
 
   --color-kl-bg: #f7f4f4;
-  --color-kl-primary-brand-dark: #97001b;
-  --color-kl-primary-brand: #c0152a; /*For button*/
+  --color-kl-primary-brand-dark: #97001b; /**/
 
   /* Surface */
   --color-kl-surface-bg: #fbf8ff; /*Surface default*/
