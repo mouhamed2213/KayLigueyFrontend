@@ -18,12 +18,12 @@ export class ButtonComponent {
 
   get classes(): string {
     // base color
-    const base = `
-  px-4 py-2 min-w-[7rem] rounded-sm font-semibold font-headline
-  transition duration-150 ease-in-out active:scale-95
-  w-20
-  focus:outline-none focus:ring-2 focus:ring-kl-primary-red focus:ring-offset-2
-`;
+        const base = `
+      px-4 py-2 min-w-[7rem] rounded-sm font-semibold font-headline
+      transition duration-150 ease-in-out active:scale-95
+      w-20
+      focus:outline-none focus:ring-2 focus:ring-kl-primary-red focus:ring-offset-2
+    `;
 
     const variants = {
       primary: `
