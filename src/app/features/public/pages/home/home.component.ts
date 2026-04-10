@@ -9,4 +9,12 @@ import { CardsComponent } from '../../../../shared/components/cards/cards.compon
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {}
+export class HomeComponent {
+  statClass: string = `
+  uppercase text-center p-3`;
+  statText: string = `
+  text-[12px]`;
+  statNbr: string = `
+  font-bold text-4xl
+  `;
+}

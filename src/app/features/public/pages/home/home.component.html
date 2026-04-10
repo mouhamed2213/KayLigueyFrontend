@@ -179,15 +179,27 @@
 
   <!-- SECTION STAT -->
 
-  <div class="mt-16 bg-gray-600 px-4 py-10 sm:px-6 lg:px-8">
-    <div class="flex md:flex-row text-kl-surface-base">
-      <div>
-        <p class="text-xs md:text-3xl">15k+</p>
-        <p>Placements réussis</p>
+  <div
+    class="mt-16 bg-kl-surface-container-dark px-4 py-10 sm:px-4 lg:px-8 md:px-10"
+  >
+    <div
+      class="flex flex-col w-full md:flex-row text-kl-surface-base md:justify-around items-center"
+    >
+      <div [class]="statClass">
+        <p [class]="statNbr">15k+</p>
+        <p [class]="statText">Placements réussis</p>
       </div>
-      <div>
-        <p>15k+</p>
-        <p>Placements réussis</p>
+      <div [class]="statClass">
+        <p [class]="statNbr">500+</p>
+        <p [class]="statText">Partenaires officiels</p>
+      </div>
+      <div [class]="statClass">
+        <p [class]="statNbr">94%</p>
+        <p [class]="statText">Satisfaction employeur</p>
+      </div>
+      <div [class]="statClass">
+        <p [class]="statNbr">48h</p>
+        <p [class]="statText">Temps moyen de réponse</p>
       </div>
     </div>
   </div>
