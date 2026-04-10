@@ -8,6 +8,9 @@ import {
   MoveRight,
   Scale,
   MapPin,
+  TrendingUp,
+  ChevronUp,
+  UserStar,
 } from 'lucide-angular';
 
 export default () => {
@@ -21,5 +24,8 @@ export default () => {
     MoveRight,
     Scale,
     MapPin,
+    ChevronUp,
+    TrendingUp,
+    UserStar,
   };
 };
