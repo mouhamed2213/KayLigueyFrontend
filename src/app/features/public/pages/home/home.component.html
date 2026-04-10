@@ -1,5 +1,4 @@
 <section class="font-kl-content py-10 md:py-16 lg:py-20">
-  <!-- justify-items-center -->
   <!-- HERO -->
   <div class="mx-auto w-full max-w-6xl px-4 text-center sm:px-6 lg:px-8">
     <!-- TITLE -->
@@ -25,15 +24,12 @@
       <form
         class="flex w-full max-w-md flex-col overflow-hidden rounded-md shadow-md sm:max-w-lg sm:flex-row md:max-w-xl"
       >
-        <!-- INPUT -->
         <input
-          id="search"
           type="search"
           placeholder="Entreprise"
           class="text-kl-muted focus:border-kl-primary-red focus:ring-kl-primary-red/30 w-full flex-1 border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2"
         />
 
-        <!-- BUTTON -->
         <app-button
           variant="primary"
           class="w-full px-4 py-2 text-sm font-medium whitespace-nowrap sm:w-auto"
@@ -44,9 +40,9 @@
   </div>
 
   <!-- ABOUT SECTION -->
-  <div class="mt-16 px-4 py-10 sm:px-6 md:px-75 bg-gray-600">
+  <div class="mt-16 bg-gray-600 px-4 py-10 sm:px-6 lg:px-8">
     <!-- HEADER -->
-    <div class="max-w-4xl">
+    <div class="mx-auto max-w-4xl">
       <small class="text-kl-red-light font-bold">NOTRE MISSION</small>
       <h3
         class="text-kl-text mt-2 mb-10 text-xl font-bold sm:text-2xl md:text-3xl"
@@ -55,43 +51,61 @@
       </h3>
     </div>
 
-    <!-- CARDS -->
+    <!-- CARDS CONTAINER -->
     <div
-      class="bg-amber-100 grid grid-row w-full gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3"
+      class="mx-auto grid w-full max-w-6xl gap-6 [grid-cols:repeat(auto-fit,minmax(250px,1fr))] sm:grid-cols-2 md:grid-cols-3"
     >
-      <app-cards
-        title="Egalité"
-        descripiton="Nous luttons contre les barrières invisibles pour garantir que chaque
-          talent a sa chance, peu importe son parcours."
-      >
-        <lucide-icon name="scale" [size]="25" color="#97001b"></lucide-icon>
-      </app-cards>
-      <app-cards
-        title="Professionnalisme"
-        descripiton="Un standard d'excellence pour les recruteurs comme pour 
-        les candidats, assurant des recrutements de qualité.."
-      >
-        <lucide-icon name="user-star" [size]="25" color="#97001b"></lucide-icon>
+      <app-cards>
+        <lucide-icon
+          card-icon
+          name="scale"
+          [size]="25"
+          color="#97001b"
+        ></lucide-icon>
+
+        <h3 card-title>Egalité</h3>
+
+        <p card-content>
+          Nous luttons contre les barrières invisibles pour garantir que chaque
+          talent a sa chance, peu importe son parcours.
+        </p>
       </app-cards>
 
-      <app-cards
-        title="Impact"
-        descripiton="Réduire le chômage structurel en connectant efficacement 
-        les compétences aux besoins réels du marché.."
-      >
+      <app-cards>
         <lucide-icon
+          card-icon
+          name="user-star"
+          [size]="25"
+          color="#97001b"
+        ></lucide-icon>
+
+        <h3 card-title>Professionnalisme</h3>
+        <p card-content>
+          Un standard d'excellence pour les recruteurs comme pour les candidats,
+          assurant des recrutements de qualité
+        </p>
+      </app-cards>
+
+      <app-cards>
+        <lucide-icon
+          card-icon
           name="trending-up"
           [size]="25"
           color="#97001b"
         ></lucide-icon>
+        <h3 card-title>Impact</h3>
+        <p card-content>
+          Réduire le chômage structurel en connectant efficacement les
+          compétences aux besoins réels du marché.
+        </p>
       </app-cards>
     </div>
   </div>
 
-  <!-- PRESENTATION POST -->
-  <div class="mt-16 px-4 py-10 sm:px-6 md:px-75 bg-gray-600">
+  <!-- POSTS SECTION -->
+  <div class="mt-16 bg-gray-600 px-4 py-10 sm:px-6 lg:px-8">
     <!-- HEADER -->
-    <div class="max-w-4xl">
+    <div class="mx-auto max-w-4xl">
       <small class="text-kl-red-light font-bold">Opportunités récentes</small>
       <h3
         class="text-kl-text mt-2 mb-10 text-xl font-bold sm:text-2xl md:text-3xl"
@@ -100,44 +114,81 @@
       </h3>
     </div>
 
-    <!-- CARD -->
     <div
-      class="group flex h-full w-full max-w-sm cursor-pointer flex-col gap-4 rounded-md border border-transparent bg-kl-card-surface p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg hover:border-kl-card-hover"
+      class="mx-auto grid w-full max-w-6xl grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6"
     >
-      <!-- HEADER -->
-      <div class="flex items-start justify-between">
-        <!-- ICON -->
-        <div
-          class="w-fit rounded-lg bg-kl-red-100 p-3 transition-transform duration-300 group-hover:scale-110"
-        >
-          <lucide-icon
-            name="trending-up"
-            [size]="25"
-            color="#97001b"
-          ></lucide-icon>
-        </div>
+      <!-- POST CARD-->
+      <app-cards>
+        <lucide-icon
+          card-icon
+          name="trending-up"
+          [size]="25"
+          color="#97001b"
+        ></lucide-icon>
 
-        <!-- BADGE -->
         <span
-          class="rounded-md bg-kl-secondary-red-dark px-2 py-1 text-xs font-semibold text-white"
+          class="bg-kl-secondary-red-dark rounded-md px-2 py-1 text-xs font-semibold text-white"
+          card-badge
+          >NOUVEAU</span
         >
-          NOUVEAU
-        </span>
+        <h3 card-title>Analyste Financier Senior</h3>
+        <p card-content>Banque de l'Habitat du Sénégal</p>
+
+        <span card-footer>Thiès • Dakar</span>
+      </app-cards>
+
+      <app-cards>
+        <lucide-icon
+          card-icon
+          name="trending-up"
+          [size]="25"
+          color="#97001b"
+        ></lucide-icon>
+
+        <span
+          class="bg-kl-secondary-red-dark rounded-md px-2 py-1 text-xs font-semibold text-white"
+          card-badge
+          >NOUVEAU</span
+        >
+        <h3 card-title>Développeur Fullstack React/Node</h3>
+        <p card-content>Waaw Pay S.A.</p>
+
+        <span card-footer>Mermoze • Dakar</span>
+      </app-cards>
+
+      <app-cards>
+        <lucide-icon
+          card-icon
+          name="trending-up"
+          [size]="25"
+          color="#97001b"
+        ></lucide-icon>
+
+        <span
+          class="bg-kl-secondary-red-dark rounded-md px-2 py-1 text-xs font-semibold text-white"
+          card-badge
+          >NOUVEAU</span
+        >
+        <h3 card-title>Directeur des Opérations Logistiques</h3>
+        <p card-content>Bolloré Africa Logistics</p>
+
+        <span card-footer>Thies • Mbour</span>
+      </app-cards>
+    </div>
+  </div>
+
+  <!-- SECTION STAT -->
+
+  <div class="mt-16 bg-gray-600 px-4 py-10 sm:px-6 lg:px-8">
+    <div class="flex md:flex-row text-kl-surface-base">
+      <div>
+        <p class="text-xs md:text-3xl">15k+</p>
+        <p>Placements réussis</p>
       </div>
-
-      <!-- TITLE -->
-      <h3
-        class="text-kl-text font-kl-headline text-lg font-bold transition-colors duration-300 group-hover:text-kl-red-light"
-      >
-        Analyste Financier Senior
-      </h3>
-
-      <!-- COMPANY -->
-      <p class="text-kl-muted text-sm">Banque de l'Habitat du Sénégal</p>
-
-      <!-- LOCATION -->
-      <p class="text-sm text-kl-muted mt-auto">Thiès • Dakar</p>
+      <div>
+        <p>15k+</p>
+        <p>Placements réussis</p>
+      </div>
     </div>
   </div>
 </section>
-<!-- chevrons-up -->
