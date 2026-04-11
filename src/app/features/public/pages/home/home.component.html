@@ -31,8 +31,8 @@
         />
 
         <app-button
-          variant="primary"
-          class="w-full px-4 py-2 text-sm font-medium whitespace-nowrap sm:w-auto"
+          variant="primary_light"
+          class="w-full px-4 py-2 text-sm font-medium whitespace-nowrap sm:w-auto cursor-pointer"
           >Rechercher</app-button
         >
       </form>
@@ -180,10 +180,10 @@
   <!-- SECTION STAT -->
 
   <div
-    class="mt-16 bg-kl-surface-container-dark px-4 py-10 sm:px-4 lg:px-8 md:px-10"
+    class="bg-kl-surface-container-dark mt-16 px-4 py-10 sm:px-4 md:px-10 lg:px-8"
   >
     <div
-      class="flex flex-col w-full md:flex-row text-kl-surface-base md:justify-around items-center"
+      class="text-kl-surface-base flex w-full flex-col items-center md:flex-row md:justify-around"
     >
       <div [class]="statClass">
         <p [class]="statNbr">15k+</p>
@@ -200,6 +200,74 @@
       <div [class]="statClass">
         <p [class]="statNbr">48h</p>
         <p [class]="statText">Temps moyen de réponse</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROPOSAL SECTION  -->
+  <div class="mt-16 bg-amber-200 px-4 py-10 sm:px-4 md:px-10 lg:px-8">
+    <!-- PROPOSAL CONTAINER -->
+    <div class="flex flex-col md:flex-row gap-3 justify-around">
+      <div
+        class="flex h-full p-12 w-full max-w-md flex-col rounded-md bg-white gap-3"
+      >
+        <!-- Badge -->
+        <span
+          class="w-fit rounded-2xl bg-[#e5edf0] p-2 font-semibold text-[#00506b] uppercase"
+          >candidat</span
+        >
+        <span class="text-kl-text text-xl font-bold md:text-2xl lg:text-3xl"
+          >Propulsez votre carrière au niveau supérieur</span
+        >
+        <p class="mt-2 text-lg">
+          Déposez votre CV aujourd'hui et laissez les meilleures entreprises du
+          Sénégal vous trouver. Simple, gratuit et confidentiel.
+        </p>
+        <a
+          routerLink="/"
+          class="w-fit group mt-4 inline-flex items-center gap-2 rounded-md border border-transparent bg-kl-primary-red px-5 py-2 text-md font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white hover:text-black hover:border-kl-primary-red"
+        >
+          <span>Voir les Offres</span>
+
+          <lucide-icon
+            name="plus"
+            [size]="25"
+            class="transition-transform duration-300 group-hover:translate-x-1"
+          ></lucide-icon>
+        </a>
+      </div>
+
+      <!-- CARD 2 -->
+      <div
+        class="flex h-full p-12 w-full max-w-md flex-col rounded-md bg-[#e5edf0] gap-3"
+      >
+        <!-- Badge -->
+        <span
+          class="w-fit rounded-2xl bg-kl-red-bg p-2 font-semibold text-[#97001b] uppercase"
+          >recruteur</span
+        >
+        <span class="text-kl-text text-xl font-bold md:text-2xl lg:text-3xl"
+          >Propulsez votre carrière au niveau supérieur</span
+        >
+        <p class="mt-2 text-lg">
+          Déposez votre CV aujourd'hui et laissez les meilleures entreprises du
+          Sénégal vous trouver. Simple, gratuit et confidentiel.
+        </p>
+        <a
+          routerLink="/"
+          class="w-fit group mt-4 inline-flex items-center gap-2 rounded-md border border-transparent
+           bg-kl-text px-5 py-2 text-md font-semibold text-white 
+           transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white
+            hover:text-black hover:border-kl-primary-red"
+        >
+          <span>Voir les Offres</span>
+
+          <lucide-icon
+            name="plus"
+            [size]="25"
+            class="transition-transform duration-300 group-hover:translate-x-1"
+          ></lucide-icon>
+        </a>
       </div>
     </div>
   </div>
