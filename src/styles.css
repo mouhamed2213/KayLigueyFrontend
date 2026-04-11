@@ -7,10 +7,11 @@
   --color-kl-red-light: #e8354a;
   --color-kl-primary-brand: #c0152a; /* For primary action */
   --color-kl-primary-brand-dark: #97001b;
-  
+
   --color-kl-secondary-dark: #97001b; /* hover, Icons */
   --color-kl-red-50: #fff5f5; /* text for btn with bg red light */
-  --color-kl-red-100: #fcd0d0;
+  --color-kl-red-100: #fcd0d0; 
+  --color-kl-red-bg: #fcd0d0;
   --color-kl-red-200: #f9a8a8;
 
   --color-kl-bg: #f7f4f4;
