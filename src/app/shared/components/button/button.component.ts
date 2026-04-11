@@ -27,14 +27,9 @@ export class ButtonComponent {
 
     const variants = {
       primary: `
-    bg-kl-primary-red border-kl-primary-red 
-    text-kl-surface hover:bg-kl-red-btn-hover hover:text-kl-text 
-    transition-all ease-in-out duration-400
-    
-    flex-none rounded-sm border px-2 py-1 
-    transition duration-150 ease-in-out hover:shadow-md 
-    focus:ring-2 focus:ring-offset-2 focus:outline-none active:scale-95"
-     `,
+ w-fit group mt-4 inline-flex items-center gap-2 rounded-md border border-transparent bg-kl-primary-red px-5 py-2 text-sm font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white hover:text-black hover:border-kl-primary-red
+    `,
+    // focus:ring-2 focus:ring-offset-2 focus:outline-none active:scale-95"
       outline: `
     border border-kl-primary-red text-kl-primary-red
     hover:bg-kl-primary-red hover:text-kl-surface hover:shadow-md
