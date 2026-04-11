@@ -10,7 +10,7 @@
 
   --color-kl-secondary-dark: #97001b; /* hover, Icons */
   --color-kl-red-50: #fff5f5; /* text for btn with bg red light */
-  --color-kl-red-100: #fcd0d0; 
+  --color-kl-red-100: #fcd0d0;
   --color-kl-red-bg: #fcd0d0;
   --color-kl-red-200: #f9a8a8;
 
@@ -50,6 +50,14 @@
   --radius-lg: 14px;
   --radius-xl: 20px;
   --radius-default: 4px;
+
+  /* REORGANIZE */
+
+  /* Couleurs */
+  --color-kl-zinc-50: #fafafa; /* Background base color*/
+  --color-kl-zinc-100: #f4f4f5; /*Secondary surface*/
+
+
 }
 
 /* ── Base globale ── */

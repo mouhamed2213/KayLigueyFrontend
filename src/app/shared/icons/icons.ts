@@ -12,6 +12,7 @@ import {
   ChevronUp,
   UserStar,
   Plus,
+  CirclePlus,
 } from 'lucide-angular';
 
 export default () => {
@@ -28,6 +29,7 @@ export default () => {
     ChevronUp,
     TrendingUp,
     UserStar,
+    CirclePlus,
     Plus,
   };
 };
