@@ -11,6 +11,7 @@ import {
   TrendingUp,
   ChevronUp,
   UserStar,
+  Plus,
 } from 'lucide-angular';
 
 export default () => {
@@ -27,5 +28,6 @@ export default () => {
     ChevronUp,
     TrendingUp,
     UserStar,
+    Plus,
   };
 };
