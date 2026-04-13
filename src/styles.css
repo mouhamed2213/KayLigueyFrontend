@@ -26,7 +26,6 @@
   --color-kl-red-btn-hover: hsla(0, 16%, 96%, 0.643);
   /* --color-kl-text: #1a1a1a; */
   --color-kl-text: #18181b; /*Gros et moyen titre*/
-  --color-kl-muted: #6b6b6b; /* default small text */
   --color-kl-hint: #2c1d1d;
 
   /* Button colors */
@@ -51,13 +50,21 @@
   --radius-xl: 20px;
   --radius-default: 4px;
 
-  /* REORGANIZE */
+  /* REORGANIZE====================== */
 
-  /* Couleurs */
+  /* Typographie Couleurs */
   --color-kl-zinc-50: #fafafa; /* Background base color*/
   --color-kl-zinc-100: #f4f4f5; /*Secondary surface*/
+  --color-kl-gost-border: #6b6b6b; /*  small text */
 
+  /* TEXT COLOR */
+  --color-kl-zinc-700: #3f3f46; /* primary body text*/
+  --color-kl-zinc-900: #09090b; /* primary body text*/
+  --color-kl-muted: #6b6b6b; /*  small text */
 
+  /* Backgrounds */
+  --color-bg-input: #f4f2fd;
+  --color-bg-footer: #f4f2fd;
 }
 
 /* ── Base globale ── */
