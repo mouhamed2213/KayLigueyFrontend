@@ -1,0 +1,13 @@
+<div class="flex flex-col gap-1" placeholder="test" label="forName">
+  <label
+    class="w-fit font-semibold text-md text-kl-text"
+    for="{{ label_for() }}"
+  >
+    <ng-content [select]="label"></ng-content
+  ></label>
+  <input
+    type="{{ type() }}"
+    class="w-full p-2 text-kl-muted border border-kl-border outline-0 text-md transition duration-300 ease-in-out focus:border-kl-active"
+    placeholder="{{ placeholder() }}"
+  />
+</div>
