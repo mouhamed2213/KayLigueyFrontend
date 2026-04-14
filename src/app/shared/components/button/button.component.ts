@@ -25,12 +25,13 @@ export class ButtonComponent {
 `;
 
     const variants = {
+      // primary with full red fielded
       primary: `
       bg-kl-primary-red text-white border border-transparent
       hover:bg-kl-primary-red/75 
         `,
       secondary: `
-      border border-kl-border bg-transparent hover:bg-kl-border-hover
+      border border-kl-border  text-kl-red-light bg-transparent hover:bg-kl-border-hover
     `,
     };
 
