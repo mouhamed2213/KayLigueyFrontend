@@ -1,1 +1,118 @@
-<p>contact works!</p>
+<section
+  class="font-kl-content bg-[#fbf8ff] py-10 md:py-20 lg:py-20 px-4 sm:px-6 lg:px-8 flex flex-col"
+>
+  <div class="flex flex-col w-full max-w-md gap-3">
+    <h1 class="font-semibold text-kl-text text-xl md:text-4xl">
+      Contactez-nous
+    </h1>
+    <p>
+      Nous sommes à votre écoute pour toute question ou partenariat. Notre
+      équipe d'experts est là pour vous accompagner dans l'excellence
+      professionnelle.
+    </p>
+  </div>
+
+  <!-- COORDONNE -->
+
+  <div
+    class="mt-10 flex flex-col md:flex-row p-7 bg-kl-zinc-100 md:items-start gap-10"
+  >
+    <address class="flex flex-col gap-6 w-full md:w-1/3">
+      <h2 class="font-semibold text-kl-text text-xl">Nos coordonnées</h2>
+
+      <!-- EMAIL -->
+      <div class="flex items-start gap-4">
+        <lucide-icon
+          name="mail"
+          [size]="28"
+          class="text-kl-primary-red"
+        ></lucide-icon>
+        <div>
+          <p class="font-semibold">Email</p>
+          <a href="mailto:contact@kayliguey.com" class="text-kl-muted">
+            contact@kayliguey.com
+          </a>
+        </div>
+      </div>
+
+      <!-- TEL -->
+      <div class="flex items-start gap-4">
+        <lucide-icon
+          name="phone"
+          [size]="28"
+          class="text-kl-primary-red"
+        ></lucide-icon>
+        <div>
+          <p class="font-semibold">Téléphone</p>
+          <p class="text-kl-muted">+221 778096713</p>
+        </div>
+      </div>
+
+      <!-- ADDRESS -->
+      <div class="flex items-start gap-4">
+        <lucide-icon
+          name="map-pin"
+          [size]="28"
+          class="text-kl-primary-red"
+        ></lucide-icon>
+        <div>
+          <p class="font-semibold">Adresse</p>
+          <p class="text-kl-muted">Hann Mariste</p>
+        </div>
+      </div>
+    </address>
+
+    <!-- FORM -->
+    <form
+      class="bg-white w-full md:w-2/3 flex flex-col gap-5 p-6 md:p-8 rounded-md"
+    >
+      <app-input placeholder="Fallou Ndiay" label_for="name" type="text">
+        <label label> Prenom et Nom</label>
+      </app-input>
+      <app-input
+        placeholder="Entrer Votre Email"
+        label_for="email"
+        type="email"
+      >
+        <label label> Email</label>
+      </app-input>
+
+      <app-input
+        placeholder="Entrez le sujet de votre message"
+        label_for="subject"
+        type="text"
+      >
+        <label label> Sujet</label>
+      </app-input>
+
+      <div class="flex flex-col gap-1">
+        <label class="w-fit font-semibold text-md text-kl-text" for="message"
+          >Message</label
+        >
+        <textarea
+          class="w-full p-2 text-kl-muted border border-kl-border text-md transition duration-300 ease-in-out focus:border-kl-active bg-bg-input"
+          id="comment"
+          name="messager"
+          rows="4"
+          placeholder="Comment pouvons-nous vous aider"
+        ></textarea>
+      </div>
+
+      <app-button variant="primary" class="inline-flex justify-center">
+        Envoyer le message</app-button
+      >
+    </form>
+  </div>
+
+  <div class="mt-10 w-full h-full max-h-lg">
+    <iframe
+      src="https://www.google.com/maps?q=48.8584,2.2945&z=15&output=embed"
+      width="100%"
+      height="400"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+    >
+    </iframe>
+  </div>
+</section>
