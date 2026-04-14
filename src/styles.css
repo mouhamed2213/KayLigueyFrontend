@@ -3,52 +3,25 @@
 @theme {
   /* ── Couleurs Kay Liguey ── */
   --color-kl-primary-red: #c0152a;
-  --color-kl-secondary-red-dark: #96101f; /* kl-red-dark */
+  --color-kl-red-dark: #96101f; /* kl-red-dark */
   --color-kl-red-light: #e8354a;
   --color-kl-primary-brand: #c0152a; /* For primary action */
   --color-kl-primary-brand-dark: #97001b;
-
-  --color-kl-secondary-dark: #97001b; /* hover, Icons */
-  --color-kl-red-50: #fff5f5; /* text for btn with bg red light */
-  --color-kl-red-100: #fcd0d0;
-  --color-kl-red-bg: #fcd0d0;
-  --color-kl-red-200: #f9a8a8;
-
-  --color-kl-bg: #f7f4f4;
 
   /* Surface */
   --color-kl-surface-base: #ffffff; /* Surface default */
   --color-kl-surface-bg: #fbf8ff; /* Surface default */
   --color-kl-surface-container-low: #f2f2fd; /* divider */
-  --color-kl-surface-container-height: #f2f2fd; /* input background */
   --color-kl-surface-container-dark: #1a1b22; /* input background dark */
 
   --color-kl-red-btn-hover: hsla(0, 16%, 96%, 0.643);
-  /* --color-kl-text: #1a1a1a; */
-  --color-kl-text: #18181b; /*Gros et moyen titre*/
-  --color-kl-hint: #2c1d1d;
-
-  /* Button colors */
-  --color-kl-border-red: #f4f4f46e;
-  --color-kl-primary-trans: #f4f4f46e;
 
   /* Cards */
   --color-kl-card-surface: #ffffff;
   --color-kl-card-hover: #97001b;
 
-  /* ── Typographie ── */
-  --font-sans: "DM Inter", system-ui, sans-serif;
-  --font-display: "Syne", system-ui, sans-serif;
-  --font-headline: "Manrope", system-ui, sans-serif;
-  --font-kl-content: "Inter";
-  --font-label: "Inter", system-ui, sans-serif;
-
-  /* ── Border radius ── */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
-  --radius-default: 4px;
+  /* transprent red bg  */
+  --color-kl-trans-bg: #e8353536;
 
   /* REORGANIZE====================== */
 
@@ -58,13 +31,33 @@
   --color-kl-gost-border: #6b6b6b; /*  small text */
 
   /* TEXT COLOR */
-  --color-kl-zinc-700: #3f3f46; /* primary body text*/
   --color-kl-zinc-900: #09090b; /* primary body text*/
+  --color-kl-zinc-700: #3f3f46; /* secondarybody text*/
   --color-kl-muted: #6b6b6b; /*  small text */
+  --color-kl-text: #18181b; /*Gros et moyen titre*/
 
   /* Backgrounds */
   --color-bg-input: #f4f2fd;
   --color-bg-footer: #f4f2fd;
+  --color-kl-bg: #f7f4f4;
+
+  /* Button border  colors */
+  --color-kl-border: #94949463;
+  --color-kl-border-hover: #94949428; /*secondary hover*/
+
+  /* ── Border radius ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-default: 4px;
+
+  /* ── Typographie ── */
+  --font-sans: "DM Inter", system-ui, sans-serif;
+  --font-display: "Syne", system-ui, sans-serif;
+  --font-headline: "Manrope", system-ui, sans-serif;
+  --font-kl-content: "Inter";
+  --font-label: "Inter", system-ui, sans-serif;
 }
 
 /* ── Base globale ── */
