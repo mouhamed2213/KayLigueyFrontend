@@ -1,39 +1,53 @@
-import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+
 @Directive({
   selector: '[appAnimateOnScroll]',
+  standalone: true,
 })
 export class AnimateOnScrollDirective implements OnInit {
+  @Input() delay = 0;
+  @Input() direction: 'up' | 'down' | 'left' | 'right' = 'up';
+
   constructor(
     private el: ElementRef,
-    private renderer: Renderer2,
+    private renderer: Renderer2, // allow do manipulation
   ) {}
 
   ngOnInit() {
-    // état initial (invisible)
-    this.renderer.addClass(this.el.nativeElement, 'opacity-0');
-    this.renderer.addClass(this.el.nativeElement, 'translate-y-6');
+    const element = this.el.nativeElement;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          // animation
-          this.renderer.removeClass(this.el.nativeElement, 'opacity-0');
-          this.renderer.removeClass(this.el.nativeElement, 'translate-y-6');
+    // direction
+    const translateMap = {
+      up: 'translate-y-6',
+      down: '-translate-y-6',
+      left: 'translate-x-6',
+      right: '-translate-x-6',
+    };
 
-          this.renderer.addClass(this.el.nativeElement, 'opacity-100');
-          this.renderer.addClass(this.el.nativeElement, 'translate-y-0');
-          this.renderer.addClass(this.el.nativeElement, 'transition-all');
-          this.renderer.addClass(this.el.nativeElement, 'duration-700');
-          this.renderer.addClass(this.el.nativeElement, 'ease-out');
+    this.renderer.addClass(element, 'opacity-0');
+    this.renderer.addClass(element, translateMap[this.direction]);
 
-          observer.unobserve(this.el.nativeElement);
-        }
-      },
-      {
-        threshold: 0.2,
-      },
-    );
+    setTimeout(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            this.renderer.removeClass(element, 'opacity-0');
+            this.renderer.removeClass(element, translateMap[this.direction]);
 
-    observer.observe(this.el.nativeElement);
+            this.renderer.addClass(element, 'opacity-100');
+            this.renderer.addClass(element, 'translate-x-0');
+            this.renderer.addClass(element, 'translate-y-0');
+            this.renderer.addClass(element, 'transition-all');
+            this.renderer.addClass(element, 'duration-700');
+            this.renderer.addClass(element, 'ease-out');
+
+            observer.unobserve(element);
+          }
+        },
+        { threshold: 0.2 },
+      );
+
+      observer.observe(element);
+    }, this.delay);
   }
 }

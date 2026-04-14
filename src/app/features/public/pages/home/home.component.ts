@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { LucideAngularModule } from 'lucide-angular';
 import { CardsComponent } from '../../../../shared/components/cards/cards.component';
-import { RouterLink } from "@angular/router";
+import { RouterLink } from '@angular/router';
+import { AnimateOnScrollDirective } from '../../../../shared/directives/animate-on-scroll.directive';
 
 @Component({
   selector: 'app-home',
-  imports: [LucideAngularModule, ButtonComponent, CardsComponent, RouterLink],
+  imports: [LucideAngularModule, ButtonComponent, CardsComponent, RouterLink, AnimateOnScrollDirective],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
