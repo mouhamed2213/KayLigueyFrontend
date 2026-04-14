@@ -17,7 +17,7 @@ export class ButtonComponent {
       inline-flex items-center justify-center gap-2
       px-4 py-2
       text-sm font-semibold font-headline
-      rounded-md
+      rounded-sm
       transition-all duration-300 ease-out
       hover:-translate-y-0.5 active:scale-95
       focus:outline-none focus:ring-2 focus:ring-kl-primary-red focus:ring-offset-2
@@ -27,7 +27,7 @@ export class ButtonComponent {
     const variants = {
       primary: `
       bg-kl-primary-red text-white border border-transparent
-      hover:bg-white hover:text-black hover:border-kl-primary-red
+      hover:bg-kl-primary-red/75 
         `,
       secondary: `
     `,
