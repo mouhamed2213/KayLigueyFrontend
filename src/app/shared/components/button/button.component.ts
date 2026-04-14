@@ -30,6 +30,7 @@ export class ButtonComponent {
       hover:bg-kl-primary-red/75 
         `,
       secondary: `
+      border border-kl-border bg-transparent hover:bg-kl-border-hover
     `,
     };
 
