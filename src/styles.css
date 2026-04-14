@@ -22,12 +22,13 @@
 
   /* transprent red bg  */
   --color-kl-trans-bg: #e8353536;
+  --color-trans: #f4f2fd6e;
 
   /* REORGANIZE====================== */
 
   /* Typographie Couleurs */
   --color-kl-zinc-50: #fafafa; /* Background base color*/
-  --color-kl-zinc-100: #f4f4f5; /*Secondary surface*/
+  --color-kl-zinc-100: #f4f2fd; /*Secondary surface*/
   --color-kl-gost-border: #6b6b6b; /*  small text */
 
   /* TEXT COLOR */
@@ -37,12 +38,14 @@
   --color-kl-text: #18181b; /*Gros et moyen titre*/
 
   /* Backgrounds */
-  --color-bg-input: #f4f2fd;
+  --color-bg-input: #e3e1ec;
   --color-bg-footer: #f4f2fd;
-  --color-kl-bg: #f7f4f4;
+  --color-kl-bg: #fbf8ff;
 
   /* Button border  colors */
   --color-kl-border: #94949463;
+  --color-kl-active: #949494f3;
+
   --color-kl-border-hover: #94949428; /*secondary hover*/
 
   /* ── Border radius ── */

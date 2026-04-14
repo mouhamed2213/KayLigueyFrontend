@@ -13,6 +13,8 @@ import {
   UserStar,
   Plus,
   CirclePlus,
+  Mail,
+  MapPinHouse,
 } from 'lucide-angular';
 
 export default () => {
@@ -30,6 +32,8 @@ export default () => {
     TrendingUp,
     UserStar,
     CirclePlus,
+    Mail,
     Plus,
+    MapPinHouse,
   };
 };
