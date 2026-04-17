@@ -6,6 +6,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { Login } from '../../../core/models/auth.models';
 import { switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DestroyRef } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   readonly showPwd = signal(false);
 
@@ -58,7 +60,7 @@ export class LoginComponent {
       .login(creds)
       .pipe(
         switchMap(() => this.authService.getMe()),
-        // takeUntilDestroyed(),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe({
         next: () => {

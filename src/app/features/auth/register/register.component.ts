@@ -12,6 +12,7 @@ import {
 import { AuthService } from '../../../core/services/auth.service';
 import { LucideAngularModule, User } from 'lucide-angular';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DestroyRef } from '@angular/core';
 // import { UserRole } from '../../../core/models/auth.models';
 
 function passwordMatchValidator(g: AbstractControl): ValidationErrors | null {
@@ -31,6 +32,7 @@ export class RegisterComponent {
   readonly authService = inject(AuthService);
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   readonly selectedRole = signal<string | null>(null);
   readonly showPwd = signal(false);
@@ -141,7 +143,7 @@ export class RegisterComponent {
     console.log(this.regions.length);
     this.authService
       .register(payload as any)
-      // .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () =>
           this.router.navigate(['/auth/login'], {
