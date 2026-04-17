@@ -1,3 +1,4 @@
+// APi Response
 export interface ApiResponse<T> {
   message: string;
   data: T;
