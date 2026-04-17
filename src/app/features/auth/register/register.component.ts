@@ -141,7 +141,7 @@ export class RegisterComponent {
     console.log(this.regions.length);
     this.authService
       .register(payload as any)
-      .pipe(takeUntilDestroyed())
+      // .pipe(takeUntilDestroyed())
       .subscribe({
         next: () =>
           this.router.navigate(['/auth/login'], {

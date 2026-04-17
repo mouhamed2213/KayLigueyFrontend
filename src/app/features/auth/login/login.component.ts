@@ -58,7 +58,7 @@ export class LoginComponent {
       .login(creds)
       .pipe(
         switchMap(() => this.authService.getMe()),
-        takeUntilDestroyed(),
+        // takeUntilDestroyed(),
       )
       .subscribe({
         next: () => {
