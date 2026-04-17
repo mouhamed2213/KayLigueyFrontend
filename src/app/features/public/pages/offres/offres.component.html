@@ -1,1 +1,7 @@
-<p>offres works!</p>
+@if (!isLoading()) {
+  <pre>{{ jobOffers() | json }}</pre>
+} @else {
+  <app-loader>
+    <mat-spinner></mat-spinner>
+  </app-loader>
+}
