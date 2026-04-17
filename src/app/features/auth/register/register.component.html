@@ -484,7 +484,12 @@
                 <lucide-icon name="Building" size="16"> </lucide-icon
               ></span>
 
-              <select class="kl-input" formControlName="city">
+              <select
+                class="kl-input"
+                formControlName="city"
+                aria-label="City"
+                aria-label="City"
+              >
                 @for (region of regions; track region) {
                   <option value="{{ region }}">{{ region }}</option>
                 }

@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { JobOfferService } from '../../../../shared/service/job_offer.service';
+import { JobOfferService } from '../../../../core/services/job_offer.service';
+import { JobOffer } from '../../../../core/models/job_offer.model';
 @Component({
   selector: 'app-offres',
   imports: [],
@@ -8,9 +9,16 @@ import { JobOfferService } from '../../../../shared/service/job_offer.service';
 })
 export class OffresComponent implements OnInit {
   private jobOfferService = inject(JobOfferService);
-  jobOffers: string[] = [];
+  private jobOffers: JobOffer[] = [];
 
   ngOnInit(): void {
-    this.jobOfferService.jobOffer().subscribe((data) => console.log(data));
+    this.jobOfferService.jobOffer().subscribe({
+      next(value) {
+        console.log('GOT IT ', value);
+      },
+      error(err) {
+        console.log(err);
+      },
+    });
   }
 }

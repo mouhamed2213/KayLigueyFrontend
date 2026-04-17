@@ -11,7 +11,7 @@ export interface JobOffer {
 
   city?: string | null;
 
-  salary_min?: number | ;
+  salary_min?: number | null;
   salary_max?: number | null;
 
   experience_years?: number | null;
