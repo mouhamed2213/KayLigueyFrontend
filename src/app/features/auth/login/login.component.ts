@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Login } from '../../../core/models/auth.models';
 import { switchMap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login',
@@ -55,7 +56,10 @@ export class LoginComponent {
     const creds: Login = { email, password };
     this.authService
       .login(creds)
-      .pipe(switchMap(() => this.authService.getMe()))
+      .pipe(
+        switchMap(() => this.authService.getMe()),
+        takeUntilDestroyed(),
+      )
       .subscribe({
         next: () => {
           const returnUrl = this.route.snapshot.queryParams['returnUrl'];

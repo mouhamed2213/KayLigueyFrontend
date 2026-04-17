@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { LucideAngularModule, User } from 'lucide-angular';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 // import { UserRole } from '../../../core/models/auth.models';
 
 function passwordMatchValidator(g: AbstractControl): ValidationErrors | null {
@@ -138,11 +139,14 @@ export class RegisterComponent {
 
     console.log(payload);
     console.log(this.regions.length);
-    this.authService.register(payload as any).subscribe({
-      next: () =>
-        this.router.navigate(['/auth/login'], {
-          queryParams: { registered: 'true' },
-        }),
-    });
+    this.authService
+      .register(payload as any)
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        next: () =>
+          this.router.navigate(['/auth/login'], {
+            queryParams: { registered: 'true' },
+          }),
+      });
   }
 }
