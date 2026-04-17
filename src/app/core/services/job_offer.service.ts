@@ -1,7 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { ApiResponse } from '../api/api.interface';
 import { JobOffer } from '../models/job_offer.model';
 
@@ -15,10 +15,15 @@ export class JobOfferService {
   private http = inject(HttpClient);
 
   // Get all offer (future using pagination)
-  public jobOffer(): Observable<ApiResponse<JobOffer>> {
+  public jobOffer(): Observable<ApiResponse<JobOffer[]>> {
     // create offer interface
-    // handle error/
-    return this.http.get<ApiResponse<JobOffer>>(`${this.apiUrl}`);
+    return this.http.get<ApiResponse<JobOffer[]>>(`${this.apiUrl}`).pipe(
+      tap((data) => console.log(data)),
+      catchError((err) => {
+        console.error('Error fetching jobs:', err);
+        return throwError(() => err);
+      }),
+    );
   }
 
   // get one job funtion
