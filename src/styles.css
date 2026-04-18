@@ -1,55 +1,75 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────
+   🎨 THEME TOKENS
+───────────────────────────── */
 @theme {
-  /* Typographie Couleurs */
-  --color-kl-zinc-50: #fafafa; /* Background base color*/
-  --color-kl-zinc-100: #f4f2fd; /*Secondary surface*/
-  --color-kl-gost-border: #6b6b6b; /*  small text */
+  /* ── COLORS : BACKGROUND ── */
+  --color-kl-bg: #fbf8ff;
+  --color-kl-zinc-50: #fafafa;
+  --color-kl-zinc-100: #f4f2fd;
+  --color-bg-input: #e3e1ec;
+  --color-bg-footer: #f4f2fd;
+  --color-kl-card-surface: #ffffff;
 
-  /* TEXT COLOR */
-  --color-kl-zinc-900: #09090b; /* primary body text*/
-  --color-kl-zinc-700: #3f3f46; /* secondarybody text*/
-  --color-kl-muted: #6b6b6b; /*  small text */
-  --color-kl-text: #18181b; /*Gros et moyen titre*/
+  /* ── COLORS : TEXT ── */
+  --color-kl-text: #18181b;
+  --color-kl-zinc-900: #09090b;
+  --color-kl-zinc-700: #3f3f46;
+  --color-kl-muted: #6b6b6b;
 
-  /* Backgrounds */
+  /* ── BRAND ── */
   --color-kl-primary-red: #c0152a;
   --color-kl-red-dark: #96101f; /* kl-red-dark */
   --color-kl-red-light: #e8354a;
   --color-kl-primary-brand: #c0152a; /* For primary action */
   --color-kl-primary-brand-dark: #97001b;
-  --color-bg-input: #e3e1ec;
-  --color-bg-footer: #f4f2fd;
-  --color-kl-bg: #fbf8ff; /* Default bg*/
-  --color-kl-surface-container-dark: #1a1b22; /*  separator background dark  */
 
-  /* Button border  colors */
+  /* ── BORDER ── */
   --color-kl-border: #94949463;
+  --color-kl-border-hover: #94949428;
   --color-kl-active: #949494f3;
 
-  --color-kl-border-hover: #94949428; /*secondary hover*/
-
-  /* Cards */
-  --color-kl-card-surface: #ffffff; /*default bg*/
+  /* ── EFFECTS ── */
+  --color-kl-trans-bg: #e8353536;
+  --color-trans: #f4f2fd6e;
+  --color-kl-surface-container-dark: #1a1b22;
   --color-kl-card-hover: #97001b;
 
-  /* ── Border radius ── */
+  /* ── RADIUS ── */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-xl: 20px;
   --radius-default: 4px;
 
-  /* transprent red bg  */
-  --color-kl-trans-bg: #e8353536; /* Icon, */
-  --color-trans: #f4f2fd6e;
-
-  /* ── Typographie ── */
-  --font-sans: "DM Inter", system-ui, sans-serif;
+  /* ── TYPOGRAPHY FONTS ── */
+  --font-sans: "Inter", system-ui, sans-serif;
   --font-display: "Syne", system-ui, sans-serif;
   --font-headline: "Manrope", system-ui, sans-serif;
-  --font-kl-content: "Inter";
   --font-label: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  h1 {
+    @apply text-2xl md:text-3xl lg:text-4xl font-display font-bold;
+  }
+
+  h2 {
+    @apply text-xl md:text-2xl lg:text-3xl font-headline font-semibold;
+  }
+
+  h3 {
+    @apply text-lg md:text-xl lg:text-2xl font-headline;
+  }
+
+  p {
+    @apply text-sm md:text-base lg:text-lg;
+  }
+
+  small {
+    @apply text-xs md:text-sm text-kl-muted;
+  }
 }
 
 /* ── Base globale ── */
@@ -64,21 +84,16 @@
   }
 }
 
-/* ── Composants réutilisables ── */
+/* ── COMPONENTS ── */
 @layer components {
   .nav-link {
-    @apply text-kl-muted font-headline font-semibold p-1 
-           border-b-2 border-transparent 
-           transition duration-150 ease-in-out hover:scale-110
-           hover:text-kl-red-light hover:border-kl-red-light;
+    @apply text-kl-muted font-semibold p-1
+           border-b-2 border-transparent
+           transition duration-150 ease-in-out
+           hover:scale-110
+           hover:text-kl-red-light
+           hover:border-kl-red-light;
   }
 }
 
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
+/* TYPOGRAPHIE */
