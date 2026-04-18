@@ -1,31 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Couleurs Kay Liguey ── */
-  --color-kl-primary-red: #c0152a;
-  --color-kl-red-dark: #96101f; /* kl-red-dark */
-  --color-kl-red-light: #e8354a;
-  --color-kl-primary-brand: #c0152a; /* For primary action */
-  --color-kl-primary-brand-dark: #97001b;
-
-  /* Surface */
-  --color-kl-surface-base: #ffffff; /* Surface default */
-  --color-kl-surface-bg: #fbf8ff; /* Surface default */
-  --color-kl-surface-container-low: #f2f2fd; /* divider */
-  --color-kl-surface-container-dark: #1a1b22; /* input background dark */
-
-  --color-kl-red-btn-hover: hsla(0, 16%, 96%, 0.643);
-
-  /* Cards */
-  --color-kl-card-surface: #ffffff;
-  --color-kl-card-hover: #97001b;
-
-  /* transprent red bg  */
-  --color-kl-trans-bg: #e8353536;
-  --color-trans: #f4f2fd6e;
-
-  /* ===============================REORGANIZEd====================== */
-
   /* Typographie Couleurs */
   --color-kl-zinc-50: #fafafa; /* Background base color*/
   --color-kl-zinc-100: #f4f2fd; /*Secondary surface*/
@@ -38,9 +13,15 @@
   --color-kl-text: #18181b; /*Gros et moyen titre*/
 
   /* Backgrounds */
+  --color-kl-primary-red: #c0152a;
+  --color-kl-red-dark: #96101f; /* kl-red-dark */
+  --color-kl-red-light: #e8354a;
+  --color-kl-primary-brand: #c0152a; /* For primary action */
+  --color-kl-primary-brand-dark: #97001b;
   --color-bg-input: #e3e1ec;
   --color-bg-footer: #f4f2fd;
-  --color-kl-bg: #fbf8ff;
+  --color-kl-bg: #fbf8ff; /* Default bg*/
+  --color-kl-surface-container-dark: #1a1b22; /*  separator background dark  */
 
   /* Button border  colors */
   --color-kl-border: #94949463;
@@ -48,12 +29,20 @@
 
   --color-kl-border-hover: #94949428; /*secondary hover*/
 
+  /* Cards */
+  --color-kl-card-surface: #ffffff; /*default bg*/
+  --color-kl-card-hover: #97001b;
+
   /* ── Border radius ── */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-xl: 20px;
   --radius-default: 4px;
+
+  /* transprent red bg  */
+  --color-kl-trans-bg: #e8353536; /* Icon, */
+  --color-trans: #f4f2fd6e;
 
   /* ── Typographie ── */
   --font-sans: "DM Inter", system-ui, sans-serif;
@@ -85,5 +74,11 @@
   }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
