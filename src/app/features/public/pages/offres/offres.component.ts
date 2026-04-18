@@ -9,7 +9,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-offres',
-  imports: [JsonPipe, LoaderComponent, MatProgressSpinner],
+  imports: [ LoaderComponent, MatProgressSpinner],
   templateUrl: './offres.component.html',
   styleUrl: './offres.component.css',
 })
