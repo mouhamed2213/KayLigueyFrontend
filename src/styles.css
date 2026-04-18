@@ -17,6 +17,7 @@
   --color-kl-zinc-900: #09090b;
   --color-kl-zinc-700: #3f3f46;
   --color-kl-muted: #6b6b6b;
+  --color-kl-muted-dark: #000000d8;
 
   /* ── BRAND ── */
   --color-kl-primary-red: #c0152a;
@@ -52,7 +53,7 @@
 
 @layer base {
   h1 {
-    @apply text-xl md:text-4xl  font-sans font-bold; /* Header for just hight title*/
+    @apply text-3xl md:text-5xl  font-sans font-bold; /* Header for just hight title*/
   }
 
   h2 {
@@ -60,15 +61,25 @@
   }
 
   h3 {
-    @apply text-lg md:text-xl lg:text-2xl font-headline;
+    @apply text-lg font-headline font-semibold text-kl-zinc-900;
+  }
+  h4 {
+    @apply text-sm font-headline font-semibold text-kl-muted-dark;
   }
 
   p {
-    @apply text-sm md:text-base lg:text-lg;
+    @apply font-['Inter'] font-normal text-zinc-600;
+    @apply text-sm md:text-base lg:text-lg leading-relaxed;
+  }
+
+  /* span, */
+  label {
+    @apply font-['Inter'] font-semibold text-kl-muted text-[15px];
   }
 
   small {
-    @apply text-xs md:text-sm text-kl-muted;
+    @apply font-['Inter'] text-xs md:text-sm text-zinc-500;
+    @apply leading-normal;
   }
 }
 

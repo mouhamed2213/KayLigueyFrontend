@@ -6,10 +6,12 @@ import { JsonPipe } from '@angular/common';
 import { DestroyRef } from '@angular/core';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { InputComponent } from "../../../../shared/components/input/input.component";
+import { CardsComponent } from "../../../../shared/components/cards/cards.component";
 
 @Component({
   selector: 'app-offres',
-  imports: [ LoaderComponent, MatProgressSpinner],
+  imports: [LoaderComponent, MatProgressSpinner, InputComponent, CardsComponent],
   templateUrl: './offres.component.html',
   styleUrl: './offres.component.css',
 })

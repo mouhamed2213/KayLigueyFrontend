@@ -1,13 +1,29 @@
-<div class="flex flex-col gap-1" placeholder="test" label="forName">
+<div
+  class="flex flex-col gap-1"
+  placeholder="placeholder"
+  label="forName"
+>
   <label
     class="w-fit font-semibold text-md text-kl-text"
     for="{{ label_for() }}"
   >
     <ng-content [select]="label"></ng-content
   ></label>
-  <input
-    type="{{ type() }}"
-    class="bg-bg-input w-full p-2 text-kl-muted border border-kl-border outline-0 text-md transition duration-300 ease-in-out focus:border-kl-active"
-    placeholder="{{ placeholder() }}"
-  />
+  <div class="relative">
+    <div
+      class="absolute inset-y-0 left-0 p-3 flex items-center pointer-events-none"
+    >
+      <lucide-icon
+        name="search"
+        size="20"
+        class="w-5 h-5 text-gray-500"
+      ></lucide-icon>
+    </div>
+    <input
+      type="{{ type() }}"
+      [class]="inputStyle()"
+      class="bg-bg-input pl-10 w-full text-kl-muted border border-kl-border outline-0 text-lg transition duration-300 ease-in-out focus:border-kl-active"
+      placeholder="{{ placeholder() }}"
+    />
+  </div>
 </div>
