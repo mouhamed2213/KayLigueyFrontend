@@ -11,6 +11,7 @@
   --color-bg-input: #e3e1ec;
   --color-bg-footer: #f4f2fd;
   --color-kl-card-surface: #ffffff;
+  --color-kl-job-card: #ffffff;
 
   /* ── COLORS : TEXT ── */
   --color-kl-text: #18181b;
@@ -64,13 +65,13 @@
     @apply text-lg font-headline font-semibold text-kl-zinc-900;
   }
   h4 {
-    @apply text-sm font-headline font-semibold text-kl-muted-dark;
+    @apply text-sm font-headline font-semibold text-kl-muted-dark md:text-lg;
   }
 
-  p {
+  /* p {
     @apply font-['Inter'] font-normal text-zinc-600;
     @apply text-sm md:text-base lg:text-lg leading-relaxed;
-  }
+  } */
 
   /* span, */
   label {
@@ -104,6 +105,21 @@
            hover:scale-110
            hover:text-kl-red-light
            hover:border-kl-red-light;
+  }
+
+  .chip {
+    @apply bg-bg-input px-3 py-1 text-sm rounded-xl transition 
+         peer-checked:bg-kl-red-dark 
+         peer-checked:text-white;
+  }
+
+  .job-card {
+    @apply flex flex-col gap-4 rounded-xl bg-white p-5 shadow-sm
+         transition-all duration-300
+         hover:-translate-y-1 hover:shadow-md;
+  }
+  .card-content {
+    @apply text-sm font-sans text-kl-muted 
   }
 }
 

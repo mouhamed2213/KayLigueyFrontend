@@ -1,8 +1,4 @@
-<div
-  class="flex flex-col gap-1"
-  placeholder="placeholder"
-  label="forName"
->
+<div class="flex flex-col gap-1" placeholder="placeholder" label="forName">
   <label
     class="w-fit font-semibold text-md text-kl-text"
     for="{{ label_for() }}"
@@ -13,11 +9,7 @@
     <div
       class="absolute inset-y-0 left-0 p-3 flex items-center pointer-events-none"
     >
-      <lucide-icon
-        name="search"
-        size="20"
-        class="w-5 h-5 text-gray-500"
-      ></lucide-icon>
+      <ng-content [select]="icon"></ng-content>
     </div>
     <input
       type="{{ type() }}"
