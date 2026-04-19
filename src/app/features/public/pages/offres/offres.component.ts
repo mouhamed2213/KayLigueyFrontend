@@ -9,18 +9,18 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { InputComponent } from '../../../../shared/components/input/input.component';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
-import { LucideAngularModule } from "lucide-angular";
+import { LucideAngularModule } from 'lucide-angular';
+import { WorkingMode, ContractType } from '../../../../core/constant/enums';
 
 @Component({
   selector: 'app-offres',
   imports: [
     LoaderComponent,
     MatProgressSpinner,
-    InputComponent,
     LucideAngularModule,
     ButtonComponent,
-    BadgeComponent
-],
+    BadgeComponent,
+  ],
   templateUrl: './offres.component.html',
   styleUrl: './offres.component.css',
 })
@@ -29,6 +29,46 @@ export class OffresComponent implements OnInit {
   protected jobOffers = signal<JobOffer[]>([]);
   protected isLoading = signal(true);
   private destroyRef = inject(DestroyRef);
+
+  // WORKING MODE MAPPING
+  working_mode: Record<WorkingMode, { label: string; class: string }> = {
+    REMOTE: {
+      label: 'Télétravail',
+      class: 'bg-green-100 text-green-700',
+    },
+    HYBRID: {
+      label: 'Hybride',
+      class: 'bg-yellow-100 text-yellow-700',
+    },
+    ON_SITE: {
+      label: 'Présentiel',
+      class: 'bg-blue-100 text-blue-700',
+    },
+  };
+
+  // CONTRACT TYPE CONFIG
+  contract_type: Record<ContractType, { label: string; class: string }> = {
+    CDI: {
+      label: 'CDI',
+      class: 'bg-emerald-100 text-emerald-700',
+    },
+    CDD: {
+      label: 'CDD',
+      class: 'bg-blue-100 text-blue-700',
+    },
+    FREELANCE: {
+      label: 'Freelance',
+      class: 'bg-purple-100 text-purple-700',
+    },
+    STAGE: {
+      label: 'Stage',
+      class: 'bg-orange-100 text-orange-700',
+    },
+    ALTERNANCE: {
+      label: 'Alternance',
+      class: 'bg-pink-100 text-pink-700',
+    },
+  };
 
   ngOnInit(): void {
     this.jobOfferService

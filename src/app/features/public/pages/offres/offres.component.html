@@ -1,12 +1,16 @@
 @if (!isLoading()) {
-  <!-- <pre>{{ jobOffers() | json }}</pre> -->
-  <!--Main CONTANER-->
-  <section class="flex w-full flex-col gap-4 p-3 md:p-5 md:py-10">
+  <section
+    class="container mx-auto px-5 flex w-full flex-col gap-6 p-4 md:p-6 md:py-10"
+  >
     <!-- HEADER -->
     <div class="flex w-full flex-col gap-4 md:max-w-lg">
       <div class="flex flex-col">
-        <h1>Découvrez votre prochaine</h1>
-        <h1 class="text-kl-primary-red">opportunité</h1>
+        <h1 class="text-2xl md:text-4xl font-bold">
+          Découvrez votre prochaine
+        </h1>
+        <h1 class="text-2xl md:text-4xl font-bold text-kl-primary-red">
+          opportunité
+        </h1>
       </div>
 
       <p>
@@ -16,24 +20,21 @@
       </p>
     </div>
 
-    <!-- SEACRH BAR  -->
-
-    <!-- FILTER -->
-    <div class="grid md:grid-cols-6 bg-kl-zinc-100 gap-10">
+    <!-- MAIN GRID -->
+    <div class="grid gap-8 md:grid-cols-6">
       <!-- ================= FILTER ================= -->
-      <aside class="md:sticky md:top-20 h-fit">
-        <div class="space-y-6 rounded-md bg-white p-5 shadow-sm">
-          <!-- HEADER -->
+      <aside class="md:col-span-1 md:sticky md:top-20 h-fit">
+        <div class="space-y-6 rounded-xl bg-white p-5 shadow-sm border">
           <div class="flex items-center justify-between">
             <h3 class="font-semibold">Filtres</h3>
-            <button type="button" class="text-sm font-bold text-kl-primary-red">
-              Réinitialiser
-            </button>
+            <button class="text-sm font-bold text-kl-primary-red">Reset</button>
           </div>
 
           <!-- LOCALISATION -->
           <div class="space-y-3">
-            <h4 class="text-sm font-semibold uppercase">Localisation</h4>
+            <h4 class="text-xs font-semibold uppercase text-kl-muted">
+              Localisation
+            </h4>
 
             <label class="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" class="accent-kl-primary-red" />
@@ -44,121 +45,147 @@
               <input type="checkbox" class="accent-kl-primary-red" />
               <span>Thiès</span>
             </label>
-
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" class="accent-kl-primary-red" />
-              <span>Saint-Louis</span>
-            </label>
-
-            <select
-              aria-label="Region"
-              class="w-full rounded-md border border-kl-border bg-bg-input p-2 text-sm focus:border-kl-active outline-none"
-            >
-              <option>Toutes les régions</option>
-              <option>Dakar</option>
-              <option>Thiès</option>
-            </select>
           </div>
 
           <!-- CONTRAT -->
           <div class="space-y-3">
-            <h4 class="text-sm font-semibold uppercase">Type de contrat</h4>
+            <h4 class="text-xs font-semibold uppercase text-kl-muted">
+              Type de contrat
+            </h4>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="chip">CDI</span>
+              <span class="chip">CDD</span>
+              <span class="chip">Freelance</span>
+              <span class="chip">Stage</span>
+              <span class="chip">Alternace</span>
+            </div>
+          </div>
+
+          <!-- Working mode  -->
+          <div class="space-y-3">
+            <h4 class="text-xs font-semibold uppercase text-kl-muted">
+              Type de contrat
+            </h4>
 
             <div class="flex flex-wrap gap-2">
               <label class="cursor-pointer">
-                <input type="radio" name="contract" class="hidden peer" />
-                <span class="chip">CDI</span>
+                <span class="chip">Hybrid</span>
+                <input type="radio" name="working" class="hidden peer" />
               </label>
-
               <label class="cursor-pointer">
-                <input type="radio" name="contract" class="hidden peer" />
-                <span class="chip">CDD</span>
+                <span class="chip">Remote</span>
+                <input type="radio" name="working" class="hidden peer" />
               </label>
-
               <label class="cursor-pointer">
-                <input type="radio" name="contract" class="hidden peer" />
-                <span class="chip">Freelance</span>
+                <span class="chip">Presentiel</span>
+                <input type="radio" name="working" class="hidden peer" />
               </label>
             </div>
           </div>
 
           <!-- EXPERIENCE -->
-          <div class="space-y-2">
-            <h4 class="text-sm font-semibold uppercase">Expérience</h4>
+          <div>
+            <label>
+              Niveau D'etudes
+              <select aria-label="experience">
+                <option>Tout les exp</option>
+                <option>BAC+3</option>
+                <option>BAC+5</option>
+                <option>BAC+2</option>
+              </select>
+            </label>
+          </div>
 
-            <select
-              aria-label="Niveau d'experience"
-              class="w-full rounded-md border border-kl-border bg-bg-input p-2 text-sm focus:border-kl-active outline-none"
-            >
-              <option>Tous niveaux</option>
-              <option>Junior</option>
-              <option>Senior</option>
-            </select>
+          <div>
+            <label>
+              Expérience
+              <select aria-label="experience">
+                <option>Tout les exp</option>
+                <option>Debutant</option>
+                <option>3ans</option>
+                <option>5ans</option>
+                <option>+10ans</option>
+              </select>
+            </label>
           </div>
         </div>
       </aside>
 
-      <!-- JOBG LISTS -->
-      <div class="col-span-5 sm:grid-cols-2 grid md:grid-cols-3 gap-5">
-        <!-- JOB CARD -->
+      <!-- ================= JOB LIST ================= -->
+      <div class="md:col-span-5 space-y-6">
         @for (job of jobOffers(); track $index) {
           <!-- JOB CARD -->
-          <div class="bg-kl-job-card p-5">
+          <div
+            class="group w-full rounded-xl border bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+          >
             <!-- HEADER -->
-            <div class="flex items-start justify-between">
-              <div class="flex gap-3">
-                <div class="p-7 rounded-md bg-gray-300"></div>
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex gap-4">
+                <!-- LOGO -->
+                <div class="h-12 w-12 rounded-md bg-gray-200"></div>
 
+                <!-- TITLE -->
                 <div>
-                  <h3 class="font-semibold kl-text">UX/UI Designer</h3>
-                  <p class="text-sm">Dakar • Publiée le 16 avr. 2026</p>
+                  <h3
+                    class="font-semibold text-lg text-kl-text group-hover:text-kl-primary-red transition"
+                  >
+                    {{ job.title }}
+                  </h3>
+
+                  <p class="text-sm text-kl-muted">Dakar • Publiée récemment</p>
                 </div>
               </div>
 
               <!-- BADGES -->
-              <div class="flex gap-2">
-                <app-badge color="red-500"> CDI</app-badge>
-                <app-badge color="red-500"> Freelance</app-badge>
+              <div class="flex gap-2 flex-wrap">
+                <app-badge
+                  [label]="working_mode[job.working_mode].label"
+                  [customClass]="working_mode[job.working_mode].class"
+                />
+                <app-badge
+                  [label]="contract_type[job.contract_type].label"
+                  [customClass]="contract_type[job.contract_type].class"
+                />
               </div>
             </div>
 
             <!-- DESCRIPTION -->
-            <div>
-              <p class="card-content">
-                Rejoignez l'élite du marché du travail au Sénégal. Nous
-                connectons les talents d'exception
-              </p>
-            </div>
+            <p class="mt-4 text-sm text-kl-muted leading-relaxed line-clamp-2">
+              {{ job.description }}
+            </p>
 
             <!-- STATS -->
-            <div class="flex flex-row justify-around gap-5">
-              <div class="flex flex-col bg-red-300 rounded-lg px-2 w-full">
-                <p class="font-semibold text-kl-muted text-lg">Salaire</p>
-                <span class="font-semibold text-kl-text text-lg"
-                  >100k-200k</span
-                >
+            <div class="mt-5 grid grid-cols-3 gap-4 text-sm">
+              <div class="flex flex-col">
+                <span class="text-kl-muted text-xs">Salaire</span>
+                <span class="font-semibold text-kl-text">100k - 200k</span>
               </div>
-              <div class="flex flex-col bg-red-300 rounded-lg px-2 w-full">
-                <p class="font-semibold text-kl-muted text-lg">Vue</p>
-                <span class="font-semibold text-kl-text text-lg">30</span>
+
+              <div class="flex flex-col">
+                <span class="text-kl-muted text-xs">Vues</span>
+                <span class="font-semibold text-kl-text">
+                  {{ job.view_count }}
+                </span>
               </div>
-              <div class="flex flex-col bg-red-300 rounded-lg px-2 w-full">
-                <p class="font-semibold text-kl-muted text-lg">Candidatures</p>
-                <span class="font-semibold text-kl-text text-lg">80</span>
+
+              <div class="flex flex-col">
+                <span class="text-kl-muted text-xs">Candidatures</span>
+                <span class="font-semibold text-kl-text">
+                  {{ job.application_count }}
+                </span>
               </div>
             </div>
 
-            <!-- Card Footer -->
-            <hr />
-            <div class="flex flex-row justify-between">
-              <p>Orange Senegal</p>
-              <app-button variant="primary"> Voir l'offre</app-button>
+            <!-- FOOTER -->
+            <div class="mt-6 flex items-center justify-between border-t pt-4">
+              <span class="text-sm text-kl-muted"> Expire bientôt </span>
+
+              <app-button variant="primary"> Voir l'offre </app-button>
             </div>
           </div>
         }
       </div>
-
-      <!-- END CARD -->
     </div>
   </section>
 } @else {
@@ -166,4 +193,3 @@
     <mat-spinner></mat-spinner>
   </app-loader>
 }
-"
