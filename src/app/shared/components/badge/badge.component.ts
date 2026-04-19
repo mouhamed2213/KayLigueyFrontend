@@ -1,12 +1,12 @@
-import { Component ,input } from '@angular/core';
+import { Component, input, computed } from '@angular/core';
+import { WorkingMode, ContractType } from '../../../core/constant/enums';
 
 @Component({
   selector: 'app-badge',
-  imports: [],
+  standalone: true,
   templateUrl: './badge.component.html',
-  styleUrl: './badge.component.css',
 })
 export class BadgeComponent {
-  color = input('')
-
+  label = input('');
+  customClass = input('');
 }

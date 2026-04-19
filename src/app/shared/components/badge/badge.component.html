@@ -1,5 +1,5 @@
 <span
-  class="mr-2 bg-green-600 text-white p-2 rounded leading-none flex items-center"
+  [class]="'px-2 py-1 text-xs font-semibold rounded-md ' + ' ' + customClass()"
 >
-  <ng-content></ng-content>
+  {{ label() }}
 </span>
