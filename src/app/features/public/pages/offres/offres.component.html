@@ -1,7 +1,7 @@
 @if (!isLoading()) {
   <!-- <pre>{{ jobOffers() | json }}</pre> -->
   <!--Main CONTANER-->
-  <section class="flex p-3 flex-col w-full gap-4 md:p-5 md:py-10">
+  <section class="flex w-full flex-col gap-4 p-3 md:p-5 md:py-10">
     <!-- HEADER -->
     <div class="flex w-full flex-col gap-4 md:max-w-lg">
       <div class="flex flex-col">
@@ -16,136 +16,149 @@
       </p>
     </div>
 
-    <!-- FILTER & JOB CARDs  -->
-    <div class="bg-kl-zinc-100 flex w-full flex-col md:flex-row gap-10">
-      <!-- FILTER -->
-      <div class="justify flex w-full max-w-sm flex-col gap-5 p-7">
-        <div class="flex justify-between gap-3">
-          <h3>Filtres</h3>
-          <button
-            type="reset"
-            class="text-kl-primary-red cursor-pointer text-sm font-bold"
-          >
-            Réinitialiser
-          </button>
-        </div>
+    <!-- SEACRH BAR  -->
 
-        <!-- SEARCH INPUT  -->
-        <form>
-          <app-input
-            inputStyle="rounded-md p-2"
-            placeholder="Design , Tech ..."
-            type="search"
-          >
-            <span label>MOTS-CLES</span>
-          </app-input>
-          <!-- Add a button -->
-        </form>
-
-        <!-- LOCALISATION  -->
-        <div class="flex flex-col gap-2">
-          <h4 class="uppercase">localition</h4>
-
-          <div class="flex gap-3">
-            <input aria-label="checkbox" type="checkbox" />
-            <span for="">Dakar</span>
+    <!-- FILTER -->
+    <div class="grid md:grid-cols-6 bg-kl-zinc-100 gap-10">
+      <!-- ================= FILTER ================= -->
+      <aside class="md:sticky md:top-20 h-fit">
+        <div class="space-y-6 rounded-md bg-white p-5 shadow-sm">
+          <!-- HEADER -->
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold">Filtres</h3>
+            <button type="button" class="text-sm font-bold text-kl-primary-red">
+              Réinitialiser
+            </button>
           </div>
 
-          <div class="flex gap-3">
-            <input aria-label="checkbox" type="checkbox" />
-            <span for="">Thies</span>
-          </div>
+          <!-- LOCALISATION -->
+          <div class="space-y-3">
+            <h4 class="text-sm font-semibold uppercase">Localisation</h4>
 
-          <div class="flex gap-3">
-            <input aria-label="Region" type="checkbox" />
-            <span for="">Saint-louit</span>
-          </div>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" class="accent-kl-primary-red" />
+              <span>Dakar</span>
+            </label>
 
-          <div class="flex flex-col gap-1">
-            <label for="mySelect">Regions :</label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" class="accent-kl-primary-red" />
+              <span>Thiès</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" class="accent-kl-primary-red" />
+              <span>Saint-Louis</span>
+            </label>
+
             <select
-              class="bg-bg-input border-kl-border text-kl-text focus:border-kl-active rounded-lg border p-2 ring-0 transition-colors duration-300 ease-in-out outline-none"
-              id="mySelect"
-              name="mySelect"
+              aria-label="Region"
+              class="w-full rounded-md border border-kl-border bg-bg-input p-2 text-sm focus:border-kl-active outline-none"
             >
-              <option value="">Hello World</option>
-              <option value="">Dakar</option>
-              <option value="">thies</option>
-              <option value="">Dakar</option>
+              <option>Toutes les régions</option>
+              <option>Dakar</option>
+              <option>Thiès</option>
+            </select>
+          </div>
+
+          <!-- CONTRAT -->
+          <div class="space-y-3">
+            <h4 class="text-sm font-semibold uppercase">Type de contrat</h4>
+
+            <div class="flex flex-wrap gap-2">
+              <label class="cursor-pointer">
+                <input type="radio" name="contract" class="hidden peer" />
+                <span class="chip">CDI</span>
+              </label>
+
+              <label class="cursor-pointer">
+                <input type="radio" name="contract" class="hidden peer" />
+                <span class="chip">CDD</span>
+              </label>
+
+              <label class="cursor-pointer">
+                <input type="radio" name="contract" class="hidden peer" />
+                <span class="chip">Freelance</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- EXPERIENCE -->
+          <div class="space-y-2">
+            <h4 class="text-sm font-semibold uppercase">Expérience</h4>
+
+            <select
+              aria-label="Niveau d'experience"
+              class="w-full rounded-md border border-kl-border bg-bg-input p-2 text-sm focus:border-kl-active outline-none"
+            >
+              <option>Tous niveaux</option>
+              <option>Junior</option>
+              <option>Senior</option>
             </select>
           </div>
         </div>
+      </aside>
 
-        <div class="flex flex-col gap-2">
-          <h4 class="text-sm font-semibold uppercase">Type de contrat</h4>
+      <!-- JOBG LISTS -->
+      <div class="col-span-5 sm:grid-cols-2 grid md:grid-cols-3 gap-5">
+        <!-- JOB CARD -->
+        @for (job of jobOffers(); track $index) {
+          <!-- JOB CARD -->
+          <div class="bg-kl-job-card p-5">
+            <!-- HEADER -->
+            <div class="flex items-start justify-between">
+              <div class="flex gap-3">
+                <div class="p-7 rounded-md bg-gray-300"></div>
 
-          <div class="flex gap-3">
-            <label class="cursor-pointer">
-              <input
-                type="radio"
-                name="contract"
-                value="CDI"
-                class="peer hidden"
-              />
-              <span
-                class="bg-bg-input peer-checked:bg-kl-red-dark rounded-xl px-3 py-1 text-sm peer-checked:text-white"
-                >CDI</span
-              >
-            </label>
+                <div>
+                  <h3 class="font-semibold kl-text">UX/UI Designer</h3>
+                  <p class="text-sm">Dakar • Publiée le 16 avr. 2026</p>
+                </div>
+              </div>
 
-            <label class="cursor-pointer">
-              <input
-                type="radio"
-                name="contract"
-                value="CDD"
-                class="peer hidden"
-              />
-              <span
-                class="bg-bg-input peer-checked:bg-kl-red-dark rounded-xl px-3 py-1 text-sm peer-checked:text-white"
-                >CDD</span
-              >
-            </label>
+              <!-- BADGES -->
+              <div class="flex gap-2">
+                <app-badge color="red-500"> CDI</app-badge>
+                <app-badge color="red-500"> Freelance</app-badge>
+              </div>
+            </div>
 
-            <label class="cursor-pointer">
-              <input
-                type="radio"
-                name="contract"
-                value="CDD"
-                class="peer hidden"
-              />
-              <span
-                class="bg-bg-input peer-checked:bg-kl-red-dark rounded-xl px-3 py-1 text-sm peer-checked:text-white"
-                >Freelance</span
-              >
-            </label>
+            <!-- DESCRIPTION -->
+            <div>
+              <p class="card-content">
+                Rejoignez l'élite du marché du travail au Sénégal. Nous
+                connectons les talents d'exception
+              </p>
+            </div>
+
+            <!-- STATS -->
+            <div class="flex flex-row justify-around gap-5">
+              <div class="flex flex-col bg-red-300 rounded-lg px-2 w-full">
+                <p class="font-semibold text-kl-muted text-lg">Salaire</p>
+                <span class="font-semibold text-kl-text text-lg"
+                  >100k-200k</span
+                >
+              </div>
+              <div class="flex flex-col bg-red-300 rounded-lg px-2 w-full">
+                <p class="font-semibold text-kl-muted text-lg">Vue</p>
+                <span class="font-semibold text-kl-text text-lg">30</span>
+              </div>
+              <div class="flex flex-col bg-red-300 rounded-lg px-2 w-full">
+                <p class="font-semibold text-kl-muted text-lg">Candidatures</p>
+                <span class="font-semibold text-kl-text text-lg">80</span>
+              </div>
+            </div>
+
+            <!-- Card Footer -->
+            <hr />
+            <div class="flex flex-row justify-between">
+              <p>Orange Senegal</p>
+              <app-button variant="primary"> Voir l'offre</app-button>
+            </div>
           </div>
-        </div>
-
-        <!-- NIVEAU D'EXPERIENCE -->
-        <div class="flex flex-col gap-1">
-          <label for="mySelect">Niveau d'expérience</label>
-          <select
-            class="bg-bg-input border-kl-border text-kl-text focus:border-kl-active rounded-lg border p-2 ring-0 transition-colors duration-300 ease-in-out outline-none"
-            id="mySelect"
-            name="mySelect"
-          >
-            <option value="">Tout les niveaux</option>
-            <option value="">BAC</option>
-          </select>
-        </div>
+        }
       </div>
 
-      <!-- CARD CONTAINER -->
-      <div class="w-full">
-        <!-- CARD -->
-        <div class="bg-amber-300 w-full max-w-md">
-          <h3>Directeur Clientel</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni fugit
-            perferendis, soluta qui odio incidunt. Ratione sequi, id suscipit
-          </p>
-        </div>
-      </div>
+      <!-- END CARD -->
     </div>
   </section>
 } @else {
@@ -153,3 +166,4 @@
     <mat-spinner></mat-spinner>
   </app-loader>
 }
+"

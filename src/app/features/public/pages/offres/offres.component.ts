@@ -6,12 +6,21 @@ import { JsonPipe } from '@angular/common';
 import { DestroyRef } from '@angular/core';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { InputComponent } from "../../../../shared/components/input/input.component";
-import { CardsComponent } from "../../../../shared/components/cards/cards.component";
+import { InputComponent } from '../../../../shared/components/input/input.component';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
+import { LucideAngularModule } from "lucide-angular";
 
 @Component({
   selector: 'app-offres',
-  imports: [LoaderComponent, MatProgressSpinner, InputComponent, CardsComponent],
+  imports: [
+    LoaderComponent,
+    MatProgressSpinner,
+    InputComponent,
+    LucideAngularModule,
+    ButtonComponent,
+    BadgeComponent
+],
   templateUrl: './offres.component.html',
   styleUrl: './offres.component.css',
 })
