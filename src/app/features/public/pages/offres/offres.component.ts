@@ -2,7 +2,7 @@ import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { JobOfferService } from '../../../../core/services/job_offer.service';
 import { JobOffer } from '../../../../core/models/job_offer.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, DatePipe } from '@angular/common';
 import { DestroyRef } from '@angular/core';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -11,6 +11,8 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
 import { LucideAngularModule } from 'lucide-angular';
 import { WorkingMode, ContractType } from '../../../../core/constant/enums';
+import { IPagination } from '../../../../core/models/offer_respose.model';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-offres',
@@ -20,16 +22,12 @@ import { WorkingMode, ContractType } from '../../../../core/constant/enums';
     LucideAngularModule,
     ButtonComponent,
     BadgeComponent,
+    DatePipe,
   ],
   templateUrl: './offres.component.html',
   styleUrl: './offres.component.css',
 })
 export class OffresComponent implements OnInit {
-  private jobOfferService = inject(JobOfferService);
-  protected jobOffers = signal<JobOffer[]>([]);
-  protected isLoading = signal(true);
-  private destroyRef = inject(DestroyRef);
-
   // WORKING MODE MAPPING
   working_mode: Record<WorkingMode, { label: string; class: string }> = {
     REMOTE: {
@@ -70,14 +68,25 @@ export class OffresComponent implements OnInit {
     },
   };
 
+  private jobOfferService = inject(JobOfferService);
+  protected jobOffers = signal<JobOffer[]>([]);
+  protected pagination = signal({}); // metadat containing pagination data
+  protected isLoading = signal(true);
+  private destroyRef = inject(DestroyRef);
   ngOnInit(): void {
     this.jobOfferService
       .jobOffer()
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+
+        // tap((res) => {
+        //   console.log(res);
+        // }),
+      )
       .subscribe({
-        next: ({ data }) => {
-          console.log(data);
+        next: ({ data, meta }) => {
           this.jobOffers.set(data);
+          this.pagination.set(meta);
           this.isLoading.set(false);
         },
         error: (err) => {

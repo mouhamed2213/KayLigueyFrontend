@@ -119,7 +119,7 @@
          hover:-translate-y-1 hover:shadow-md;
   }
   .card-content {
-    @apply text-sm font-sans text-kl-muted 
+    @apply mt-4 text-sm text-kl-muted  leading-relaxed line-clamp-2 font-sans;
   }
 }
 
