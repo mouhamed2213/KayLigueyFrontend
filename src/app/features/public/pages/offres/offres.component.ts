@@ -83,7 +83,7 @@ export class OffresComponent implements OnInit {
 
   // Filters state (single source of truth)
   protected filters = signal<IFilters>({
-    city: '',
+    city: 'Dakar',
     contract_type: '',
     working_mode: '',
   });

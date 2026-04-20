@@ -109,8 +109,6 @@
 
   .chip {
     @apply bg-bg-input px-3 py-1 text-sm rounded-xl transition 
-         peer-checked:bg-kl-red-dark 
-         peer-checked:text-white;
   }
 
   .job-card {

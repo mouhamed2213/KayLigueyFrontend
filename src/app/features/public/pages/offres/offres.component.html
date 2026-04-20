@@ -1,5 +1,7 @@
 @if (!isLoading()) {
-  <section class="px-4 md:px-6 flex w-full flex-col gap-6 py-8 md:py-12">
+  <section
+    class="px-4 md:px-6 flex w-full flex-col gap-6 py-8 md:py-12 bg-kl-zinc-100"
+  >
     <!-- ══ HEADER ══════════════════════════════════════════════════ -->
     <div class="flex w-full flex-col gap-3 md:max-w-xl">
       <div class="flex flex-col">
@@ -66,59 +68,20 @@
           <div class="h-px bg-kl-border"></div>
 
           <!-- Localisation -->
-          <div class="space-y-2.5">
+          <div class="space-y-1.5">
             <h4
               class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
             >
-              Localisation
+              localisation
             </h4>
-            @for (region of regions; track $index) {
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  class="accent-kl-primary-red w-3.5 h-3.5"
-                />
-                <span class="text-sm text-kl-text">
-                  {{ region.toLocaleLowerCase() }}
-                </span>
-              </label>
-            }
-          </div>
-
-          <div class="h-px bg-kl-border"></div>
-
-          <!-- Type de contrat -->
-          <div class="space-y-2.5">
-            <h4
-              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+            <select
+              aria-label="Niveau d'études"
+              class="w-full rounded-lg border border-kl-border bg-white px-3 py-2 text-sm text-kl-text outline-none focus:border-kl-primary-red transition-colors"
             >
-              Type de contrat
-            </h4>
-            <div class="flex flex-wrap gap-2">
-              @for (type of contractTypes; track $index) {
-                <span (click)="updateFilter('contract_type', type)">
-                  {{ contractTypeMap[type].label }}
-                </span>
+              @for (region of regions; track region) {
+                <option value="{{ region }}">{{ region }}</option>
               }
-            </div>
-          </div>
-
-          <div class="h-px bg-kl-border"></div>
-
-          <!-- Mode de travail -->
-          <div class="space-y-2.5">
-            <h4
-              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
-            >
-              Mode de travail
-            </h4>
-            <div class="flex flex-wrap gap-2">
-              @for (mode of workingModes; track mode) {
-                <span (click)="updateFilter('working_mode', mode)">
-                  {{ workingModeMap[mode].label }}</span
-                >
-              }
-            </div>
+            </select>
           </div>
 
           <div class="h-px bg-kl-border"></div>
@@ -160,6 +123,56 @@
               <option value="2">Intermédiaire (2–5 ans)</option>
               <option value="5">Senior (5+ ans)</option>
             </select>
+          </div>
+
+          <div class="h-px bg-kl-border"></div>
+
+          <!-- Type de contrat -->
+          <div class="space-y-2.5">
+            <h4
+              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+            >
+              Type de contrat
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              @for (type of contractTypes; track $index) {
+                <span
+                  (click)="updateFilter('contract_type', type)"
+                  class="cursor-pointer px-3 py-1 rounded-xl text-sm transition"
+                  [class.bg-kl-primary-red]="filters().contract_type === type"
+                  [class.text-white]="filters().contract_type === type"
+                  [class.bg-bg-input]="filters().contract_type !== type"
+                  [class.text-kl-text]="filters().contract_type !== type"
+                >
+                  {{ contractTypeMap[type].label }}
+                </span>
+              }
+            </div>
+          </div>
+
+          <div class="h-px bg-kl-border"></div>
+
+          <!-- Mode de travail -->
+          <div class="space-y-2.5">
+            <h4
+              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+            >
+              Mode de travail
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              @for (mode of workingModes; track mode) {
+                <span
+                  (click)="updateFilter('working_mode', mode)"
+                  class="cursor-pointer px-3 py-1 rounded-xl text-sm transition"
+                  [class.bg-kl-primary-red]="filters().working_mode === mode"
+                  [class.text-white]="filters().working_mode === mode"
+                  [class.bg-bg-input]="filters().working_mode !== mode"
+                  [class.text-kl-text]="filters().working_mode !== mode"
+                >
+                  {{ workingModeMap[mode].label }}
+                </span>
+              }
+            </div>
           </div>
         </div>
       </aside>
