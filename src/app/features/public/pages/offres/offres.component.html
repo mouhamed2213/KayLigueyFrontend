@@ -196,6 +196,27 @@
         }
       </div>
     </div>
+
+    <!-- Disable button -->
+    <div>
+      <div>
+        <button
+          (click)="onPageChange(currentPage() - 1)"
+          type="button"
+          [disabled]="currentPage() === 1"
+        >
+          Précédent
+        </button>
+        <span>Page {{ currentPage() }} sur {{ totalPage() }}</span>
+        <button
+          (click)="onPageChange(currentPage() + 1)"
+          type="button"
+          [disabled]="currentPage() >= totalPage()"
+        >
+          Suivant
+        </button>
+      </div>
+    </div>
   </section>
 } @else {
   <app-loader>

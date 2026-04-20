@@ -15,19 +15,26 @@ export class JobOfferService {
   private http = inject(HttpClient);
 
   // Get all offer (future using pagination)
-  public jobOffer(): Observable<IOfferResponse<JobOffer[]>> {
+  public jobOffer(
+    page: number,
+    limit: number,
+  ): Observable<IOfferResponse<JobOffer[]>> {
     // create offer interface
-    return this.http.get<IOfferResponse<JobOffer[]>>(`${this.apiUrl}`).pipe(
-      // tap((result) => console.log(result)),
-      map(res => {
-        return {data : res.data ,  meta : res.meta}
-      }),
+    return this.http
+      .get<IOfferResponse<JobOffer[]>>(`${this.apiUrl}`, {
+        params: { page, limit },
+      })
+      .pipe(
+        // tap((result) => console.log(result)),
+        map((res) => {
+          return { data: res.data, meta: res.meta };
+        }),
 
-      catchError((err) => {
-        console.error('Error fetching jobs:', err);
-        return throwError(() => err);
-      }),
-    );
+        catchError((err) => {
+          console.error('Error fetching jobs:', err);
+          return throwError(() => err);
+        }),
+      );
   }
 
   // get one job funtion

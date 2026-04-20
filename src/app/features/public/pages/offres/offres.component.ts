@@ -1,4 +1,11 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { JobOfferService } from '../../../../core/services/job_offer.service';
 import { JobOffer } from '../../../../core/models/job_offer.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -9,10 +16,11 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { InputComponent } from '../../../../shared/components/input/input.component';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
-import { LucideAngularModule } from 'lucide-angular';
+import { LucideAngularModule, TheaterIcon } from 'lucide-angular';
 import { WorkingMode, ContractType } from '../../../../core/constant/enums';
 import { IPagination } from '../../../../core/models/offer_respose.model';
 import { tap } from 'rxjs';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-offres',
@@ -23,6 +31,7 @@ import { tap } from 'rxjs';
     ButtonComponent,
     BadgeComponent,
     DatePipe,
+    MatPaginatorModule,
   ],
   templateUrl: './offres.component.html',
   styleUrl: './offres.component.css',
@@ -70,12 +79,30 @@ export class OffresComponent implements OnInit {
 
   private jobOfferService = inject(JobOfferService);
   protected jobOffers = signal<JobOffer[]>([]);
-  protected pagination = signal({}); // metadat containing pagination data
   protected isLoading = signal(true);
   private destroyRef = inject(DestroyRef);
+
+  protected currentPage = signal<number>(1);
+  protected totalJobs = signal<number>(0);
+  protected jobPerPage = signal<number>(10);
+  protected itemsPerpage = signal<number[]>([10]);
+  protected totalPage = signal<number>(0);
+  protected offset = signal<number>(0);
+
+  // default pagination
+  protected pagination = signal<IPagination>({
+    page: 1,
+    limit: 10,
+    total: 0,
+  });
+
   ngOnInit(): void {
+    this.loadJobOffer(this.pagination().page, this.pagination().limit);
+  }
+
+  loadJobOffer(page: number, limit: number) {
     this.jobOfferService
-      .jobOffer()
+      .jobOffer(page, limit)
       .pipe(
         takeUntilDestroyed(this.destroyRef),
 
@@ -87,6 +114,12 @@ export class OffresComponent implements OnInit {
         next: ({ data, meta }) => {
           this.jobOffers.set(data);
           this.pagination.set(meta);
+
+          this.currentPage.set(this.pagination().page);
+          this.totalJobs.set(this.pagination().total);
+          this.jobPerPage.set(this.pagination().limit);
+          this.totalPage.set(Math.ceil(this.totalJobs() / this.jobPerPage()));
+
           this.isLoading.set(false);
         },
         error: (err) => {
@@ -94,5 +127,13 @@ export class OffresComponent implements OnInit {
           console.log(err);
         },
       });
+  }
+
+  onPageChange(currentPage: number) {
+    this.isLoading.set(true);
+
+    this.currentPage.set(currentPage);
+    this.loadJobOffer(this.currentPage(), this.jobPerPage());
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
