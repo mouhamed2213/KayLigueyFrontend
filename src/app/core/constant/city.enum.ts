@@ -1,0 +1,16 @@
+export enum SenegalRegion {
+  DAKAR = 'Dakar',
+  THIES = 'Thiès',
+  SAINT_LOUIS = 'Saint-Louis',
+  DIOURBEL = 'Diourbel',
+  LOUGA = 'Louga',
+  FATICK = 'Fatick',
+  KAOLACK = 'Kaolack',
+  KAFFRINE = 'Kaffrine',
+  TAMBACOUNDA = 'Tambacounda',
+  KOLDA = 'Kolda',
+  ZIGUINCHOR = 'Ziguinchor',
+  SEDHIOU = 'Sédhiou',
+  KEDOUGOU = 'Kédougou',
+  MATAM = 'Matam',
+}
