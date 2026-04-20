@@ -1,29 +1,32 @@
-import {
-  Component,
-  computed,
-  inject,
-  OnDestroy,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { Component, inject, OnInit, signal, DestroyRef } from '@angular/core';
 import { JobOfferService } from '../../../../core/services/job_offer.service';
 import { JobOffer } from '../../../../core/models/job_offer.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { JsonPipe, DatePipe } from '@angular/common';
-import { DestroyRef } from '@angular/core';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { InputComponent } from '../../../../shared/components/input/input.component';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
-import { LucideAngularModule, TheaterIcon } from 'lucide-angular';
-import { WorkingMode, ContractType } from '../../../../core/constant/enums';
-import { IPagination } from '../../../../core/models/offer_respose.model';
-import { tap } from 'rxjs';
+import { LucideAngularModule } from 'lucide-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { IPagination } from '../../../../core/models/offer_respose.model';
+import { IFilters } from '../../../../core/models/filter.model';
+
+import {
+  CONTRACT_TYPE_CONFIG,
+  CONTRACT_TYPES,
+} from '../../../../core/constant/contractTypes';
+
+import {
+  WORKING_MODE_CONFIG,
+  WORKING_MODES,
+} from '../../../../core/constant/workingMode';
+
+import { SN_REGIONS } from '../../../../core/constant/regions';
 
 @Component({
   selector: 'app-offres',
+  standalone: true,
   imports: [
     LoaderComponent,
     MatProgressSpinner,
@@ -36,110 +39,165 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   styleUrl: './offres.component.css',
 })
 export class OffresComponent implements OnInit {
-  // WORKING MODE MAPPING
-  workingModeMap: Record<WorkingMode, { label: string; class: string }> = {
-    REMOTE: {
-      label: 'Télétravail',
-      class: 'bg-green-100 text-green-700',
-    },
-    HYBRID: {
-      label: 'Hybride',
-      class: 'bg-yellow-100 text-yellow-700',
-    },
-    ON_SITE: {
-      label: 'Présentiel',
-      class: 'bg-blue-100 text-blue-700',
-    },
-  };
+  /* =========================================================
+   * UI CONFIG (mapping + arrays for iteration)
+   * ========================================================= */
 
-  // CONTRACT TYPE CONFIG
-  contractTypeMap: Record<ContractType, { label: string; class: string }> = {
-    CDI: {
-      label: 'CDI',
-      class: 'bg-emerald-100 text-emerald-700',
-    },
-    CDD: {
-      label: 'CDD',
-      class: 'bg-blue-100 text-blue-700',
-    },
-    FREELANCE: {
-      label: 'Freelance',
-      class: 'bg-purple-100 text-purple-700',
-    },
-    STAGE: {
-      label: 'Stage',
-      class: 'bg-orange-100 text-orange-700',
-    },
-    ALTERNANCE: {
-      label: 'Alternance',
-      class: 'bg-pink-100 text-pink-700',
-    },
-  };
+  protected workingModeMap = WORKING_MODE_CONFIG;
+  protected workingModes = WORKING_MODES;
+
+  protected contractTypeMap = CONTRACT_TYPE_CONFIG;
+  protected contractTypes = CONTRACT_TYPES;
+
+  protected regions = SN_REGIONS;
+
+  /* =========================================================
+   * SERVICES
+   * ========================================================= */
 
   private jobOfferService = inject(JobOfferService);
-  protected jobOffers = signal<JobOffer[]>([]);
-  protected isLoading = signal(true);
   private destroyRef = inject(DestroyRef);
 
-  protected currentPage = signal<number>(1);
-  protected totalJobs = signal<number>(0);
-  protected jobPerPage = signal<number>(10);
-  protected itemsPerpage = signal<number[]>([10]);
-  protected totalPage = signal<number>(0);
-  protected offset = signal<number>(0);
+  /* =========================================================
+   * STATE MANAGEMENT (Signals)
+   * ========================================================= */
 
-  // default pagination
+  // Job data
+  protected jobOffers = signal<JobOffer[]>([]);
+
+  // Loading state (for UX)
+  protected isLoading = signal(true);
+
+  // Pagination state
+  protected currentPage = signal<number>(1);
+  protected jobPerPage = signal<number>(10);
+  protected totalJobs = signal<number>(0);
+  protected totalPages = signal<number>(0);
+
+  // Backend pagination metadata
   protected pagination = signal<IPagination>({
     page: 1,
     limit: 10,
     total: 0,
   });
 
+  // Filters state (single source of truth)
+  protected filters = signal<IFilters>({
+    city: '',
+    contract_type: '',
+    working_mode: '',
+  });
+
+  /* =========================================================
+   * LIFECYCLE
+   * ========================================================= */
+
   ngOnInit(): void {
-    this.loadJobOffer(this.pagination().page, this.pagination().limit);
+    // Initial data fetch
+    this.fetch();
   }
 
-  loadJobOffer(page: number, limit: number) {
-    this.jobOfferService
-      .jobOffer(page, limit)
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
+  /* =========================================================
+   * CORE FETCH LOGIC
+   * ========================================================= */
 
-        // tap((res) => {
-        //   console.log(res);
-        // }),
-      )
+  fetch() {
+    // Always enable loading before API call
+    this.isLoading.set(true);
+
+    this.loadJobOffer(this.currentPage(), this.jobPerPage(), this.filters());
+  }
+
+  loadJobOffer(page: number, limit: number, filters: IFilters) {
+    this.jobOfferService
+      .jobOffer(page, limit, filters)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: ({ data, meta }) => {
+          // Update job list
           this.jobOffers.set(data);
+
+          // Sync pagination from backend
           this.pagination.set(meta);
 
-          this.currentPage.set(this.pagination().page);
-          this.totalJobs.set(this.pagination().total);
-          this.jobPerPage.set(this.pagination().limit);
-          this.totalPage.set(Math.ceil(this.totalJobs() / this.jobPerPage()));
+          // Update derived state
+          this.currentPage.set(meta.page);
+          this.jobPerPage.set(meta.limit);
+          this.totalJobs.set(meta.total);
+          this.totalPages.set(Math.ceil(meta.total / meta.limit));
 
+          // Stop loading
           this.isLoading.set(false);
         },
         error: (err) => {
+          console.error(err);
           this.isLoading.set(false);
-          console.log(err);
         },
       });
   }
 
-  onPageChange(currentPage: number) {
-    this.isLoading.set(true);
+  /* =========================================================
+   * FILTER MANAGEMENT
+   * ========================================================= */
 
-    this.currentPage.set(currentPage);
-    this.loadJobOffer(this.currentPage(), this.jobPerPage());
+  // Generic filter updater (scalable)
+  updateFilter<K extends keyof IFilters>(key: K, value: IFilters[K]) {
+    this.filters.update((current) => ({
+      ...current,
+      // Toggle behavior (click again = remove filter)
+      [key]: current[key] === value ? '' : value,
+    }));
+
+    // Reset to first page when filters change
+    this.currentPage.set(1);
+
+    // Refetch data
+    this.fetch();
+  }
+
+  // Reset all filters
+  resetFilters() {
+    this.filters.set({
+      city: '',
+      contract_type: '',
+      working_mode: '',
+    });
+
+    this.currentPage.set(1);
+    this.fetch();
+  }
+
+  /* =========================================================
+   * PAGINATION
+   * ========================================================= */
+
+  onPageChange(page: number) {
+    this.currentPage.set(page);
+
+    // Fetch with current filters
+    this.fetch();
+
+    // UX: scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  pageNumbers(){
-    return[]
+  /* =========================================================
+   * HELPERS (optional)
+   * ========================================================= */
+
+  // Example: format salary
+  formatSalary(min?: number, max?: number): string {
+    if (!min && !max) return 'Non spécifié';
+    return `${min ?? 0} - ${max ?? 0} FCFA`;
   }
 
-  formatSalary() {}
-  resetFilters() {}
+  // Example: format date
+  formatDate(date?: string): string {
+    if (!date) return '';
+    return new Date(date).toLocaleDateString();
+  }
+
+  pageNumbers() {
+    return [];
+  }
 }

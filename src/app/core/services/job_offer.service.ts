@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { JobOffer } from '../models/job_offer.model';
 import { IOfferResponse } from '../models/offer_respose.model';
+import { IFilters } from '../models/filter.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +19,18 @@ export class JobOfferService {
   public jobOffer(
     page: number,
     limit: number,
+    filters: IFilters,
   ): Observable<IOfferResponse<JobOffer[]>> {
-    // create offer interface
+    const { city, working_mode, contract_type } = filters;
     return this.http
       .get<IOfferResponse<JobOffer[]>>(`${this.apiUrl}`, {
-        params: { page, limit },
+        params: {
+          page,
+          limit,
+          city,
+          working_mode,
+          contract_type,
+        },
       })
       .pipe(
         // tap((result) => console.log(result)),
