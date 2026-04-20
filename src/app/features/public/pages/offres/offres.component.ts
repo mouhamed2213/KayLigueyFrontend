@@ -30,7 +30,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     LucideAngularModule,
     ButtonComponent,
     BadgeComponent,
-    DatePipe,
     MatPaginatorModule,
   ],
   templateUrl: './offres.component.html',
@@ -38,7 +37,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 })
 export class OffresComponent implements OnInit {
   // WORKING MODE MAPPING
-  working_mode: Record<WorkingMode, { label: string; class: string }> = {
+  workingModeMap: Record<WorkingMode, { label: string; class: string }> = {
     REMOTE: {
       label: 'Télétravail',
       class: 'bg-green-100 text-green-700',
@@ -54,7 +53,7 @@ export class OffresComponent implements OnInit {
   };
 
   // CONTRACT TYPE CONFIG
-  contract_type: Record<ContractType, { label: string; class: string }> = {
+  contractTypeMap: Record<ContractType, { label: string; class: string }> = {
     CDI: {
       label: 'CDI',
       class: 'bg-emerald-100 text-emerald-700',
@@ -136,4 +135,11 @@ export class OffresComponent implements OnInit {
     this.loadJobOffer(this.currentPage(), this.jobPerPage());
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  pageNumbers(){
+    return[]
+  }
+
+  formatSalary() {}
+  resetFilters() {}
 }

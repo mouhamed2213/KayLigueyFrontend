@@ -1,6 +1,7 @@
 import { ContractType, WorkingMode, JobStatus } from '../constant/enums';
 
 export interface JobOffer {
+  id: string;
   company_id?: string;
   title: string;
   description: string;

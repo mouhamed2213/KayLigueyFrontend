@@ -1,225 +1,436 @@
 @if (!isLoading()) {
-  <section class="px-5 flex w-full flex-col gap-6 p-4 md:p-6 md:py-10">
-    <!-- HEADER -->
-    <div class="flex w-full flex-col gap-4 md:max-w-lg">
+  <section class="px-4 md:px-6 flex w-full flex-col gap-6 py-8 md:py-12">
+    <!-- ══ HEADER ══════════════════════════════════════════════════ -->
+    <div class="flex w-full flex-col gap-3 md:max-w-xl">
       <div class="flex flex-col">
-        <h1 class="text-2xl md:text-4xl font-bold">
+        <h1 class="text-2xl md:text-4xl font-bold text-kl-text leading-tight">
           Découvrez votre prochaine
         </h1>
-        <h1 class="text-2xl md:text-4xl font-bold text-kl-primary-red">
+        <h1
+          class="text-2xl md:text-4xl font-bold text-kl-primary-red leading-tight"
+        >
           opportunité
         </h1>
       </div>
-
-      <p>
+      <p class="text-kl-muted text-sm md:text-base leading-relaxed">
         Rejoignez l'élite du marché du travail au Sénégal. Nous connectons les
-        talents d'exception avec les entreprises qui façonnent l'avenir de notre
-        pays.
+        talents avec les entreprises qui façonnent l'avenir du pays.
       </p>
+      <!-- Stats rapides -->
+      <div class="flex flex-wrap gap-2 mt-1">
+        <span
+          class="text-xs bg-white border border-kl-border rounded-full px-3 py-1.5 text-kl-muted"
+        >
+          <span class="font-bold text-kl-primary-red">{{ totalJobs() }}+</span>
+          offres actives
+        </span>
+        <span
+          class="text-xs bg-white border border-kl-border rounded-full px-3 py-1.5 text-kl-muted"
+        >
+          <span class="font-bold text-kl-primary-red">840+</span> entreprises
+        </span>
+      </div>
     </div>
 
-    <!-- MAIN GRID -->
-    <div class="grid gap-8 md:grid-cols-6 bg-kl-zinc-100 md:p-7 rounded-lg">
-      <!-- ================= FILTER ================= -->
-      <aside class="md:col-span-1 md:sticky md:top-20 h-fit">
-        <div class="space-y-6 rounded-xl bg-white p-5 shadow-sm border">
+    <!-- ══ MAIN GRID ═══════════════════════════════════════════════ -->
+    <div class="grid gap-6 md:grid-cols-[260px_1fr]">
+      <!-- ══ FILTER PANEL ════════════════════════════════════════ -->
+      <aside class="md:sticky md:top-20 h-fit">
+        <div class="rounded-xl bg-white p-5 border border-kl-border space-y-5">
+          <!-- Header filtres -->
           <div class="flex items-center justify-between">
-            <h3 class="font-semibold">Filtres</h3>
-            <button class="text-sm font-bold text-kl-primary-red">Reset</button>
+            <h3 class="font-semibold text-kl-text text-sm">Filtres</h3>
+            <button
+              type="button"
+              class="text-xs font-bold text-kl-primary-red hover:underline underline-offset-2 cursor-pointer"
+            >
+              Réinitialiser
+            </button>
           </div>
 
-          <!-- LOCALISATION -->
-          <div class="space-y-3">
-            <h4 class="text-xs font-semibold uppercase text-kl-muted">
+          <!-- Recherche mots-clés -->
+          <div class="space-y-1.5">
+            <h4
+              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+            >
+              Mots-clés
+            </h4>
+            <input
+              type="search"
+              placeholder="Design, Tech, Marketing…"
+              class="w-full rounded-lg border border-kl-border bg-white px-3 py-2 text-sm text-kl-text outline-none focus:border-kl-primary-red transition-colors placeholder:text-kl-muted/50"
+            />
+          </div>
+
+          <div class="h-px bg-kl-border"></div>
+
+          <!-- Localisation -->
+          <div class="space-y-2.5">
+            <h4
+              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+            >
               Localisation
             </h4>
-
             <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" class="accent-kl-primary-red" />
-              <span>Dakar</span>
-            </label>
-
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" class="accent-kl-primary-red" />
-              <span>Thiès</span>
+              <input
+                type="checkbox"
+                class="accent-kl-primary-red w-3.5 h-3.5"
+              />
+              <span class="text-sm text-kl-text"> CITY </span>
             </label>
           </div>
 
-          <!-- CONTRAT -->
-          <div class="space-y-3">
-            <h4 class="text-xs font-semibold uppercase text-kl-muted">
+          <div class="h-px bg-kl-border"></div>
+
+          <!-- Type de contrat -->
+          <div class="space-y-2.5">
+            <h4
+              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+            >
               Type de contrat
             </h4>
-
             <div class="flex flex-wrap gap-2">
-              <span class="chip">CDI</span>
-              <span class="chip">CDD</span>
-              <span class="chip">Freelance</span>
-              <span class="chip">Stage</span>
-              <span class="chip">Alternace</span>
+              <span> c.label </span>
             </div>
           </div>
 
-          <!-- Working mode  -->
-          <div class="space-y-3">
-            <h4 class="text-xs font-semibold uppercase text-kl-muted">
-              Type de contrat
-            </h4>
+          <div class="h-px bg-kl-border"></div>
 
+          <!-- Mode de travail -->
+          <div class="space-y-2.5">
+            <h4
+              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+            >
+              Mode de travail
+            </h4>
             <div class="flex flex-wrap gap-2">
-              <label class="cursor-pointer">
-                <span class="chip">Hybrid</span>
-                <input type="radio" name="working" class="hidden peer" />
-              </label>
-              <label class="cursor-pointer">
-                <span class="chip">Remote</span>
-                <input type="radio" name="working" class="hidden peer" />
-              </label>
-              <label class="cursor-pointer">
-                <span class="chip">Presentiel</span>
-                <input type="radio" name="working" class="hidden peer" />
-              </label>
+              <span></span>
             </div>
           </div>
 
-          <!-- EXPERIENCE -->
-          <div>
-            <label>
-              Niveau D'etudes
-              <select aria-label="experience">
-                <option>Tout les exp</option>
-                <option>BAC+3</option>
-                <option>BAC+5</option>
-                <option>BAC+2</option>
-              </select>
-            </label>
+          <div class="h-px bg-kl-border"></div>
+
+          <!-- Niveau d'études -->
+          <div class="space-y-1.5">
+            <h4
+              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+            >
+              Niveau d'études
+            </h4>
+            <select
+              aria-label="Niveau d'études"
+              class="w-full rounded-lg border border-kl-border bg-white px-3 py-2 text-sm text-kl-text outline-none focus:border-kl-primary-red transition-colors"
+            >
+              <option value="">Tous niveaux</option>
+              <option value="Bac">Bac</option>
+              <option value="Bac+2">Bac+2</option>
+              <option value="Bac+3">Bac+3</option>
+              <option value="Bac+5">Bac+5</option>
+            </select>
           </div>
 
-          <div>
-            <label>
+          <div class="h-px bg-kl-border"></div>
+
+          <!-- Expérience -->
+          <div class="space-y-1.5">
+            <h4
+              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+            >
               Expérience
-              <select aria-label="experience">
-                <option>Tout les exp</option>
-                <option>Debutant</option>
-                <option>3ans</option>
-                <option>5ans</option>
-                <option>+10ans</option>
-              </select>
-            </label>
+            </h4>
+            <select
+              aria-label="Expérience requise"
+              class="w-full rounded-lg border border-kl-border bg-white px-3 py-2 text-sm text-kl-text outline-none focus:border-kl-primary-red transition-colors"
+            >
+              <option value="">Tous niveaux</option>
+              <option value="0">Débutant (0–2 ans)</option>
+              <option value="2">Intermédiaire (2–5 ans)</option>
+              <option value="5">Senior (5+ ans)</option>
+            </select>
           </div>
         </div>
       </aside>
 
-      <!-- ================= JOB LIST ================= -->
-      <div class="md:col-span-5 space-y-6 md:grid md:grid-cols-2 gap-5">
-        @for (job of jobOffers(); track $index) {
-          <!-- JOB CARD -->
-          <div
-            class="group w-full rounded-xl border border-transparent hover:border-red-500 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+      <!-- ══ JOB LIST ════════════════════════════════════════════ -->
+      <div class="flex flex-col gap-5">
+        <!-- Résultats + tri -->
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-kl-muted">
+            <span class="font-semibold text-kl-text">{{
+              jobOffers().length
+            }}</span>
+            offres trouvées
+          </span>
+          <select
+            aria-label="Trier par"
+            class="text-xs border border-kl-border rounded-lg px-3 py-2 text-kl-muted bg-white outline-none focus:border-kl-primary-red transition-colors"
           >
-            <!-- HEADER -->
-            <div class="flex items-start justify-between gap-4">
-              <div class="flex gap-4">
-                <!-- LOGO -->
-                <div class="h-12 w-12 rounded-md bg-gray-200"></div>
+            <option value="recent">Plus récentes</option>
+            <option value="salary_desc">Salaire décroissant</option>
+            <option value="applications">Plus de candidatures</option>
+            <option value="views">Plus vues</option>
+          </select>
+        </div>
 
-                <!-- TITLE -->
-                <div>
-                  <h3
-                    class="font-semibold text-lg text-kl-text group-hover:text-kl-primary-red transition"
+        <!-- Cards grille -->
+        <div class="grid gap-4 md:grid-cols-2">
+          @for (job of jobOffers(); track job.id) {
+            <div
+              class="group relative w-full rounded-xl border bg-white p-5 transition-all duration-200 hover:border-kl-primary-red hover:shadow-md cursor-pointer"
+              [class.border-kl-primary-red]="job.is_featured"
+              [class.border-l-4]="job.is_featured"
+              [class.border-kl-border]="!job.is_featured"
+            >
+              <!-- Badge "En vedette" -->
+              @if (job.is_featured) {
+                <div class="absolute -top-2.5 left-4">
+                  <span
+                    class="text-[10px] font-bold bg-kl-primary-red text-white px-2.5 py-1 rounded-full"
                   >
-                    {{ job.title }}
-                  </h3>
+                    En vedette
+                  </span>
+                </div>
+              }
 
-                  <p class="text-sm text-kl-muted">{{ job.city }}</p>
+              <!-- CARD HEADER -->
+              <div
+                class="flex items-start justify-between gap-3 mb-3"
+                [class.mt-2]="job.is_featured"
+              >
+                <div class="flex items-start gap-3">
+                  <!-- Logo entreprise avec fallback initiales -->
+                  <div
+                    class="h-10 w-10 rounded-lg bg-kl-red-50 border border-kl-border flex items-center justify-center text-sm font-bold text-kl-primary-red shrink-0"
+                  ></div>
+                  <div>
+                    <h3
+                      class="font-semibold text-kl-text text-[15px] leading-tight group-hover:text-kl-primary-red transition-colors"
+                    >
+                      {{ job.title }}
+                    </h3>
+                    <p
+                      class="text-xs text-kl-muted mt-0.5 flex items-center gap-1.5"
+                    >
+                      <span>Company Name</span>
+                      <span
+                        class="w-1 h-1 rounded-full bg-kl-muted/40 inline-block"
+                      ></span>
+                      <span>{{ job.city ?? "Sénégal" }}</span>
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Badges -->
+                <div class="flex flex-col gap-1.5 items-end shrink-0">
+                  <app-badge
+                    [label]="
+                      workingModeMap[job.working_mode]?.label ??
+                      job.working_mode
+                    "
+                    [customClass]="
+                      workingModeMap[job.working_mode]?.class ?? 'badge-gray'
+                    "
+                  />
+                  <app-badge
+                    [label]="
+                      contractTypeMap[job.contract_type]?.label ??
+                      job.contract_type
+                    "
+                    [customClass]="
+                      contractTypeMap[job.contract_type]?.class ?? 'badge-gray'
+                    "
+                  />
                 </div>
               </div>
 
-              <!-- BADGES -->
-              <div class="flex gap-2 flex-wrap">
-                <app-badge
-                  [label]="working_mode[job.working_mode].label"
-                  [customClass]="working_mode[job.working_mode].class"
+              <!-- Description tronquée -->
+              <p
+                class="text-xs text-kl-muted leading-relaxed line-clamp-2 mb-4"
+              >
+                {{ job.description }}
+              </p>
+
+              <!-- Stats -->
+              <div class="grid grid-cols-3 gap-2 mb-4">
+                <div
+                  class="flex flex-col p-2 rounded-lg bg-gray-50 border border-transparent group-hover:border-kl-red-100 transition-colors"
+                >
+                  <span
+                    class="text-[10px] text-kl-muted uppercase tracking-wide"
+                    >Salaire</span
+                  >
+                  <span class="text-xs font-semibold text-kl-text mt-0.5">
+                    <!-- {{job.salary_min , job.salary_max}} -->
+                  </span>
+                </div>
+                <div
+                  class="flex flex-col p-2 rounded-lg bg-gray-50 border border-transparent group-hover:border-kl-red-100 transition-colors"
+                >
+                  <span
+                    class="text-[10px] text-kl-muted uppercase tracking-wide"
+                    >Vues</span
+                  >
+                  <span class="text-xs font-semibold text-kl-text mt-0.5">{{
+                    job.view_count
+                  }}</span>
+                </div>
+                <div
+                  class="flex flex-col p-2 rounded-lg bg-gray-50 border border-transparent group-hover:border-kl-red-100 transition-colors"
+                >
+                  <span
+                    class="text-[10px] text-kl-muted uppercase tracking-wide"
+                    >Candidatures</span
+                  >
+                  <span class="text-xs font-semibold text-kl-text mt-0.5">{{
+                    job.application_count
+                  }}</span>
+                </div>
+              </div>
+
+              <!-- Footer -->
+              <div
+                class="flex items-center justify-between pt-3 border-t border-kl-border"
+              >
+                <span class="text-[11px] text-kl-muted flex items-center gap-1">
+                  <!-- Icône horloge -->
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <circle
+                      cx="6"
+                      cy="6"
+                      r="5"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                    />
+                    <path
+                      d="M6 3.5V6l1.5 1.5"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                  <span>
+                    {{ job.expires_at }}
+                  </span>
+                </span>
+                <app-button variant="primary" size="sm">
+                  Voir l'offre
+                </app-button>
+              </div>
+            </div>
+          }
+
+          <!-- État vide -->
+          @empty {
+            <div
+              class="md:col-span-2 flex flex-col items-center justify-center py-16 text-center"
+            >
+              <div
+                class="w-14 h-14 rounded-full bg-kl-red-50 flex items-center justify-center mb-4"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <circle
+                    cx="11"
+                    cy="11"
+                    r="8"
+                    stroke="#C0152A"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="M16.5 16.5L21 21"
+                    stroke="#C0152A"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M8 11h6M11 8v6"
+                    stroke="#C0152A"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
+              <p class="font-semibold text-kl-text mb-1">
+                Aucune offre trouvée
+              </p>
+              <p class="text-sm text-kl-muted mb-4">
+                Essayez de modifier vos filtres
+              </p>
+              <button
+                type="button"
+                class="text-sm font-semibold text-kl-primary-red hover:underline underline-offset-2 cursor-pointer"
+              >
+                Réinitialiser les filtres
+              </button>
+            </div>
+          }
+        </div>
+
+        <!-- ══ PAGINATION ══════════════════════════════════════ -->
+        @if (totalPage() > 1) {
+          <div class="flex items-center justify-center gap-2 mt-4">
+            <button
+              type="button"
+              (click)="onPageChange(currentPage() - 1)"
+              [disabled]="currentPage() === 1"
+              class="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-kl-border bg-white text-sm text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-kl-border disabled:hover:text-kl-muted cursor-pointer"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M9 11L5 7l4-4"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                 />
-                <app-badge
-                  [label]="contract_type[job.contract_type].label"
-                  [customClass]="contract_type[job.contract_type].class"
+              </svg>
+              Précédent
+            </button>
+
+            <!-- Numéros de pages -->
+            @for (page of pageNumbers(); track page) {
+              @if (page === -1) {
+                <span class="text-kl-muted px-1">…</span>
+              } @else {
+                <button
+                  type="button"
+                  (click)="onPageChange(page)"
+                  [class]="
+                    page === currentPage()
+                      ? 'w-9 h-9 rounded-lg bg-kl-primary-red text-white text-sm font-semibold cursor-pointer'
+                      : 'w-9 h-9 rounded-lg border border-kl-border bg-white text-sm text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors cursor-pointer'
+                  "
+                >
+                  {{ page }}
+                </button>
+              }
+            }
+
+            <button
+              type="button"
+              (click)="onPageChange(currentPage() + 1)"
+              [disabled]="currentPage() >= totalPage()"
+              class="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-kl-border bg-white text-sm text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-kl-border disabled:hover:text-kl-muted cursor-pointer"
+            >
+              Suivant
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M5 3l4 4-4 4"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                 />
-              </div>
-            </div>
-
-            <!-- DESCRIPTION -->
-            <p class="card-content">
-              {{ job.description }}
-            </p>
-
-            <!-- STATS -->
-            <div class="mt-5 grid grid-cols-3 gap-4 text-sm justify-between">
-              <div
-                class="flex flex-col p-2 px-3 rounded-lg bg-[#2525000a] border border-transparent group-hover:border-red-500"
-              >
-                <span class="text-kl-muted text-lg">Salaire</span>
-                <span class="font-semibold text-kl-text"
-                  >{{ job.salary_min }} - {{ job.salary_max }}
-                </span>
-              </div>
-              <!-- <div class="flex flex-col  p-2 px-3 rounded-lg"> -->
-
-              <div
-                class="flex flex-col p-2 px-3 rounded-lg bg-[#2525000a] border border-transparent group-hover:border-red-500"
-              >
-                <span class="text-kl-muted text-lg">Vues</span>
-                <span class="font-semibold text-kl-text">
-                  {{ job.view_count }}
-                </span>
-              </div>
-
-              <div
-                class="flex flex-col p-2 px-3 rounded-lg bg-[#2525000a] border border-transparent group-hover:border-red-500"
-              >
-                <span class="text-kl-muted text-lg">Candidatures</span>
-                <span class="font-semibold text-kl-text">
-                  {{ job.application_count }}
-                </span>
-              </div>
-            </div>
-
-            <!-- FOOTER -->
-            <div class="mt-6 flex items-center justify-between border-t pt-4">
-              <span class="text-sm text-kl-muted">
-                Publier {{ job.published_at | date: "short" }}</span
-              >
-
-              <app-button variant="primary"> Voir l'offre </app-button>
-            </div>
+              </svg>
+            </button>
           </div>
         }
       </div>
     </div>
-
-    <!-- Disable button -->
-    <div>
-      <div>
-        <button
-          (click)="onPageChange(currentPage() - 1)"
-          type="button"
-          [disabled]="currentPage() === 1"
-        >
-          Précédent
-        </button>
-        <span>Page {{ currentPage() }} sur {{ totalPage() }}</span>
-        <button
-          (click)="onPageChange(currentPage() + 1)"
-          type="button"
-          [disabled]="currentPage() >= totalPage()"
-        >
-          Suivant
-        </button>
-      </div>
-    </div>
   </section>
 } @else {
-  <app-loader>
-    <mat-spinner></mat-spinner>
-  </app-loader>
+  <div class="flex items-center justify-center min-h-[60vh]">
+    <app-loader>
+      <mat-spinner></mat-spinner>
+    </app-loader>
+  </div>
 }
