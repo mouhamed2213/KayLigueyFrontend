@@ -8,7 +8,7 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
 import { LucideAngularModule } from 'lucide-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { DatePipe } from '@angular/common';
 import { IPagination } from '../../../../core/models/offer_respose.model';
 import { IFilters } from '../../../../core/models/filter.model';
 
@@ -34,6 +34,7 @@ import { SN_REGIONS } from '../../../../core/constant/regions';
     ButtonComponent,
     BadgeComponent,
     MatPaginatorModule,
+    DatePipe,
   ],
   templateUrl: './offres.component.html',
   styleUrl: './offres.component.css',
@@ -74,6 +75,9 @@ export class OffresComponent implements OnInit {
   protected totalJobs = signal<number>(0);
   protected totalPages = signal<number>(0);
 
+  // Select filte
+  city = signal<string>('');
+
   // Backend pagination metadata
   protected pagination = signal<IPagination>({
     page: 1,
@@ -83,9 +87,11 @@ export class OffresComponent implements OnInit {
 
   // Filters state (single source of truth)
   protected filters = signal<IFilters>({
-    city: '',
+    city: this.city(),
     contract_type: '',
     working_mode: '',
+    education_level: '',
+    experience: '',
   });
 
   /* =========================================================
@@ -136,6 +142,11 @@ export class OffresComponent implements OnInit {
       });
   }
 
+  onSelectChange(value: string) {
+    //  this.city.set(value);
+    console.log(value);
+  }
+
   /* =========================================================
    * FILTER MANAGEMENT
    * ========================================================= */
@@ -161,6 +172,8 @@ export class OffresComponent implements OnInit {
       city: '',
       contract_type: '',
       working_mode: '',
+      education_level: '',
+      experience: '',
     });
 
     this.currentPage.set(1);
@@ -196,6 +209,7 @@ export class OffresComponent implements OnInit {
     if (!date) return '';
     return new Date(date).toLocaleDateString();
   }
+  formatedDate = signal<any>('');
 
   pageNumbers() {
     return [];

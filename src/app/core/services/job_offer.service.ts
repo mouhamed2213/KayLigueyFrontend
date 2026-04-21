@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { JobOffer } from '../models/job_offer.model';
 import { IOfferResponse } from '../models/offer_respose.model';
@@ -21,26 +21,18 @@ export class JobOfferService {
     limit: number,
     filters: IFilters,
   ): Observable<IOfferResponse<JobOffer[]>> {
-    const { city, working_mode, contract_type } = filters;
-    const params = {
-      page,
-      limit,
-      city,
-      working_mode,
-      contract_type,
-    };
+    const { city, working_mode, contract_type, education_level } = filters;
 
+    const queriesParam = new HttpParams()
+      .set('page', page)
+      .set('limit', limit)
+      .set('city', city)
+      .set('working_mode', working_mode)
+      .set('contract_type', contract_type)
+      .set('education_level', education_level);
     return this.http
       .get<IOfferResponse<JobOffer[]>>(`${this.apiUrl}`, {
-        params: {
-          page,
-          limit,
-          city,
-          working_mode,
-          contract_type,
-          // experience: 'string',
-          // education_level: 'string',
-        },
+        params: queriesParam,
       })
       .pipe(
         // tap((result) => console.log(result)),

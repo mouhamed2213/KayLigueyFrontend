@@ -75,11 +75,16 @@
               localisation
             </h4>
             <select
+              #selectRegion
               aria-label="Niveau d'études"
               class="w-full rounded-lg border border-kl-border bg-white px-3 py-2 text-sm text-kl-text outline-none focus:border-kl-primary-red transition-colors"
+              (change)="updateFilter('city', selectRegion.value)"
             >
-              @for (region of regions; track region) {
-                <option value="{{ region }}">{{ region }}</option>
+              <option value="">Tous les regions</option>
+              @for (city of regions; track city) {
+                <option [value]="city">
+                  {{ city }}
+                </option>
               }
             </select>
           </div>
@@ -94,6 +99,8 @@
               Niveau d'études
             </h4>
             <select
+              #selectChange
+              (change)="updateFilter('education_level', selectChange.value)"
               aria-label="Niveau d'études"
               class="w-full rounded-lg border border-kl-border bg-white px-3 py-2 text-sm text-kl-text outline-none focus:border-kl-primary-red transition-colors"
             >
@@ -335,7 +342,7 @@
                     />
                   </svg>
                   <span>
-                    {{ job.expires_at }}
+                    {{ job.expires_at | date }}
                   </span>
                 </span>
                 <app-button variant="primary" size="sm">

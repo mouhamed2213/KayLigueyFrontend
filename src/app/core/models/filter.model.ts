@@ -4,5 +4,6 @@ export interface IFilters {
   city: string | '';
   contract_type: ContractType | '';
   working_mode: WorkingMode | '';
-  localisation?: string;
+  education_level: string;
+  experience: string;
 }
