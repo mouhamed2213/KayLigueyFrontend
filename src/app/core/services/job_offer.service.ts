@@ -22,6 +22,14 @@ export class JobOfferService {
     filters: IFilters,
   ): Observable<IOfferResponse<JobOffer[]>> {
     const { city, working_mode, contract_type } = filters;
+    const params = {
+      page,
+      limit,
+      city,
+      working_mode,
+      contract_type,
+    };
+
     return this.http
       .get<IOfferResponse<JobOffer[]>>(`${this.apiUrl}`, {
         params: {
@@ -30,6 +38,8 @@ export class JobOfferService {
           city,
           working_mode,
           contract_type,
+          // experience: 'string',
+          // education_level: 'string',
         },
       })
       .pipe(
