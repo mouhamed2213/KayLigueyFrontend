@@ -1,53 +1,68 @@
 import { Routes } from '@angular/router';
+
 import { RegisterComponent } from './features/auth/register/register.component';
 import { LoginComponent } from './features/auth/login/login.component';
+
 import { authGuard } from './core/guard/auth/auth.guard';
 import { candidatGuard } from './core/guard/roles/user.guard';
 import { ErrorPageComponent } from './shared/pages/error-page/error-page.component';
+import { PUBLIC_ROUTE } from './features/public/public.route';
+
 export const routes: Routes = [
-  // Public page
+  // =====================================================
+  // PUBLIC LAYOUT (visible pour tout le monde)
+  // =====================================================
   {
-    path: 'public',
+    path: '',
     loadComponent: () =>
       import('./layouts/public-layout/public-layout.component').then(
         (m) => m.PublicLayoutComponent,
       ),
+
     children: [
+      // Pages publiques simples
+      ...PUBLIC_ROUTE,
+
+      // Feature OFFERS (accessible à tous)
+      // même composant pour visiteur + candidat
       {
-        path: '',
+        path: 'offers',
         loadChildren: () =>
-          import('./features/public/public.route').then((r) => r.PUBLIC_ROUTE),
+          import('./features/offers/offers.routes').then(
+            (m) => m.OFFERS_ROUTES,
+          ),
       },
     ],
   },
 
-  // Authentication
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  // =====================================================
+  // AUTH PAGES (pas de layout public)
+  // =====================================================
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
 
-  // Candidat
+  // =====================================================
+  // CANDIDAT AREA (dashboard protégé)
+  // =====================================================
   {
     path: 'candidat',
-    loadComponent: () =>
-      import('./features/candidat/pages/home/home.component').then(
-        (h) => h.HomeComponent,
-      ),
-
     loadChildren: () =>
       import('./features/candidat/candidat.routes').then(
-        (c) => c.CANDIDAT_ROUTES,
+        (m) => m.CANDIDAT_ROUTES,
       ),
+
     canActivate: [authGuard, candidatGuard],
   },
 
-  // OFFERS ROUTES
-  {
-    path: 'offers',
-    loadChildren: () =>
-      import('./features/offers/offers.routes').then((o) => o.OFFERS_ROUTES),
-  },
-
-  // ERROR PAGE
+  // =====================================================
+  //  ERROR PAGES (global handling)
+  // =====================================================
   {
     path: 'unauthorized',
     component: ErrorPageComponent,
@@ -61,16 +76,25 @@ export const routes: Routes = [
     component: ErrorPageComponent,
     data: {
       code: '500',
-      message: 'Le serveur rencontre un problème. Réessayez plus tard.',
+      message: 'Le serveur rencontre un problème.',
     },
   },
   {
     path: 'not-found',
     component: ErrorPageComponent,
-    data: { code: '404', message: "Oups ! Cette page n'existe pas." },
+    data: {
+      code: '404',
+      message: 'Page non trouvée.',
+    },
   },
 
-  // Wildcard pour attraper toutes les URLs inconnues
-  { path: '', redirectTo: 'public/home', pathMatch: 'full' },
+  // =====================================================
+  // 🔁 REDIRECTIONS
+  // =====================================================
+
+  // Page d'accueil par défaut
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+  // Catch all unknown routes
   { path: '**', redirectTo: 'not-found' },
 ];

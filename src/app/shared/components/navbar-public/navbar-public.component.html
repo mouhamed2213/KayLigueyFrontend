@@ -33,19 +33,15 @@
 
     <!-- NAV DESKTOP -->
     <nav class="hidden gap-6 md:flex">
-      <a routerLink="/public/home" routerLinkActive="active" class="nav-link"
-        >Accueil</a
-      >
+      <a routerLink="/" routerLinkActive="active" class="nav-link">Accueil</a>
       <a routerLink="/offers" routerLinkActive="active" class="nav-link"
         >Offres</a
       >
-      <a routerLink="/public/service" routerLinkActive="active" class="nav-link"
+      <a routerLink="/service" routerLinkActive="active" class="nav-link"
         >Services</a
       >
-      <a routerLink="/public/blog" routerLinkActive="active" class="nav-link"
-        >Blog</a
-      >
-      <a routerLink="/public/contact" routerLinkActive="active" class="nav-link"
+      <a routerLink="/blog" routerLinkActive="active" class="nav-link">Blog</a>
+      <a routerLink="contact" routerLinkActive="active" class="nav-link"
         >Contact</a
       >
     </nav>
@@ -84,11 +80,11 @@
   <nav
     class="flex flex-col gap-10 p-4 justify-center items-center mt-10 rounded-sm shadow-lg"
   >
-    <a (click)="closeMenu()" routerLink="/public/home">Accueil</a>
+    <a (click)="closeMenu()" routerLink="/">Accueil</a>
     <a (click)="closeMenu()" routerLink="/offres">Offres</a>
-    <a (click)="closeMenu()" routerLink="/public/service">Services</a>
-    <a (click)="closeMenu()" routerLink="/public/blog">Blog</a>
-    <a (click)="closeMenu()" routerLink="/public/contact">Contact</a>
+    <a (click)="closeMenu()" routerLink="/service">Services</a>
+    <a (click)="closeMenu()" routerLink="/blog">Blog</a>
+    <a (click)="closeMenu()" routerLink="/contact">Contact</a>
   </nav>
 
   <div class="flex flex-col gap-3 p-4 justify-center items-center mt-7">
