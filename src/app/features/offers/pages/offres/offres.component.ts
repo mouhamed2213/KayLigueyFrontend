@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal, DestroyRef } from '@angular/core';
-import { JobOfferService } from '../../../../core/services/job_offer.service';
+import { JobOfferService } from '../../services/job_offer.service';
 import { JobOffer } from '../../../../core/models/job_offer.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';

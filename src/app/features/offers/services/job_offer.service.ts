@@ -1,10 +1,10 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
-import { JobOffer } from '../models/job_offer.model';
-import { IOfferResponse } from '../models/offer_respose.model';
-import { IFilters } from '../models/filter.model';
+import { JobOffer } from '../../../core/models/job_offer.model';
+import { IOfferResponse } from '../../../core/models/offer_respose.model';
+import { IFilters } from '../../../core/models/filter.model';
 
 @Injectable({
   providedIn: 'root',
