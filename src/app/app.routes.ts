@@ -40,6 +40,13 @@ export const routes: Routes = [
     canActivate: [authGuard, candidatGuard],
   },
 
+  // OFFERS ROUTES
+  {
+    path: 'offers',
+    loadChildren: () =>
+      import('./features/offers/offers.routes').then((o) => o.OFFERS_ROUTES),
+  },
+
   // ERROR PAGE
   {
     path: 'unauthorized',
