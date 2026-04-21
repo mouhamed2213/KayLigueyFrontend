@@ -3,13 +3,13 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-button',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './button.component.html',
   styleUrl: './button.component.css',
 })
 export class ButtonComponent {
   @Input() variant: 'primary' | 'secondary' = 'primary';
-  @Input() routerLink?: string;
+  @Input() routerLink?: string[];
 
   get classes(): string {
     // base color

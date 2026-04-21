@@ -354,7 +354,11 @@
                     </svg>
                     {{ job.expires_at | date }}
                   </span>
-                  <app-button variant="primary" size="sm">Postuler</app-button>
+                  <app-button variant="primary" size="sm">
+                    <a [routerLink]="['offer', job.id]"
+                      >Current User</a
+                    ></app-button
+                  >
                 </div>
               </div>
             </div>
