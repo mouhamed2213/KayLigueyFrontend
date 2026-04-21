@@ -17,6 +17,8 @@ import {
   CONTRACT_TYPES,
 } from '../../../../core/constant/contractTypes';
 
+import { RouterLink } from '@angular/router';
+
 import {
   WORKING_MODE_CONFIG,
   WORKING_MODES,
@@ -38,6 +40,7 @@ import { SN_REGIONS } from '../../../../core/constant/regions';
     FormatSalaryPipe,
     SlicePipe,
     UpperCasePipe,
+    RouterLink,
   ],
   templateUrl: './offres.component.html',
   styleUrl: './offres.component.css',
