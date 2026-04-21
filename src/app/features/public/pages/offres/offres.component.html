@@ -1,100 +1,107 @@
 @if (!isLoading()) {
   <section
-    class="px-4 md:px-6 flex w-full flex-col gap-6 py-8 md:py-12 bg-kl-zinc-100"
+    class="px-4 md:px-6 flex w-full flex-col gap-6 py-8 md:py-10 bg-kl-zinc-100 min-h-screen"
   >
-    <!-- ══ HEADER ══════════════════════════════════════════════════ -->
-    <div class="flex w-full flex-col gap-3 md:max-w-xl">
-      <div class="flex flex-col">
-        <h1 class="text-2xl md:text-4xl font-bold text-kl-text leading-tight">
-          Découvrez votre prochaine
-        </h1>
+    <!-- ══ TOP BAR ══════════════════════════════════════════════════ -->
+    <div
+      class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white border border-kl-border rounded-2xl px-6 py-5"
+    >
+      <div class="flex flex-col gap-1.5">
         <h1
-          class="text-2xl md:text-4xl font-bold text-kl-primary-red leading-tight"
+          class="text-xl md:text-2xl font-extrabold text-kl-text leading-tight"
         >
-          opportunité
+          Trouvez votre prochaine
+          <span class="text-kl-primary-red">opportunité</span>
         </h1>
+        <p class="text-xs text-kl-muted leading-relaxed">
+          Connectez-vous aux meilleures entreprises du Sénégal
+        </p>
+        <div class="flex flex-wrap gap-2 mt-1">
+          <span
+            class="text-[11px] font-semibold bg-[#fde8eb] text-[#96101f] border border-[#f5c0c8] rounded-full px-3 py-1"
+          >
+            <span class="font-bold">{{ totalJobs() }}+</span> offres actives
+          </span>
+          <span
+            class="text-[11px] font-semibold bg-[#f0eef9] text-[#534AB7] border border-[#d4d0f5] rounded-full px-3 py-1"
+          >
+            <span class="font-bold">840+</span> entreprises
+          </span>
+        </div>
       </div>
-      <p class="text-kl-muted text-sm md:text-base leading-relaxed">
-        Rejoignez l'élite du marché du travail au Sénégal. Nous connectons les
-        talents avec les entreprises qui façonnent l'avenir du pays.
-      </p>
-      <!-- Stats rapides -->
-      <div class="flex flex-wrap gap-2 mt-1">
-        <span
-          class="text-xs bg-white border border-kl-border rounded-full px-3 py-1.5 text-kl-muted"
+
+      <!-- Recherche rapide intégrée dans le top bar -->
+      <div
+        class="flex items-center gap-2 bg-kl-zinc-100 border border-kl-border rounded-xl px-4 py-2.5 md:min-w-70"
+      >
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          class="text-kl-muted shrink-0"
         >
-          <span class="font-bold text-kl-primary-red">{{ totalJobs() }}+</span>
-          offres actives
-        </span>
-        <span
-          class="text-xs bg-white border border-kl-border rounded-full px-3 py-1.5 text-kl-muted"
-        >
-          <span class="font-bold text-kl-primary-red">840+</span> entreprises
-        </span>
+          <circle cx="9" cy="9" r="6" />
+          <path d="M15 15l-3-3" stroke-linecap="round" />
+        </svg>
+        <input
+          type="search"
+          placeholder="Titre, compétence, entreprise…"
+          class="bg-transparent border-none outline-none text-sm text-kl-text placeholder:text-kl-muted/50 w-full"
+        />
       </div>
     </div>
 
     <!-- ══ MAIN GRID ═══════════════════════════════════════════════ -->
-    <div class="grid gap-6 md:grid-cols-[260px_1fr]">
+    <div class="grid gap-5 md:grid-cols-[220px_1fr]">
       <!-- ══ FILTER PANEL ════════════════════════════════════════ -->
       <aside class="md:sticky md:top-20 h-fit">
-        <div class="rounded-xl bg-white p-5 border border-kl-border space-y-5">
-          <!-- Header filtres -->
-          <div class="flex items-center justify-between">
-            <h3 class="font-semibold text-kl-text text-sm">Filtres</h3>
+        <div
+          class="bg-white border border-kl-border rounded-2xl overflow-hidden"
+        >
+          <!-- Header -->
+          <div
+            class="flex items-center justify-between px-4 py-3.5 border-b border-kl-border"
+          >
+            <span
+              class="text-[10px] font-bold uppercase tracking-[.9px] text-kl-text"
+              >Filtres</span
+            >
             <button
               (click)="resetFilters()"
               type="button"
-              class="text-xs font-bold text-kl-primary-red hover:underline underline-offset-2 cursor-pointer"
+              class="text-[11px] font-semibold text-kl-primary-red hover:underline underline-offset-2 cursor-pointer"
             >
               Réinitialiser
             </button>
           </div>
 
-          <!-- Recherche mots-clés -->
-          <div class="space-y-1.5">
-            <h4
-              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
-            >
-              Mots-clés
-            </h4>
-            <input
-              type="search"
-              placeholder="Design, Tech, Marketing…"
-              class="w-full rounded-lg border border-kl-border bg-white px-3 py-2 text-sm text-kl-text outline-none focus:border-kl-primary-red transition-colors placeholder:text-kl-muted/50"
-            />
-          </div>
-
-          <div class="h-px bg-kl-border"></div>
-
           <!-- Localisation -->
-          <div class="space-y-1.5">
+          <div class="px-4 py-3.5 border-b border-kl-border space-y-2">
             <h4
-              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+              class="text-[10px] font-bold uppercase tracking-[.8px] text-kl-muted/70"
             >
-              localisation
+              Localisation
             </h4>
             <select
               #selectRegion
-              aria-label="Niveau d'études"
-              class="w-full rounded-lg border border-kl-border bg-white px-3 py-2 text-sm text-kl-text outline-none focus:border-kl-primary-red transition-colors"
+              aria-label="Localisation"
+              class="w-full rounded-[9px] border border-kl-border bg-kl-zinc-50 px-3 py-2 text-xs text-kl-text outline-none focus:border-kl-primary-red focus:bg-white transition-colors"
               (change)="updateFilter('city', selectRegion.value)"
             >
-              <option value="">Tous les regions</option>
+              <option value="">Toutes les régions</option>
               @for (city of regions; track city) {
-                <option [value]="city">
-                  {{ city }}
-                </option>
+                <option [value]="city">{{ city }}</option>
               }
             </select>
           </div>
 
-          <div class="h-px bg-kl-border"></div>
-
           <!-- Niveau d'études -->
-          <div class="space-y-1.5">
+          <div class="px-4 py-3.5 border-b border-kl-border space-y-2">
             <h4
-              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+              class="text-[10px] font-bold uppercase tracking-[.8px] text-kl-muted/70"
             >
               Niveau d'études
             </h4>
@@ -102,7 +109,7 @@
               #selectChange
               (change)="updateFilter('education_level', selectChange.value)"
               aria-label="Niveau d'études"
-              class="w-full rounded-lg border border-kl-border bg-white px-3 py-2 text-sm text-kl-text outline-none focus:border-kl-primary-red transition-colors"
+              class="w-full rounded-[9px] border border-kl-border bg-kl-zinc-50 px-3 py-2 text-xs text-kl-text outline-none focus:border-kl-primary-red focus:bg-white transition-colors"
             >
               <option value="">Tous niveaux</option>
               <option value="Bac">Bac</option>
@@ -112,18 +119,16 @@
             </select>
           </div>
 
-          <div class="h-px bg-kl-border"></div>
-
           <!-- Expérience -->
-          <div class="space-y-1.5">
+          <div class="px-4 py-3.5 border-b border-kl-border space-y-2">
             <h4
-              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+              class="text-[10px] font-bold uppercase tracking-[.8px] text-kl-muted/70"
             >
               Expérience
             </h4>
             <select
               aria-label="Expérience requise"
-              class="w-full rounded-lg border border-kl-border bg-white px-3 py-2 text-sm text-kl-text outline-none focus:border-kl-primary-red transition-colors"
+              class="w-full rounded-[9px] border border-kl-border bg-kl-zinc-50 px-3 py-2 text-xs text-kl-text outline-none focus:border-kl-primary-red focus:bg-white transition-colors"
             >
               <option value="">Tous niveaux</option>
               <option value="0">Débutant (0–2 ans)</option>
@@ -132,24 +137,26 @@
             </select>
           </div>
 
-          <div class="h-px bg-kl-border"></div>
-
           <!-- Type de contrat -->
-          <div class="space-y-2.5">
+          <div class="px-4 py-3.5 border-b border-kl-border space-y-2">
             <h4
-              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+              class="text-[10px] font-bold uppercase tracking-[.8px] text-kl-muted/70"
             >
               Type de contrat
             </h4>
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-1.5">
               @for (type of contractTypes; track $index) {
                 <span
                   (click)="updateFilter('contract_type', type)"
-                  class="cursor-pointer px-3 py-1 rounded-xl text-sm transition"
+                  class="cursor-pointer px-2.5 py-1 rounded-full text-[11px] font-medium transition-all border"
                   [class.bg-kl-primary-red]="filters().contract_type === type"
                   [class.text-white]="filters().contract_type === type"
+                  [class.border-kl-primary-red]="
+                    filters().contract_type === type
+                  "
                   [class.bg-bg-input]="filters().contract_type !== type"
                   [class.text-kl-text]="filters().contract_type !== type"
+                  [class.border-transparent]="filters().contract_type !== type"
                 >
                   {{ contractTypeMap[type].label }}
                 </span>
@@ -157,24 +164,26 @@
             </div>
           </div>
 
-          <div class="h-px bg-kl-border"></div>
-
           <!-- Mode de travail -->
-          <div class="space-y-2.5">
+          <div class="px-4 py-3.5 space-y-2">
             <h4
-              class="text-[10px] font-semibold uppercase tracking-[.8px] text-kl-muted"
+              class="text-[10px] font-bold uppercase tracking-[.8px] text-kl-muted/70"
             >
               Mode de travail
             </h4>
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-1.5">
               @for (mode of workingModes; track mode) {
                 <span
                   (click)="updateFilter('working_mode', mode)"
-                  class="cursor-pointer px-3 py-1 rounded-xl text-sm transition"
+                  class="cursor-pointer px-2.5 py-1 rounded-full text-[11px] font-medium transition-all border"
                   [class.bg-kl-primary-red]="filters().working_mode === mode"
                   [class.text-white]="filters().working_mode === mode"
+                  [class.border-kl-primary-red]="
+                    filters().working_mode === mode
+                  "
                   [class.bg-bg-input]="filters().working_mode !== mode"
                   [class.text-kl-text]="filters().working_mode !== mode"
+                  [class.border-transparent]="filters().working_mode !== mode"
                 >
                   {{ workingModeMap[mode].label }}
                 </span>
@@ -185,10 +194,10 @@
       </aside>
 
       <!-- ══ JOB LIST ════════════════════════════════════════════ -->
-      <div class="flex flex-col gap-5">
-        <!-- Résultats + tri -->
+      <div class="flex flex-col gap-3">
+        <!-- Toolbar résultats + tri -->
         <div class="flex items-center justify-between">
-          <span class="text-sm text-kl-muted">
+          <span class="text-xs text-kl-muted">
             <span class="font-semibold text-kl-text">{{
               jobOffers().length
             }}</span>
@@ -196,7 +205,7 @@
           </span>
           <select
             aria-label="Trier par"
-            class="text-xs border border-kl-border rounded-lg px-3 py-2 text-kl-muted bg-white outline-none focus:border-kl-primary-red transition-colors"
+            class="text-[11px] border border-kl-border rounded-[9px] px-3 py-1.5 text-kl-muted bg-white outline-none focus:border-kl-primary-red transition-colors"
           >
             <option value="recent">Plus récentes</option>
             <option value="salary_desc">Salaire décroissant</option>
@@ -205,56 +214,45 @@
           </select>
         </div>
 
-        <!-- Cards grille -->
-        <div class="grid gap-4 md:grid-cols-2">
-          @for (job of jobOffers(); track job.id) {
+        <!-- ══ ROWS ══════════════════════════════════════════════ -->
+        @for (job of jobOffers(); track job.id) {
+          <div
+            class="group relative flex gap-4 items-start bg-white border rounded-2xl px-5 py-4 cursor-pointer transition-all duration-200 hover:shadow-md hover:-translate-y-px"
+            [class.border-kl-primary-red]="job.is_featured"
+            [class.border-l-[3px]]="job.is_featured"
+            [class.border-kl-border]="!job.is_featured"
+          >
+            <!-- Badge "En vedette" -->
+            @if (job.is_featured) {
+              <div class="absolute top-3.5 right-4">
+                <span
+                  class="text-[9px] font-bold uppercase tracking-[.6px] bg-[#fde8eb] text-[#96101f] border border-[#f5c0c8] px-2.5 py-1 rounded-full"
+                >
+                  En vedette
+                </span>
+              </div>
+            }
+
+            <!-- Logo entreprise -->
             <div
-              class="group relative w-full rounded-xl border bg-white p-5 transition-all duration-200 hover:border-kl-primary-red hover:shadow-md cursor-pointer"
-              [class.border-kl-primary-red]="job.is_featured"
-              [class.border-l-4]="job.is_featured"
-              [class.border-kl-border]="!job.is_featured"
+              class="h-11 w-11 min-w-11 rounded-[11px] bg-[#fde8eb] border border-[#f5c0c8] flex items-center justify-center text-xs font-extrabold text-kl-primary-red mt-0.5"
             >
-              <!-- Badge "En vedette" -->
-              @if (job.is_featured) {
-                <div class="absolute -top-2.5 left-4">
-                  <span
-                    class="text-[10px] font-bold bg-kl-primary-red text-white px-2.5 py-1 rounded-full"
-                  >
-                    En vedette
-                  </span>
-                </div>
-              }
+              {{ job.title | slice: 0 : 2 | uppercase }}
+            </div>
 
-              <!-- CARD HEADER -->
-              <div
-                class="flex items-start justify-between gap-3 mb-3"
-                [class.mt-2]="job.is_featured"
-              >
-                <div class="flex items-start gap-3">
-                  <!-- Logo entreprise avec fallback initiales -->
-                  <div
-                    class="h-10 w-10 rounded-lg bg-kl-red-50 border border-kl-border flex items-center justify-center text-sm font-bold text-kl-primary-red shrink-0"
-                  ></div>
-                  <div>
-                    <h3
-                      class="font-semibold text-kl-text text-[15px] leading-tight group-hover:text-kl-primary-red transition-colors"
-                    >
-                      {{ job.title }}
-                    </h3>
-                    <p
-                      class="text-xs text-kl-muted mt-0.5 flex items-center gap-1.5"
-                    >
-                      <span>Company Name</span>
-                      <span
-                        class="w-1 h-1 rounded-full bg-kl-muted/40 inline-block"
-                      ></span>
-                      <span>{{ job.city ?? "Sénégal" }}</span>
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Badges -->
-                <div class="flex flex-col gap-1.5 items-end shrink-0">
+            <!-- Contenu principal -->
+            <div class="flex-1 min-w-0">
+              <!-- Titre + badges -->
+              <div class="flex items-start justify-between gap-2 mb-1">
+                <h3
+                  class="text-[14px] font-bold text-kl-text leading-tight group-hover:text-kl-primary-red transition-colors flex-1"
+                >
+                  {{ job.title }}
+                </h3>
+                <div
+                  class="flex gap-1.5 shrink-0 items-center"
+                  [class.pr-20]="job.is_featured"
+                >
                   <app-badge
                     [label]="
                       workingModeMap[job.working_mode]?.label ??
@@ -276,139 +274,169 @@
                 </div>
               </div>
 
+              <!-- Méta : entreprise · ville · niveau -->
+              <div
+                class="flex items-center flex-wrap gap-1.5 text-[11px] text-kl-muted mb-2"
+              >
+                <span>Company Name</span>
+                <span
+                  class="w-1 h-1 rounded-full bg-kl-muted/30 inline-block"
+                ></span>
+                <span>{{ job.city ?? "Sénégal" }}</span>
+                <span
+                  class="w-1 h-1 rounded-full bg-kl-muted/30 inline-block"
+                ></span>
+                <span>{{ job.education_level ?? "Tous niveaux" }}</span>
+              </div>
+
               <!-- Description tronquée -->
               <p
-                class="text-xs text-kl-muted leading-relaxed line-clamp-2 mb-4"
+                class="text-xs text-kl-muted leading-relaxed line-clamp-1 mb-3"
               >
                 {{ job.description }}
               </p>
 
-              <!-- Stats -->
-              <div class="grid grid-cols-3 gap-2 mb-4">
-                <div
-                  class="flex flex-col p-2 rounded-lg bg-gray-50 border border-transparent group-hover:border-kl-red-100 transition-colors"
-                >
-                  <span
-                    class="text-[10px] text-kl-muted uppercase tracking-wide"
-                    >Salaire</span
-                  >
-                  <span class="text-xs font-semibold text-kl-text mt-0.5">
-                    <!-- {{job.salary_min , job.salary_max}} -->
-                  </span>
+              <!-- Footer : stats + CTA -->
+              <div class="flex items-center justify-between flex-wrap gap-3">
+                <!-- Stats inline avec séparateurs -->
+                <div class="flex items-center gap-3">
+                  <div class="flex flex-col">
+                    <span
+                      class="text-[9px] uppercase tracking-[.7px] text-kl-muted/70"
+                      >Salaire</span
+                    >
+                    <span class="text-xs font-semibold text-kl-text">
+                      {{ job.salary_min | formatSalary }} –
+                      {{ job.salary_max | formatSalary }}
+                    </span>
+                  </div>
+                  <div class="w-px h-6 bg-kl-border"></div>
+                  <div class="flex flex-col">
+                    <span
+                      class="text-[9px] uppercase tracking-[.7px] text-kl-muted/70"
+                      >Vues</span
+                    >
+                    <span class="text-xs font-semibold text-kl-text">{{
+                      job.view_count
+                    }}</span>
+                  </div>
+                  <div class="w-px h-6 bg-kl-border"></div>
+                  <div class="flex flex-col">
+                    <span
+                      class="text-[9px] uppercase tracking-[.7px] text-kl-muted/70"
+                      >Candidatures</span
+                    >
+                    <span class="text-xs font-semibold text-kl-text">{{
+                      job.application_count
+                    }}</span>
+                  </div>
                 </div>
-                <div
-                  class="flex flex-col p-2 rounded-lg bg-gray-50 border border-transparent group-hover:border-kl-red-100 transition-colors"
-                >
-                  <span
-                    class="text-[10px] text-kl-muted uppercase tracking-wide"
-                    >Vues</span
-                  >
-                  <span class="text-xs font-semibold text-kl-text mt-0.5">{{
-                    job.view_count
-                  }}</span>
-                </div>
-                <div
-                  class="flex flex-col p-2 rounded-lg bg-gray-50 border border-transparent group-hover:border-kl-red-100 transition-colors"
-                >
-                  <span
-                    class="text-[10px] text-kl-muted uppercase tracking-wide"
-                    >Candidatures</span
-                  >
-                  <span class="text-xs font-semibold text-kl-text mt-0.5">{{
-                    job.application_count
-                  }}</span>
-                </div>
-              </div>
 
-              <!-- Footer -->
-              <div
-                class="flex items-center justify-between pt-3 border-t border-kl-border"
-              >
-                <span class="text-[11px] text-kl-muted flex items-center gap-1">
-                  <!-- Icône horloge -->
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <circle
-                      cx="6"
-                      cy="6"
-                      r="5"
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                    />
-                    <path
-                      d="M6 3.5V6l1.5 1.5"
-                      stroke="currentColor"
-                      stroke-width="1.2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
-                  <span>
+                <!-- Date + bouton -->
+                <div class="flex items-center gap-2">
+                  <span
+                    class="text-[10px] text-kl-muted flex items-center gap-1"
+                  >
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                      <circle
+                        cx="6"
+                        cy="6"
+                        r="5"
+                        stroke="currentColor"
+                        stroke-width="1.2"
+                      />
+                      <path
+                        d="M6 3.5V6l1.5 1.5"
+                        stroke="currentColor"
+                        stroke-width="1.2"
+                        stroke-linecap="round"
+                      />
+                    </svg>
                     {{ job.expires_at | date }}
                   </span>
-                </span>
-                <app-button variant="primary" size="sm">
-                  Voir l'offre
-                </app-button>
+                  <app-button variant="primary" size="sm">Postuler</app-button>
+                </div>
               </div>
             </div>
-          }
 
-          <!-- État vide -->
-          @empty {
-            <div
-              class="md:col-span-2 flex flex-col items-center justify-center py-16 text-center"
+            <!-- Bouton save -->
+            <button
+              aria-label="Save"
+              type="button"
+              class="w-8 h-8 shrink-0 border border-kl-border rounded-lg bg-white flex items-center justify-center cursor-pointer hover:border-kl-primary-red transition-colors mt-0.5"
             >
-              <div
-                class="w-14 h-14 rounded-full bg-kl-red-50 flex items-center justify-center mb-4"
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <circle
-                    cx="11"
-                    cy="11"
-                    r="8"
-                    stroke="#C0152A"
-                    stroke-width="1.5"
-                  />
-                  <path
-                    d="M16.5 16.5L21 21"
-                    stroke="#C0152A"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M8 11h6M11 8v6"
-                    stroke="#C0152A"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                </svg>
-              </div>
-              <p class="font-semibold text-kl-text mb-1">
-                Aucune offre trouvée
-              </p>
-              <p class="text-sm text-kl-muted mb-4">
-                Essayez de modifier vos filtres
-              </p>
-              <button
-                type="button"
-                (click)="resetFilters()"
-                class="text-sm font-semibold text-kl-primary-red hover:underline underline-offset-2 cursor-pointer"
-              >
-                Réinitialiser les filtres
-              </button>
+                <path
+                  d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        }
+
+        <!-- État vide -->
+        @empty {
+          <div
+            class="flex flex-col items-center justify-center py-16 text-center bg-white rounded-2xl border border-kl-border"
+          >
+            <div
+              class="w-14 h-14 rounded-full bg-[#fde8eb] flex items-center justify-center mb-4"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle
+                  cx="11"
+                  cy="11"
+                  r="8"
+                  stroke="#C0152A"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M16.5 16.5L21 21"
+                  stroke="#C0152A"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M8 11h6M11 8v6"
+                  stroke="#C0152A"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
             </div>
-          }
-        </div>
+            <p class="font-semibold text-kl-text mb-1">Aucune offre trouvée</p>
+            <p class="text-sm text-kl-muted mb-4">
+              Essayez de modifier vos filtres
+            </p>
+            <button
+              type="button"
+              (click)="resetFilters()"
+              class="text-sm font-semibold text-kl-primary-red hover:underline underline-offset-2 cursor-pointer"
+            >
+              Réinitialiser les filtres
+            </button>
+          </div>
+        }
 
         <!-- ══ PAGINATION ══════════════════════════════════════ -->
         @if (totalPages() > 1) {
-          <div class="flex items-center justify-center gap-2 mt-4">
+          <div class="flex items-center justify-center gap-1.5 mt-4">
             <button
               type="button"
               (click)="onPageChange(currentPage() - 1)"
               [disabled]="currentPage() === 1"
-              class="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-kl-border bg-white text-sm text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-kl-border disabled:hover:text-kl-muted cursor-pointer"
+              class="flex items-center gap-1 px-4 py-2 rounded-[9px] border border-kl-border bg-white text-xs text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-kl-border disabled:hover:text-kl-muted cursor-pointer"
             >
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
                 <path
                   d="M9 11L5 7l4-4"
                   stroke="currentColor"
@@ -420,18 +448,17 @@
               Précédent
             </button>
 
-            <!-- Numéros de pages -->
             @for (page of pageNumbers(); track page) {
               @if (page === -1) {
-                <span class="text-kl-muted px-1">…</span>
+                <span class="text-kl-muted px-1 text-xs">…</span>
               } @else {
                 <button
                   type="button"
                   (click)="onPageChange(page)"
                   [class]="
                     page === currentPage()
-                      ? 'w-9 h-9 rounded-lg bg-kl-primary-red text-white text-sm font-semibold cursor-pointer'
-                      : 'w-9 h-9 rounded-lg border border-kl-border bg-white text-sm text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors cursor-pointer'
+                      ? 'w-8 h-8 rounded-[9px] bg-kl-primary-red text-white text-xs font-bold cursor-pointer'
+                      : 'w-8 h-8 rounded-[9px] border border-kl-border bg-white text-xs text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors cursor-pointer'
                   "
                 >
                   {{ page }}
@@ -443,10 +470,10 @@
               type="button"
               (click)="onPageChange(currentPage() + 1)"
               [disabled]="currentPage() >= totalPages()"
-              class="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-kl-border bg-white text-sm text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-kl-border disabled:hover:text-kl-muted cursor-pointer"
+              class="flex items-center gap-1 px-4 py-2 rounded-[9px] border border-kl-border bg-white text-xs text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-kl-border disabled:hover:text-kl-muted cursor-pointer"
             >
               Suivant
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
                 <path
                   d="M5 3l4 4-4 4"
                   stroke="currentColor"

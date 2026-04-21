@@ -8,10 +8,10 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
 import { LucideAngularModule } from 'lucide-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { DatePipe } from '@angular/common';
+import { DatePipe, SlicePipe, UpperCasePipe } from '@angular/common';
 import { IPagination } from '../../../../core/models/offer_respose.model';
 import { IFilters } from '../../../../core/models/filter.model';
-
+import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
 import {
   CONTRACT_TYPE_CONFIG,
   CONTRACT_TYPES,
@@ -35,6 +35,9 @@ import { SN_REGIONS } from '../../../../core/constant/regions';
     BadgeComponent,
     MatPaginatorModule,
     DatePipe,
+    FormatSalaryPipe,
+    SlicePipe,
+    UpperCasePipe,
   ],
   templateUrl: './offres.component.html',
   styleUrl: './offres.component.css',
