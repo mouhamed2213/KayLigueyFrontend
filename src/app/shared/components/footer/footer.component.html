@@ -1,32 +1,62 @@
-<footer
-  class="flex flex-col md:flex-row justify-around text-kl-zinc-900 p-5 bg-kl-zinc-100"
->
-  <div class="w-full max-w-md flex flex-col gap-2">
-    <h3 class="font-semibold text-xl">Kay liguey</h3>
-    <p>
-      La première plateforme dédiée à l'excellence professionnelle au Sénégal.
-      Nous bâtissons des ponts entre ambitions et opportunités.
-    </p>
-  </div>
-  <div class="w-full max-w-md flex flex-col gap-2">
-    <h3 class="uppercase font-semibold text-xl">lien rapide</h3>
-    <a class="underline hover:text-kl-red-light" href>A propos</a>
-    <a class="underline hover:text-kl-red-light" href>Terms of Service</a>
-    <a class="underline hover:text-kl-red-light" href>Privacy Policy</a>
-    <a class="underline hover:text-kl-red-light" href>Contact Support</a>
-  </div>
-  <div class="w-full max-w-md flex flex-col gap-2">
-    <h3 class="uppercase font-semibold text-xl">Newsletter</h3>
-    <p>Recever les meilleures offres d'emploi chaque semain</p>
-    <form class="flex px-2 p-y3 flex-row justify-center items-center gap-3">
-      <input
-        placeholder="Entrer Votre email"
-        class="w-full p-2 bg-input text-kl-muted outline-0 transition transform duration-600 ease-in-out border border-kl-border hover:border-amber-900 focus:border-kl-primary-red"
-      />
+<footer class="hidden bg-kl-zinc-100 text-kl-zinc-900 px-6 py-10">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+    <!-- =========================
+         BRAND / DESCRIPTION
+    ========================== -->
+    <div class="flex flex-col gap-4">
+      <h3 class="font-semibold text-2xl">Kay Liguey</h3>
 
-      <!-- hover:kl-gost-border -->
-      <app-button variant="primary"> inscrire </app-button>
-    </form>
-    <p class="mt-7">&copy; 2026 Kay Liguey. All rights reserved.</p>
+      <p class="text-sm leading-6 text-kl-zinc-700">
+        La première plateforme dédiée à l'excellence professionnelle au Sénégal.
+        Nous connectons les talents aux meilleures opportunités.
+      </p>
+    </div>
+
+    <!-- =========================
+         QUICK LINKS
+    ========================== -->
+    <div class="flex flex-col gap-4">
+      <h3 class="uppercase font-semibold text-lg tracking-wide">
+        Liens rapides
+      </h3>
+
+      <div class="flex flex-col gap-2 text-sm">
+        <a class="hover:text-kl-red-light transition" href="#"> À propos </a>
+        <a class="hover:text-kl-red-light transition" href="#">
+          Terms of Service
+        </a>
+        <a class="hover:text-kl-red-light transition" href="#">
+          Privacy Policy
+        </a>
+        <a class="hover:text-kl-red-light transition" href="#">
+          Contact Support
+        </a>
+      </div>
+    </div>
+
+    <!-- =========================
+         NEWSLETTER
+    ========================== -->
+    <div class="flex flex-col gap-4">
+      <h3 class="uppercase font-semibold text-lg tracking-wide">Newsletter</h3>
+
+      <p class="text-sm text-kl-zinc-700">
+        Recevez les meilleures offres d’emploi chaque semaine.
+      </p>
+
+      <form class="flex items-center gap-2">
+        <input
+          type="email"
+          placeholder="Votre email"
+          class="w-full px-3 py-2 rounded-md border border-kl-border bg-white text-sm outline-none focus:border-kl-primary-red transition"
+        />
+
+        <app-button variant="primary"> S’inscrire </app-button>
+      </form>
+
+      <p class="text-xs text-kl-zinc-500 mt-4">
+        &copy; 2026 Kay Liguey. Tous droits réservés.
+      </p>
+    </div>
   </div>
 </footer>

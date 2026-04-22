@@ -47,6 +47,18 @@ export class JobOfferService {
       );
   }
 
-  // get one job funtion
-  // create a loading  while offre compnent get data
+  getOneJobOffer(id: string): Observable<any> {
+    const query = this.http.get<any>(`${this.apiUrl}/${id}`);
+    return query.pipe(
+      // tap(({ data }) => {
+      //   console.log(data);
+      // }),
+
+      // Handle Error if need
+      catchError((err) => {
+        console.error(err.error.message);
+        return throwError(() => err);
+      }),
+    );
+  }
 }
