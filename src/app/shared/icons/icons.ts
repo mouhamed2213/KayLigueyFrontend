@@ -15,6 +15,8 @@ import {
   CirclePlus,
   Mail,
   MapPinHouse,
+  Eye,
+  Users,
 } from 'lucide-angular';
 
 export default () => {
@@ -35,5 +37,7 @@ export default () => {
     Mail,
     Plus,
     MapPinHouse,
+    Eye,
+    Users,
   };
 };
