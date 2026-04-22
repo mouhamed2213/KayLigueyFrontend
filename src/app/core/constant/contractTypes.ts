@@ -8,8 +8,8 @@ export const CONTRACT_TYPES = [
 
 export type ContractType = (typeof CONTRACT_TYPES)[number];
 
-// Used to convert upper case text received form the backend
-export const CONTRACT_TYPE_CONFIG: Record<ContractType, { label: string }> = {
+// Used to convert upper case text received form the
+export const CONTRACT_TYPE_CONFIG: Record<string, any> = {
   CDI: {
     label: 'CDI',
   },

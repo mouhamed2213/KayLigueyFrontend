@@ -50,11 +50,11 @@
     <div
       class="hidden gap-4 md:flex md:flex-row items-center whitespace-nowrap"
     >
-      <app-button variant="secondary" routerLink="/login"
-        >Se connecter</app-button
+      <app-button variant="secondary">
+        <a routerLink="/login"> Se connecter</a></app-button
       >
-      <app-button variant="primary" routerLink="/register"
-        >S'inscrire</app-button
+      <app-button variant="primary"
+        ><a routerLink="/register"> S'inscrire></a></app-button
       >
     </div>
   </div>
@@ -88,7 +88,9 @@
   </nav>
 
   <div class="flex flex-col gap-3 p-4 justify-center items-center mt-7">
-    <app-button variant="primary" routerLink="/register">S'inscrire</app-button>
+    <app-button variant="primary">
+      <a routerLink="/register"> S'inscrire</a></app-button
+    >
     <!-- <app-button variant="outline" routerLink="/login">Se connecter</app-button> -->
   </div>
 </div>

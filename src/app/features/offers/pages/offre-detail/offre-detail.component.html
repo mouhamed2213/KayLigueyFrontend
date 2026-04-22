@@ -1,2 +1,85 @@
-<p>{{ jobOffer.data | json }}</p>
+<!-- <p>{{ jobOffer.data | json }}</p> -->
+<section class="md:container mx-auto p-10 grid bg-bg-kl gap-5">
+  <!-- Page Header -->
+  <div class="flex flex-col md:flex-row justify-between">
+    <span>offers > offer </span>
+    <div class="flex flex-row gap-5">
+      <div class="flex flex-row space-x-1">
+        <lucide-icon name="eye" [size]="20" [strokeWidth]="2"></lucide-icon>
+        <span> {{ jobOffer().view_count }} Vues </span>
+      </div>
 
+      <div class="flex flex-row space-x-1">
+        <lucide-icon name="Users" [size]="20" [strokeWidth]="2"></lucide-icon>
+
+        <span> {{ jobOffer().application_count }} candidatures </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- OFFER DETAIL CONTAINER -->
+  <div class="grid md:grid-cols-2">
+    <!-- LEFT SIDE   JOB DETAL-->
+    <div>
+      <div>
+        <!--badge  -->
+        <app-badge [label]="contractTypeMap[jobOffer().contract_type].label">
+        </app-badge>
+        <app-badge [label]="workingModeMap[jobOffer().working_mode].label">
+        </app-badge>
+      </div>
+
+      <!-- job , company Title -->
+      <div class="flex flex-col gap-3">
+        <h1>{{ jobOffer().title }}</h1>
+        <!-- Sub containt company name -->
+        <div class="flex gap-2">
+          <div>
+            <span> Logo </span>
+          </div>
+          <div>
+            <h4>{{ jobOffer().company.name }}</h4>
+            <span>location</span>
+          </div>
+        </div>
+        <!--  JOB DESCRIPTION -->
+        <div class="flex flex-col">
+          <h5>--------- Description Du post</h5>
+          <p>{{ jobOffer().description }}</p>
+        </div>
+      </div>
+
+      <!-- PROFILE REQUIRED -->
+      <div class="flex flex-col">
+        <h5>---------- Profile rechercher</h5>
+        <div class="flex flex-col md:flex-row gap-3">
+          <app-cards>
+            <h3 card-title>Maitrise Technique</h3>
+            <p card-content>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
+              fugiat deserunt at libero sit quae maiores enim ex. Quibusdam,
+              dolore.
+            </p>
+          </app-cards>
+
+          <app-cards>
+            <h3 card-title>Architecture API</h3>
+            <p card-content>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
+              fugiat deserunt at libero sit quae maiores enim ex. Quibusdam,
+              dolore.
+            </p>
+          </app-cards>
+        </div>
+      </div>
+
+      <!-- MARKTING  -->
+      <div>
+        <h5>POURQUOI NOUS REJOINDRE ?</h5>
+        <span>Image </span>
+      </div>
+    </div>
+
+    <!-- RIGHT APPLY SECTION -->
+  </div>
+</section>
