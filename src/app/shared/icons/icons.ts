@@ -18,7 +18,8 @@ import {
   Eye,
   Users,
   GraduationCap ,
-  BriefcaseBusiness
+  BriefcaseBusiness,
+  Star
 } from 'lucide-angular';
 
 export default () => {
@@ -30,6 +31,7 @@ export default () => {
     Menu,
     X,
     Search,
+    Star,
     MoveRight,
     Scale,
     MapPin,

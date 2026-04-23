@@ -116,7 +116,7 @@ export class OffreDetailComponent implements OnInit {
     console.log('cliked');
   }
   onSaveClick() {
-    console.log('cliked');
+    // this.snackB-ar.open('Offre sauvegarder');
   }
 
   isExpiringSoon(string: any) {
