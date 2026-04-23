@@ -1,160 +1,405 @@
-<!-- <p>{{ jobOffer.data | json }}</p> -->
-<section class="bg-bg-kl mx-auto grid gap-5 p-10 font-sans md:container">
-  <!-- Page Header -->
-  <div class="flex flex-col justify-between md:flex-row">
-    <span>offers > offer</span>
-    <div class="flex flex-row gap-5">
-      <div class="flex flex-row space-x-1">
-        <lucide-icon name="eye" [size]="20" [strokeWidth]="2"></lucide-icon>
-        <span>{{ jobOffer().view_count }} Vues</span>
-      </div>
+<section class="min-h-screen bg-[#f7f4f4] px-4 py-8 md:px-8 md:py-12">
+  <div class="mx-auto max-w-5xl">
+    <!-- ══ BREADCRUMB ════════════════════════════════════════════ -->
+    <nav class="flex items-center gap-2 text-xs text-kl-muted mb-6">
+      <a
+        routerLink="/"
+        class="hover:text-kl-primary-red transition-colors cursor-pointer"
+        >Accueil</a
+      >
+      <span>/</span>
+      <a
+        routerLink="/offres"
+        class="hover:text-kl-primary-red transition-colors cursor-pointer"
+        >Offres</a
+      >
+      <span>/</span>
+      <span class="text-kl-text font-medium truncate max-w-50">{{
+        jobOffer().title
+      }}</span>
+    </nav>
 
-      <div class="flex flex-row space-x-1">
-        <lucide-icon name="Users" [size]="20" [strokeWidth]="2"></lucide-icon>
-
-        <span>{{ jobOffer().application_count }} candidatures</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- OFFER  DETAIL  AND APPLY CONTAINER -->
-  <div class="grid md:grid-cols-2">
-    <!-- LEFT SIDE   JOB DETAL-->
-    <div class="flex flex-col space-y-10">
-      <div class="flex flex-row gap-2">
-        <!--badge  -->
-        <app-badge
-          [label]="contractTypeMap[jobOffer().contract_type].label"
-        ></app-badge>
-        <app-badge
-          [label]="workingModeMap[jobOffer().working_mode].label"
-        ></app-badge>
-      </div>
-
-      <!-- job , company Title -->
-      <div class="flex flex-col gap-3">
-        <h1>{{ jobOffer().title }}</h1>
-        <!-- Sub containt company name -->
-        <div class="flex gap-2">
-          <div>
+    <div class="grid gap-6 md:grid-cols-[1fr_340px]">
+      <!-- ══ COLONNE PRINCIPALE ═════════════════════════════════ -->
+      <div class="flex flex-col gap-5">
+        <!-- HEADER CARD -->
+        <div class="bg-white rounded-xl border border-kl-border p-6">
+          <!-- Top : logo + titre + badges -->
+          <div class="flex items-start gap-4 mb-5">
+            <!-- Logo entreprise -->
             <div
-              class="text-kl-primary-red mt-0.5 flex h-11 w-11 min-w-11 items-center justify-center rounded-[11px] border border-[#f5c0c8] bg-[#fde8eb] text-xs font-extrabold"
+              class="w-14 h-14 rounded-xl bg-[#fff5f5] border border-kl-border flex items-center justify-center text-lg font-bold text-kl-primary-red shrink-0"
             >
-              {{ jobOffer().company.name | uppercase | slice: 0 : 2 }}
+              {{ jobOffer().company?.name?.charAt(0) ?? "?" }}
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-3 flex-wrap">
+                <div>
+                  <h1
+                    class="text-xl md:text-2xl font-bold text-kl-text leading-tight"
+                  >
+                    {{ jobOffer().title }}
+                  </h1>
+                  <p
+                    class="text-sm text-kl-muted mt-1 flex items-center gap-1.5 flex-wrap"
+                  >
+                    <span class="font-medium text-kl-text">{{
+                      jobOffer().company?.name
+                    }}</span>
+                    <span
+                      class="w-1 h-1 rounded-full bg-kl-muted/40 inline-block"
+                    ></span>
+                    <span>{{ jobOffer().city }}</span>
+                    <span
+                      class="w-1 h-1 rounded-full bg-kl-muted/40 inline-block"
+                    ></span>
+                    <span
+                      >Publiée le
+                      {{
+                        jobOffer().published_at | date: "d MMM yyyy" : "" : "fr"
+                      }}</span
+                    >
+                  </p>
+                </div>
+
+                <!-- Featured badge -->
+                @if (jobOffer().is_featured) {
+                  <span
+                    class="text-[10px] font-bold bg-kl-primary-red text-white px-2.5 py-1 rounded-full shrink-0"
+                  >
+                    En vedette
+                  </span>
+                }
+              </div>
+
+              <!-- Badges contrat + mode -->
+              <div class="flex flex-wrap gap-2 mt-3">
+                <app-badge
+                  [label]="
+                    contractTypeMap[jobOffer().contract_type]?.label ??
+                    jobOffer().contract_type
+                  "
+                />
+                <app-badge
+                  [label]="
+                    workingModeMap[jobOffer().working_mode]?.label ??
+                    jobOffer().working_mode
+                  "
+                />
+                @if (jobOffer().education_level) {
+                  <app-badge
+                    [label]="jobOffer().education_level"
+                    customClass="badge-gray"
+                  />
+                }
+              </div>
             </div>
           </div>
 
-          <!-- SUBTITLE -->
-          <div>
-            <h4>{{ jobOffer().company.name }}</h4>
-
-            <div
-              class="flex w-fit flex-row items-center justify-center space-x-1 rounded-md p-1 px-2 py-1 text-sm font-semibold"
-            >
-              <span>
-                <lucide-icon name="map-pin" [size]="15"></lucide-icon>
+          <!-- Stats rapides -->
+          <div
+            class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-5 border-t border-kl-border"
+          >
+            <div class="flex flex-col">
+              <span class="text-[10px] text-kl-muted uppercase tracking-wide"
+                >Salaire</span
+              >
+              <span class="text-sm font-semibold text-kl-text mt-0.5">
+                {{ jobOffer().salary_min | FormatSalaryPipe }} -
+                {{ jobOffer().salary_max | FormatSalaryPipe }}
               </span>
-              <span>{{ jobOffer().city }}</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-[10px] text-kl-muted uppercase tracking-wide"
+                >Expérience</span
+              >
+              <span class="text-sm font-semibold text-kl-text mt-0.5">
+                {{ formatExperience(jobOffer().experience_years) }}
+              </span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-[10px] text-kl-muted uppercase tracking-wide"
+                >Candidatures</span
+              >
+              <span class="text-sm font-semibold text-kl-text mt-0.5">
+                {{ jobOffer().application_count }}
+              </span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-[10px] text-kl-muted uppercase tracking-wide"
+                >Expire</span
+              >
+              <span
+                class="text-sm font-semibold mt-0.5"
+                [class.text-orange-500]="isExpiringSoon(jobOffer().expires_at)"
+                [class.text-kl-text]="!isExpiringSoon(jobOffer().expires_at)"
+              >
+                {{ formatExpiry(jobOffer().expires_at) }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="bg-white rounded-xl border border-kl-border p-6">
+          <h2
+            class="text-base font-bold text-kl-text mb-4 flex items-center gap-2"
+          >
+            <span
+              class="w-1 h-4 bg-kl-primary-red rounded-full inline-block"
+            ></span>
+            Description du poste
+          </h2>
+          <p class="text-sm text-kl-muted leading-relaxed whitespace-pre-line">
+            {{ jobOffer().description }}
+          </p>
+        </div>
+
+        <!-- PROFIL RECHERCHÉ -->
+        @if (jobOffer().profile_required) {
+          <div class="bg-white rounded-xl border border-kl-border p-6">
+            <h2
+              class="text-base font-bold text-kl-text mb-4 flex items-center gap-2"
+            >
+              <span
+                class="w-1 h-4 bg-kl-primary-red rounded-full inline-block"
+              ></span>
+              Profil recherché
+            </h2>
+            <p
+              class="text-sm text-kl-muted leading-relaxed whitespace-pre-line"
+            >
+              {{ jobOffer().profile_required }}
+            </p>
+          </div>
+        }
+
+        <!-- INFORMATIONS COMPLÉMENTAIRES -->
+        <div class="bg-white rounded-xl border border-kl-border p-6">
+          <h2
+            class="text-base font-bold text-kl-text mb-4 flex items-center gap-2"
+          >
+            <span
+              class="w-1 h-4 bg-kl-primary-red rounded-full inline-block"
+            ></span>
+            Informations
+          </h2>
+          <div class="grid grid-cols-2 gap-x-8 gap-y-4">
+            <div class="flex flex-col gap-0.5">
+              <span class="text-[10px] text-kl-muted uppercase tracking-wide"
+                >Type de contrat</span
+              >
+              <span class="text-sm font-medium text-kl-text">
+                {{
+                  contractTypeMap[jobOffer().contract_type]?.label ??
+                    jobOffer().contract_type
+                }}
+              </span>
+            </div>
+
+            <div class="flex flex-col gap-0.5">
+              <span class="text-[10px] text-kl-muted uppercase tracking-wide"
+                >Mode de travail</span
+              >
+              <span class="text-sm font-medium text-kl-text">
+                {{
+                  workingModeMap[jobOffer().working_mode]?.label ??
+                    jobOffer().working_mode
+                }}
+              </span>
+            </div>
+
+            <div class="flex flex-col gap-0.5">
+              <span class="text-[10px] text-kl-muted uppercase tracking-wide"
+                >Localisation</span
+              >
+              <span class="text-sm font-medium text-kl-text">{{
+                jobOffer().city
+              }}</span>
+            </div>
+
+            <div class="flex flex-col gap-0.5">
+              <span class="text-[10px] text-kl-muted uppercase tracking-wide"
+                >Niveau d'études</span
+              >
+              <span class="text-sm font-medium text-kl-text">{{
+                jobOffer().education_level ?? "Non précisé"
+              }}</span>
+            </div>
+
+            <div class="flex flex-col gap-0.5">
+              <span class="text-[10px] text-kl-muted uppercase tracking-wide"
+                >Expérience</span
+              >
+              <span class="text-sm font-medium text-kl-text">
+                {{ formatExperience(jobOffer().experience_years) }}
+              </span>
+            </div>
+
+            <div class="flex flex-col gap-0.5">
+              <span class="text-[10px] text-kl-muted uppercase tracking-wide"
+                >Salaire</span
+              >
+              <span class="text-sm font-medium text-kl-text">
+                {{ formatSalary(jobOffer().salary_min, jobOffer().salary_max) }}
+              </span>
             </div>
           </div>
         </div>
       </div>
-      <!--  JOB DESCRIPTION -->
-      <div class="flex flex-col gap-3">
-        <div class="flex flex-row items-center space-x-1">
-          <span class="bg-kl-red-dark h-0.5 w-8 rounded-full"></span>
-          <h5>Description du poste</h5>
-        </div>
-        <p
-          class="border-kl-red-dark rounded-lg border-l-6 bg-white p-3 md:text-[15px]"
+
+      <!-- ══ COLONNE DROITE (sticky) ════════════════════════════ -->
+      <div class="flex flex-col gap-4">
+        <!-- CTA CANDIDATURE -->
+        <div
+          class="bg-white rounded-xl border border-kl-border p-5 sticky top-6"
         >
-          <!-- {{ jobOffer().description }} -->
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
-          itaque culpa dolorum blanditiis, maiores modi perspiciatis libero
-          impedit beatae? Delectus culpa, voluptates nihil maxime assumenda
-          exercitationem nemo inventore ipsum possimus repudiandae repellendus
-          magnam. In repellendus sint quaerat ratione. Modi ad, debitis omnis,
-          voluptatem doloremque culpa eum sunt voluptates dignissimos natus,
-          quos voluptatibus dolorum accusantium. Doloribus commodi
-        </p>
-      </div>
+          <h3 class="text-sm font-bold text-kl-text mb-1">
+            Postuler à cette offre
+          </h3>
+          <p class="text-xs text-kl-muted mb-4 leading-relaxed">
+            {{ jobOffer().application_count }} candidat{{
+              jobOffer().application_count > 1 ? "s ont" : " a"
+            }}
+            déjà postulé à cette offre.
+          </p>
 
-      <!-- PROFILE REQUIRED -->
-      <div class="flex flex-col gap-3">
-        <div class="flex flex-row items-center space-x-1">
-          <span class="bg-kl-red-dark h-0.5 w-8 rounded-full"></span>
-          <h5>Profile rechercher</h5>
-        </div>
-        <div class="flex flex-col gap-3 md:flex-row">
-          <app-cards>
-            <h3 card-title>Maitrise Technique</h3>
-            <p card-content>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
-              fugiat deserunt at libero sit quae maiores enim ex. Quibusdam,
-              dolore.
-            </p>
-          </app-cards>
+          <!-- Bouton principal -->
+          <button
+            type="button"
+            (click)="onApplyClick()"
+            class="w-full bg-kl-primary-red text-white text-sm font-bold rounded-lg py-3 px-4 hover:bg-[#96101F] transition-colors cursor-pointer flex items-center justify-center gap-2"
+          >
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+              <path
+                d="M2 7.5h9M8 4l3.5 3.5L8 11"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Postuler maintenant
+          </button>
 
-          <app-cards>
-            <h3 card-title>Architecture API</h3>
-            <p card-content>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum
-              fugiat deserunt at libero sit quae maiores enim ex. Quibusdam,
-              dolore.
-            </p>
-          </app-cards>
-        </div>
-      </div>
+          <!-- Bouton secondaire : sauvegarder -->
+          <button
+            type="button"
+            (click)="onSaveClick()"
+            class="w-full mt-2 bg-white text-kl-text text-sm font-medium rounded-lg py-2.5 px-4 border border-kl-border hover:border-kl-primary-red hover:text-kl-primary-red transition-colors cursor-pointer flex items-center justify-center gap-2"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M7 1.5L8.8 5.2l4.2.6-3 2.9.7 4.1L7 10.8l-3.7 1.9.7-4.1-3-2.9 4.2-.6L7 1.5z"
+                stroke="currentColor"
+                stroke-width="1.3"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Sauvegarder l'offre
+          </button>
 
-      <!-- MARKTING  -->
-      <div class="flex flex-col gap-3">
-        <h5>POURQUOI NOUS REJOINDRE ?</h5>
-        <span>Image</span>
-      </div>
-    </div>
-
-    <!-- RIGHT:  APPLY SECTION -->
-    <div class="bg-amber-700 p-7">
-      <div class="flex flex-col rounded-lg bg-white p-5 gap-10">
-        <div class="flex flex-col">
-          <h5 class="text-kl-muted text-xs uppercase">Renumeration</h5>
-          <span class="text-kl-text text-xs font-bold sm:text-xl md:text-2xl">
-            {{ jobOffer().salary_max | formatSalary }} -
-            {{ jobOffer().salary_min | formatSalary }}
-            <small class="text-[10px]">FCFA / mois</small>
-          </span>
-        </div>
-
-        <!-- <div class="flex">
-          <span class="h-0.1 w-full   bg-kl-muted rounded-full"></span>
-        </div> -->
-
-        <!-- EXPERIENCE -->
-        <div class="flex justify-between">
-          <div class="inline-flex space-x-2">
-            <span>
-              <lucide-icon name="briefcase-business" [size]="24"></lucide-icon>
+          <!-- Expiration -->
+          <p
+            class="text-center text-[11px] text-kl-muted mt-3 flex items-center justify-center gap-1"
+          >
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <circle
+                cx="5.5"
+                cy="5.5"
+                r="4.5"
+                stroke="currentColor"
+                stroke-width="1.1"
+              />
+              <path
+                d="M5.5 3v2.5L7 7"
+                stroke="currentColor"
+                stroke-width="1.1"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span
+              [class.text-orange-500]="isExpiringSoon(jobOffer().expires_at)"
+            >
+              {{ formatExpiry(jobOffer().expires_at) }}
             </span>
-            <span>Experience</span>
-          </div>
-          <span>{{ jobOffer().experience_years }} ans (Debutant)</span>
+          </p>
         </div>
 
-        <!-- EDUCATION LEVEL  -->
-        <div class="flex justify-between">
-          <div class="inline-flex space-x-2">
-            <span>
-              <lucide-icon name="graduation-cap" [size]="24"></lucide-icon>
-            </span>
-            <span>Education</span>
+        <!-- INFOS ENTREPRISE -->
+        <div class="bg-white rounded-xl border border-kl-border p-5">
+          <h3 class="text-sm font-bold text-kl-text mb-3">
+            À propos de l'entreprise
+          </h3>
+          <div class="flex items-center gap-3 mb-3">
+            <div
+              class="w-10 h-10 rounded-lg bg-[#fff5f5] border border-kl-border flex items-center justify-center text-sm font-bold text-kl-primary-red shrink-0"
+            >
+              {{ jobOffer().company?.name?.charAt(0) ?? "?" }}
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-kl-text">
+                {{ jobOffer().company?.name }}
+              </p>
+              <p class="text-xs text-kl-muted">
+                {{ jobOffer().city }}
+              </p>
+            </div>
           </div>
-          <span>{{ jobOffer().education_level }}</span>
+          <a
+            class="text-xs font-medium text-kl-primary-red hover:underline underline-offset-2 cursor-pointer"
+          >
+            Voir toutes les offres de cette entreprise →
+          </a>
         </div>
-        <div class="text-center">
-          <app-button  variant="primary">
-            Postuler
-          </app-button>
+
+        <!-- PARTAGER -->
+        <div class="bg-white rounded-xl border border-kl-border p-5">
+          <h3 class="text-sm font-bold text-kl-text mb-3">
+            Partager cette offre
+          </h3>
+          <div class="flex gap-2">
+            <button
+              type="button"
+              (click)="onShare('linkedin')"
+              class="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium border border-kl-border rounded-lg py-2 hover:border-[#0077b5] hover:text-[#0077b5] transition-colors cursor-pointer"
+            >
+              LinkedIn
+            </button>
+            <button
+              type="button"
+              (click)="onShare('whatsapp')"
+              class="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium border border-kl-border rounded-lg py-2 hover:border-[#25d366] hover:text-[#25d366] transition-colors cursor-pointer"
+            >
+              WhatsApp
+            </button>
+            <button
+              type="button"
+              (click)="onShare('copy')"
+              class="flex-1 flex items-center justify-center gap-1.5 text-xs font-medium border border-kl-border rounded-lg py-2 hover:border-kl-primary-red hover:text-kl-primary-red transition-colors cursor-pointer"
+            >
+              Copier
+            </button>
+          </div>
         </div>
+
+        <!-- RETOUR liste -->
+        <a
+          routerLink="/offers"
+          class="flex items-center gap-1.5 text-xs text-kl-muted hover:text-kl-primary-red transition-colors cursor-pointer"
+        >
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path
+              d="M8 2.5L4 6.5l4 4"
+              stroke="currentColor"
+              stroke-width="1.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          Retour aux offres
+        </a>
       </div>
     </div>
   </div>
