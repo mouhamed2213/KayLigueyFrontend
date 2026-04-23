@@ -52,12 +52,7 @@
                     <span
                       class="w-1 h-1 rounded-full bg-kl-muted/40 inline-block"
                     ></span>
-                    <span
-                      >Publiée le
-                      {{
-                        jobOffer().published_at | date: "d MMM yyyy" : "" : "fr"
-                      }}</span
-                    >
+                    <span> {{ jobOffer().published_at | relativeTime }}</span>
                   </p>
                 </div>
 

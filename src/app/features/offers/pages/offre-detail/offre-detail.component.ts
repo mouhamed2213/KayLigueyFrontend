@@ -16,6 +16,7 @@ import { BadgeComponent } from '../../../../shared/components/badge/badge.compon
 import { WORKING_MODE_CONFIG } from '../../../../core/constant/workingMode';
 import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { RelativeTimePipe } from '../../../../shared/pipes/relative-time.pipe';
 @Component({
   selector: 'app-offre-detail',
   imports: [
@@ -24,6 +25,7 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
     FormatSalaryPipe,
     ButtonComponent,
     DatePipe,
+    RelativeTimePipe,
   ],
   templateUrl: './offre-detail.component.html',
   styleUrl: './offre-detail.component.css',
@@ -71,11 +73,22 @@ export class OffreDetailComponent implements OnInit {
 
   onShare(string: any) {}
   onApplyClick() {}
-  formatExpiry(string: any) {}
+  onSaveClick() {}
+
   isExpiringSoon(string: any) {
     return false;
   }
-  onSaveClick() {}
-  formatSalary(min: any, max: any) {}
-  formatExperience(string: any) {}
+
+  formatExperience(experience: number) {
+    if (experience === 0) {
+      const formated = `${0} ans (Debutant) `;
+      return formated;
+    }
+    return;
+  }
+
+  formatExpiry(expiryDate: any) {
+    const date = new Date(expiryDate);
+    return date.toLocaleDateString('fr-FR');
+  }
 }
