@@ -123,6 +123,14 @@
   .card-content {
     @apply mt-4 text-sm text-kl-muted  leading-relaxed line-clamp-2 font-sans;
   }
+
+  .logo_style_max {
+    @apply w-14 h-14 rounded-xl bg-[#fff5f5] border border-kl-border flex items-center justify-center text-lg font-bold text-kl-primary-red shrink-0;
+  }
+
+  .logo_style_min {
+    @apply w-10 h-10 rounded-lg bg-[#fff5f5] border border-kl-border flex items-center justify-center text-sm font-bold text-kl-primary-red shrink-0;
+  }
 }
 
 /* TYPOGRAPHIE */

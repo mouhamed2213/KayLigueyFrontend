@@ -4,6 +4,7 @@ import {
   UpperCasePipe,
   LowerCasePipe,
   SlicePipe,
+  DatePipe,
 } from '@angular/common';
 import { JobOfferService } from '../../services/job_offer.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -18,13 +19,11 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 @Component({
   selector: 'app-offre-detail',
   imports: [
-    CardsComponent,
     LucideAngularModule,
     BadgeComponent,
-    SlicePipe,
-    UpperCasePipe,
     FormatSalaryPipe,
     ButtonComponent,
+    DatePipe,
   ],
   templateUrl: './offre-detail.component.html',
   styleUrl: './offre-detail.component.css',
@@ -69,4 +68,14 @@ export class OffreDetailComponent implements OnInit {
         },
       });
   }
+
+  onShare(string: any) {}
+  onApplyClick() {}
+  formatExpiry(string: any) {}
+  isExpiringSoon(string: any) {
+    return false;
+  }
+  onSaveClick() {}
+  formatSalary(min: any, max: any) {}
+  formatExperience(string: any) {}
 }
