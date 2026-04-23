@@ -131,6 +131,15 @@
   .logo_style_min {
     @apply w-10 h-10 rounded-lg bg-[#fff5f5] border border-kl-border flex items-center justify-center text-sm font-bold text-kl-primary-red shrink-0;
   }
+
+  /*  SNAK BAR*/
+  .error-snackbar .mdc-snackbar__surface {
+    background-color: red !important;
+  }
+
+  .success-snackbar .mdc-snackbar__surface {
+    background-color: #16a34a !important; /* Vert */
+  }
 }
 
 /* TYPOGRAPHIE */
