@@ -19,6 +19,7 @@
   --color-kl-zinc-700: #3f3f46;
   --color-kl-muted: #6b6b6b;
   --color-kl-muted-dark: #000000d8;
+  --color-kl-icon: #6b6b6b58;
 
   /* ── BRAND ── */
   --color-kl-primary-red: #c0152a;
@@ -67,6 +68,9 @@
   h4 {
     @apply text-sm font-headline font-semibold text-kl-muted-dark md:text-lg;
   }
+  h5 {
+    @apply text-lg font-semibold text-kl-text;
+  }
 
   /* p {
     @apply font-['Inter'] font-normal text-zinc-600;
@@ -108,7 +112,7 @@
   }
 
   .chip {
-    @apply bg-bg-input px-3 py-1 text-sm rounded-xl transition 
+    @apply bg-bg-input px-3 py-1 text-sm rounded-xl transition;
   }
 
   .job-card {

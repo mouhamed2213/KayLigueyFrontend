@@ -1,5 +1,10 @@
 import { Component, inject, OnInit, DestroyRef, signal } from '@angular/core';
-import { JsonPipe, UpperCasePipe, LowerCasePipe } from '@angular/common';
+import {
+  JsonPipe,
+  UpperCasePipe,
+  LowerCasePipe,
+  SlicePipe,
+} from '@angular/common';
 import { JobOfferService } from '../../services/job_offer.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
@@ -8,10 +13,19 @@ import { LucideAngularModule } from 'lucide-angular';
 import { CONTRACT_TYPE_CONFIG } from '../../../../core/constant/contractTypes';
 import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
 import { WORKING_MODE_CONFIG } from '../../../../core/constant/workingMode';
-
+import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
 @Component({
   selector: 'app-offre-detail',
-  imports: [CardsComponent, LucideAngularModule, BadgeComponent],
+  imports: [
+    CardsComponent,
+    LucideAngularModule,
+    BadgeComponent,
+    SlicePipe,
+    UpperCasePipe,
+    FormatSalaryPipe,
+    ButtonComponent,
+  ],
   templateUrl: './offre-detail.component.html',
   styleUrl: './offre-detail.component.css',
 })

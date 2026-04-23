@@ -1,32 +1,34 @@
 <!-- <p>{{ jobOffer.data | json }}</p> -->
-<section class="md:container mx-auto p-10 grid bg-bg-kl gap-5">
+<section class="bg-bg-kl mx-auto grid gap-5 p-10 font-sans md:container">
   <!-- Page Header -->
-  <div class="flex flex-col md:flex-row justify-between">
-    <span>offers > offer </span>
+  <div class="flex flex-col justify-between md:flex-row">
+    <span>offers > offer</span>
     <div class="flex flex-row gap-5">
       <div class="flex flex-row space-x-1">
         <lucide-icon name="eye" [size]="20" [strokeWidth]="2"></lucide-icon>
-        <span> {{ jobOffer().view_count }} Vues </span>
+        <span>{{ jobOffer().view_count }} Vues</span>
       </div>
 
       <div class="flex flex-row space-x-1">
         <lucide-icon name="Users" [size]="20" [strokeWidth]="2"></lucide-icon>
 
-        <span> {{ jobOffer().application_count }} candidatures </span>
+        <span>{{ jobOffer().application_count }} candidatures</span>
       </div>
     </div>
   </div>
 
-  <!-- OFFER DETAIL CONTAINER -->
+  <!-- OFFER  DETAIL  AND APPLY CONTAINER -->
   <div class="grid md:grid-cols-2">
     <!-- LEFT SIDE   JOB DETAL-->
-    <div>
-      <div>
+    <div class="flex flex-col space-y-10">
+      <div class="flex flex-row gap-2">
         <!--badge  -->
-        <app-badge [label]="contractTypeMap[jobOffer().contract_type].label">
-        </app-badge>
-        <app-badge [label]="workingModeMap[jobOffer().working_mode].label">
-        </app-badge>
+        <app-badge
+          [label]="contractTypeMap[jobOffer().contract_type].label"
+        ></app-badge>
+        <app-badge
+          [label]="workingModeMap[jobOffer().working_mode].label"
+        ></app-badge>
       </div>
 
       <!-- job , company Title -->
@@ -35,24 +37,55 @@
         <!-- Sub containt company name -->
         <div class="flex gap-2">
           <div>
-            <span> Logo </span>
+            <div
+              class="text-kl-primary-red mt-0.5 flex h-11 w-11 min-w-11 items-center justify-center rounded-[11px] border border-[#f5c0c8] bg-[#fde8eb] text-xs font-extrabold"
+            >
+              {{ jobOffer().company.name | uppercase | slice: 0 : 2 }}
+            </div>
           </div>
+
+          <!-- SUBTITLE -->
           <div>
             <h4>{{ jobOffer().company.name }}</h4>
-            <span>location</span>
+
+            <div
+              class="flex w-fit flex-row items-center justify-center space-x-1 rounded-md p-1 px-2 py-1 text-sm font-semibold"
+            >
+              <span>
+                <lucide-icon name="map-pin" [size]="15"></lucide-icon>
+              </span>
+              <span>{{ jobOffer().city }}</span>
+            </div>
           </div>
         </div>
-        <!--  JOB DESCRIPTION -->
-        <div class="flex flex-col">
-          <h5>--------- Description Du post</h5>
-          <p>{{ jobOffer().description }}</p>
+      </div>
+      <!--  JOB DESCRIPTION -->
+      <div class="flex flex-col gap-3">
+        <div class="flex flex-row items-center space-x-1">
+          <span class="bg-kl-red-dark h-0.5 w-8 rounded-full"></span>
+          <h5>Description du poste</h5>
         </div>
+        <p
+          class="border-kl-red-dark rounded-lg border-l-6 bg-white p-3 md:text-[15px]"
+        >
+          <!-- {{ jobOffer().description }} -->
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
+          itaque culpa dolorum blanditiis, maiores modi perspiciatis libero
+          impedit beatae? Delectus culpa, voluptates nihil maxime assumenda
+          exercitationem nemo inventore ipsum possimus repudiandae repellendus
+          magnam. In repellendus sint quaerat ratione. Modi ad, debitis omnis,
+          voluptatem doloremque culpa eum sunt voluptates dignissimos natus,
+          quos voluptatibus dolorum accusantium. Doloribus commodi
+        </p>
       </div>
 
       <!-- PROFILE REQUIRED -->
-      <div class="flex flex-col">
-        <h5>---------- Profile rechercher</h5>
-        <div class="flex flex-col md:flex-row gap-3">
+      <div class="flex flex-col gap-3">
+        <div class="flex flex-row items-center space-x-1">
+          <span class="bg-kl-red-dark h-0.5 w-8 rounded-full"></span>
+          <h5>Profile rechercher</h5>
+        </div>
+        <div class="flex flex-col gap-3 md:flex-row">
           <app-cards>
             <h3 card-title>Maitrise Technique</h3>
             <p card-content>
@@ -74,12 +107,55 @@
       </div>
 
       <!-- MARKTING  -->
-      <div>
+      <div class="flex flex-col gap-3">
         <h5>POURQUOI NOUS REJOINDRE ?</h5>
-        <span>Image </span>
+        <span>Image</span>
       </div>
     </div>
 
-    <!-- RIGHT APPLY SECTION -->
+    <!-- RIGHT:  APPLY SECTION -->
+    <div class="bg-amber-700 p-7">
+      <div class="flex flex-col rounded-lg bg-white p-5 gap-10">
+        <div class="flex flex-col">
+          <h5 class="text-kl-muted text-xs uppercase">Renumeration</h5>
+          <span class="text-kl-text text-xs font-bold sm:text-xl md:text-2xl">
+            {{ jobOffer().salary_max | formatSalary }} -
+            {{ jobOffer().salary_min | formatSalary }}
+            <small class="text-[10px]">FCFA / mois</small>
+          </span>
+        </div>
+
+        <!-- <div class="flex">
+          <span class="h-0.1 w-full   bg-kl-muted rounded-full"></span>
+        </div> -->
+
+        <!-- EXPERIENCE -->
+        <div class="flex justify-between">
+          <div class="inline-flex space-x-2">
+            <span>
+              <lucide-icon name="briefcase-business" [size]="24"></lucide-icon>
+            </span>
+            <span>Experience</span>
+          </div>
+          <span>{{ jobOffer().experience_years }} ans (Debutant)</span>
+        </div>
+
+        <!-- EDUCATION LEVEL  -->
+        <div class="flex justify-between">
+          <div class="inline-flex space-x-2">
+            <span>
+              <lucide-icon name="graduation-cap" [size]="24"></lucide-icon>
+            </span>
+            <span>Education</span>
+          </div>
+          <span>{{ jobOffer().education_level }}</span>
+        </div>
+        <div class="text-center">
+          <app-button  variant="primary">
+            Postuler
+          </app-button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
