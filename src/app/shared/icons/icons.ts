@@ -17,10 +17,13 @@ import {
   MapPinHouse,
   Eye,
   Users,
+  GraduationCap ,
+  BriefcaseBusiness
 } from 'lucide-angular';
 
 export default () => {
   return {
+    GraduationCap ,
     User,
     Phone,
     Building,
@@ -39,5 +42,6 @@ export default () => {
     MapPinHouse,
     Eye,
     Users,
+    BriefcaseBusiness
   };
 };

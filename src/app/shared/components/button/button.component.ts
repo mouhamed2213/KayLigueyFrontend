@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, computed, input, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 export class ButtonComponent {
   @Input() variant: 'primary' | 'secondary' = 'primary';
   @Input() routerLink?: string[];
+  customClass?: string;
 
   get classes(): string {
     // base color
@@ -22,6 +23,7 @@ export class ButtonComponent {
       hover:-translate-y-0.5 active:scale-95
       focus:outline-none focus:ring-2 focus:ring-kl-primary-red focus:ring-offset-2
       cursor-pointer
+      w-full
 `;
 
     const variants = {

@@ -10,8 +10,6 @@ export class BadgeComponent {
   label = input('');
   style = input('px-2 py-1 text-xs font-semibold rounded-md');
 
-  // Create another input to change color badge
-
   customClass = computed(() => {
     const text = this.label();
 
@@ -30,4 +28,7 @@ export class BadgeComponent {
 
     return defaultColor; // Valeur par défaut
   });
+
+
+  
 }
