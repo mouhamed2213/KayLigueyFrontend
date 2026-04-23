@@ -1,10 +1,19 @@
-import { Component, inject, OnInit, DestroyRef, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  DestroyRef,
+  signal,
+  PLATFORM_ID,
+  DOCUMENT,
+} from '@angular/core';
 import {
   JsonPipe,
   UpperCasePipe,
   LowerCasePipe,
   SlicePipe,
   DatePipe,
+  isPlatformBrowser,
 } from '@angular/common';
 import { JobOfferService } from '../../services/job_offer.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -17,6 +26,8 @@ import { WORKING_MODE_CONFIG } from '../../../../core/constant/workingMode';
 import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { RelativeTimePipe } from '../../../../shared/pipes/relative-time.pipe';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-offre-detail',
   imports: [
@@ -24,7 +35,6 @@ import { RelativeTimePipe } from '../../../../shared/pipes/relative-time.pipe';
     BadgeComponent,
     FormatSalaryPipe,
     ButtonComponent,
-    DatePipe,
     RelativeTimePipe,
   ],
   templateUrl: './offre-detail.component.html',
@@ -32,12 +42,14 @@ import { RelativeTimePipe } from '../../../../shared/pipes/relative-time.pipe';
 })
 export class OffreDetailComponent implements OnInit {
   private jobOfferService = inject(JobOfferService);
+  private document = inject(DOCUMENT); // access dom document
+  private platformId = inject(PLATFORM_ID);
   private destroyRef = inject(DestroyRef);
-
   private route = inject(ActivatedRoute);
   protected jobOffer = signal<any>('');
   private jobOfferId = signal<string>('');
   protected errors = signal<string | null>(null);
+  protected snackBar = inject(MatSnackBar);
 
   workingModeMap = WORKING_MODE_CONFIG;
   contractTypeMap = CONTRACT_TYPE_CONFIG;
@@ -71,9 +83,41 @@ export class OffreDetailComponent implements OnInit {
       });
   }
 
-  onShare(string: any) {}
-  onApplyClick() {}
-  onSaveClick() {}
+  onShare(sharedType: 'copy' | 'whatsapp' | 'linkedin') {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const url = this.document.location.href;
+    const title = 'Découvrez cette offre !';
+
+    switch (sharedType) {
+      case 'copy':
+        navigator.clipboard.writeText(url);
+        this.snackBar.open('Lien copié !', 'close', {
+          duration: 3000,
+          horizontalPosition: 'right',
+        });
+
+        break;
+
+      case 'whatsapp':
+        const waUrl = `https://wa.me/${encodeURIComponent(title + ' ' + url)}`;
+        navigator.share();
+        break;
+
+      case 'linkedin':
+        const liUrl = `https://linkedin.com/${encodeURIComponent(url)}`;
+        window.open(liUrl, '_blank');
+        break;
+    }
+  }
+
+  //
+  onApplyClick() {
+    console.log('cliked');
+  }
+  onSaveClick() {
+    console.log('cliked');
+  }
 
   isExpiringSoon(string: any) {
     return false;

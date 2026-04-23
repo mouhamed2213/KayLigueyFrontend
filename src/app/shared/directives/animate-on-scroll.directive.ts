@@ -10,7 +10,7 @@ export class AnimateOnScrollDirective implements OnInit {
 
   constructor(
     private el: ElementRef,
-    private renderer: Renderer2, // allow do manipulation
+    private renderer: Renderer2, // allow do manipulation of the dom
   ) {}
 
   ngOnInit() {
