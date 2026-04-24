@@ -1,15 +1,12 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { authGuard } from '../../core/guard/auth/auth.guard';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 export const CANDIDAT_ROUTES: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    pathMatch: 'full',
+    component: DashboardComponent,
   },
-
   {
-    path: 'homeCandidat',
-    component: HomeComponent,
+    path: 'dashboard',
+    component: DashboardComponent,
   },
 ];
