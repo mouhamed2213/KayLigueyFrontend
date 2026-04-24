@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../core/services/auth.service';
 import {
   Component,
   inject,
@@ -17,7 +18,7 @@ import {
 } from '@angular/common';
 import { JobOfferService } from '../../services/job_offer.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CardsComponent } from '../../../../shared/components/cards/cards.component';
 import { LucideAngularModule } from 'lucide-angular';
 import { CONTRACT_TYPE_CONFIG } from '../../../../core/constant/contractTypes';
@@ -50,6 +51,8 @@ export class OffreDetailComponent implements OnInit {
   private jobOfferId = signal<string>('');
   protected errors = signal<string | null>(null);
   protected snackBar = inject(MatSnackBar);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   workingModeMap = WORKING_MODE_CONFIG;
   contractTypeMap = CONTRACT_TYPE_CONFIG;
@@ -83,6 +86,16 @@ export class OffreDetailComponent implements OnInit {
       });
   }
 
+  // APPLY JOB
+  protected onApplyClick() {
+    const authenticated = this.authService.isAuthenticated();
+    console.log(authenticated);
+    if (!authenticated) {
+      return this.router.navigateByUrl('/register');
+    }
+    return;
+  }
+
   onShare(sharedType: 'copy' | 'whatsapp' | 'linkedin') {
     if (!isPlatformBrowser(this.platformId)) return;
 
@@ -111,12 +124,15 @@ export class OffreDetailComponent implements OnInit {
     }
   }
 
-  //
-  onApplyClick() {
-    console.log('cliked');
-  }
   onSaveClick() {
-    // this.snackB-ar.open('Offre sauvegarder');
+    const authenticated = this.authService.isAuthenticated();
+    console.log(authenticated);
+    if (!authenticated) {
+      return this.router.navigateByUrl('/register');
+    } else {
+      console.log('clicked');
+    }
+    return;
   }
 
   isExpiringSoon(string: any) {

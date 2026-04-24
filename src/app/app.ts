@@ -12,8 +12,8 @@ export class App implements OnInit {
 
   private authService = inject(AuthService);
   ngOnInit(): void {
-    if (this.authService.isAuthenticated()) {
-      this.authService.getMe().subscribe();
-    }
+    // if (this.authService.isAuthenticated()) {
+    //   this.authService.getMe().subscribe();
+    // }
   }
 }
