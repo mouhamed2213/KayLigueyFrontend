@@ -16,14 +16,14 @@ import {
   DatePipe,
   isPlatformBrowser,
 } from '@angular/common';
-import { JobOfferService } from '../../services/job_offer.service';
+import { JobOfferService } from '../../services/job-offer.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardsComponent } from '../../../../shared/components/cards/cards.component';
 import { LucideAngularModule } from 'lucide-angular';
-import { CONTRACT_TYPE_CONFIG } from '../../../../core/constant/contractTypes';
+import { CONTRACT_TYPE_CONFIG } from '../../../../core/constant/contract-types';
 import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
-import { WORKING_MODE_CONFIG } from '../../../../core/constant/workingMode';
+import { WORKING_MODE_CONFIG } from '../../../../core/constant/working-mode';
 import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { RelativeTimePipe } from '../../../../shared/pipes/relative-time.pipe';
@@ -90,12 +90,18 @@ export class OffreDetailComponent implements OnInit {
   protected onApplyClick() {
     const authenticated = this.authService.isAuthenticated();
     console.log(authenticated);
-    if (!authenticated) {
-      return this.router.navigateByUrl('/register');
-    }
+    if (!authenticated) return this.router.navigateByUrl('/register');
+
+    /**
+     true
+    show the successfull toast message
+     Redirect user to the job applied detail page
+     disable the apply button ( Rule : the user can apply many job , but cane apply only one specific job )
+     */
     return;
   }
 
+  // SHARE JOB
   onShare(sharedType: 'copy' | 'whatsapp' | 'linkedin') {
     if (!isPlatformBrowser(this.platformId)) return;
 
@@ -124,6 +130,7 @@ export class OffreDetailComponent implements OnInit {
     }
   }
 
+  // SAVE JOB
   onSaveClick() {
     const authenticated = this.authService.isAuthenticated();
     console.log(authenticated);

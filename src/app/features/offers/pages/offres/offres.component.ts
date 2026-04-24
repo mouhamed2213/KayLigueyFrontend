@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal, DestroyRef } from '@angular/core';
-import { JobOfferService } from '../../services/job_offer.service';
-import { JobOffer } from '../../../../core/models/job_offer.model';
+import { JobOfferService } from '../../services/job-offer.service';
+import { JobOffer } from '../../../../core/models/job-offer.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -9,20 +9,20 @@ import { BadgeComponent } from '../../../../shared/components/badge/badge.compon
 import { LucideAngularModule } from 'lucide-angular';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DatePipe, SlicePipe, UpperCasePipe } from '@angular/common';
-import { IPagination } from '../../../../core/models/offer_respose.model';
+import { IPagination } from '../../../../core/models/offer-respose.model';
 import { IFilters } from '../../../../core/models/filter.model';
 import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
 import {
   CONTRACT_TYPE_CONFIG,
   CONTRACT_TYPES,
-} from '../../../../core/constant/contractTypes';
+} from '../../../../core/constant/contract-types';
 
 import { RouterLink } from '@angular/router';
 
 import {
   WORKING_MODE_CONFIG,
   WORKING_MODES,
-} from '../../../../core/constant/workingMode';
+} from '../../../../core/constant/working-mode';
 
 import { SN_REGIONS } from '../../../../core/constant/regions';
 

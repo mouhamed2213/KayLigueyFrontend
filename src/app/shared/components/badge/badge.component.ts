@@ -12,14 +12,15 @@ export class BadgeComponent {
 
   customClass = computed(() => {
     const text = this.label();
-
+    if (!text) return 'bg-gray-100 text-gray-700';
+    
     let defaultColor = 'bg-green-100 text-green-700';
     // working mode badge
     if (text.includes('Télétravail')) return 'bg-green-100 text-green-700';
     if (text.includes('Hybride')) return 'bg-yellow-100 text-yellow-700';
     if (text.includes('Présentiel')) return 'bg-blue-100 text-blue-700';
 
-    // contract ype badges
+    // // contract ype badges
     if (text.includes('CDI')) return 'bg-emerald-100 text-emerald-700';
     if (text.includes('CDD')) return 'bg-blue-100 text-blue-700';
     if (text.includes('Freelance')) return 'bg-purple-100 text-purple-700';
@@ -28,7 +29,4 @@ export class BadgeComponent {
 
     return defaultColor; // Valeur par défaut
   });
-
-
-  
 }
