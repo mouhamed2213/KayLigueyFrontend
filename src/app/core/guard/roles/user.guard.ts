@@ -1,25 +1,22 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { inject } from '@angular/core';
-import { map, filter, take } from 'rxjs/operators';
+import { map, catchError, of } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 
 export const candidatGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // 1. On transforme le Signal en Observable pour pouvoir "attendre"
-  return toObservable(authService.userRole).pipe(
-    // 2. On attend que la valeur ne soit plus 'undefined'
-    // (cela veut dire que getMe() a répondu ou qu'il n'y a personne)
-    filter((role) => role !== undefined),
-    take(1), // On prend la première valeur valide
-    map((role) => {
-      if (role === 'CANDIDAT') {
+  // On demande l'utilisateur et on vérifie son rôle quand il arrive
+  return authService.getUser().pipe(
+    map((user) => {
+      if (user?.role === 'CANDIDAT') {
         return true;
+      } else {
+        return router.createUrlTree(['/unauthorized']);
       }
-      // Si pas le bon rôle, redirection
-      return router.createUrlTree(['/unauthorized']);
     }),
+    catchError(() => of(router.createUrlTree(['/login']))),
   );
 };
