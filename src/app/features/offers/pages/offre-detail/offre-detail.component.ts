@@ -20,7 +20,7 @@ import { JobOfferService } from '../../services/job-offer.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
-import { CONTRACT_TYPE_CONFIG } from '@core/constant/contract-types';
+import { CONTRACT_TYPE_CONFIG } from '../../../../core/constant/contract-types';
 import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
 import { WORKING_MODE_CONFIG } from '../../../../core/constant/working-mode';
 import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
