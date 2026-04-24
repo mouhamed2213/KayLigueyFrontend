@@ -7,6 +7,7 @@ import { authGuard } from './core/guard/auth/auth.guard';
 import { candidatGuard } from './core/guard/roles/user.guard';
 import { ErrorPageComponent } from './shared/pages/error-page/error-page.component';
 import { PUBLIC_ROUTE } from './features/public/public.route';
+import { OffresComponent } from './features/offers/pages/offres/offres.component';
 
 export const routes: Routes = [
   // 1. PUBLIC LAYOUT
@@ -48,6 +49,18 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/candidat/candidat.routes').then(
             (ca) => ca.CANDIDAT_ROUTES,
+          ),
+      },
+
+      // 3.1 OFFER PAGES
+      { path: 'offers', component: OffresComponent },
+
+      // 3.2 OFFER DETAIL PAGES
+      {
+        path: 'offers',
+        loadComponent: () =>
+          import('./features/offers/pages/offre-detail/offre-detail.component').then(
+            (od) => od.OffreDetailComponent,
           ),
       },
     ],
