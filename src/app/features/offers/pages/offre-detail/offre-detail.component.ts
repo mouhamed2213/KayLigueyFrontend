@@ -19,9 +19,8 @@ import {
 import { JobOfferService } from '../../services/job-offer.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CardsComponent } from '../../../../shared/components/cards/cards.component';
 import { LucideAngularModule } from 'lucide-angular';
-import { CONTRACT_TYPE_CONFIG } from '../../../../core/constant/contract-types';
+import { CONTRACT_TYPE_CONFIG } from '@core/constant/contract-types';
 import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
 import { WORKING_MODE_CONFIG } from '../../../../core/constant/working-mode';
 import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
@@ -96,7 +95,7 @@ export class OffreDetailComponent implements OnInit {
      true
     show the successfull toast message
      Redirect user to the job applied detail page
-     disable the apply button ( Rule : the user can apply many job , but cane apply only one specific job )
+     disable the apply button ( Rule : the user can apply many job , but cane apply only one spec )
      */
     return;
   }
