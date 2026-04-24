@@ -5,7 +5,9 @@
 ───────────────────────────── */
 @theme {
   /* ── COLORS : BACKGROUND ── */
-  --color-kl-bg: #fbf8ff;
+  --color-kl-bg: #fbf8ffbb;
+  /* --color-kl-bg: #f7f4f4; */
+  --color-kl-separator: #ffffff;
   --color-kl-zinc-50: #fafafa;
   --color-kl-zinc-100: #f4f2fd;
   --color-bg-input: #e3e1ec;
@@ -94,7 +96,7 @@
   body {
     height: 100%;
     font-family: var(--font-sans);
-    background-color: var(--color-kl-bg);
+    /* background-color: var(--color-kl-bg); */
     color: var(--color-kl-text);
     -webkit-font-smoothing: antialiased;
   }

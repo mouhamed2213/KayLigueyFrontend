@@ -1,4 +1,4 @@
-import { Component, computed, input, Input } from '@angular/core';
+import { Component, computed, input, Input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -9,7 +9,9 @@ import { RouterLink } from '@angular/router';
 })
 export class ButtonComponent {
   @Input() variant: 'primary' | 'secondary' | 'primary_dark' = 'primary';
-  @Input() routerLink?: string[];
+
+  // routerLink = input<string | string[]>();
+
   customClass?: string;
 
   get classes(): string {
@@ -30,7 +32,7 @@ export class ButtonComponent {
       // primary with full red fielded
       primary: `
       bg-kl-primary-red text-white border border-transparent
-      hover:bg-kl-primary-red/75 
+      hover:bg-[#96101F]
         `,
       secondary: `
       border border-kl-border  text-kl-red-light bg-transparent hover:bg-kl-border-hover

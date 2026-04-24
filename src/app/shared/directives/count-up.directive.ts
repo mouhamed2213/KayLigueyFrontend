@@ -1,16 +1,22 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  inject,
+  input,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 @Directive({
   selector: '[appCountUp]',
   standalone: true,
 })
 export class CountUpDirective implements OnInit {
-  @Input() end = 100;
-  @Input() duration = 1500; // ms
-  @Input() suffix = ''; // ex: %, +
+  end = input(100);
+  duration = input(1500); // ms
+  suffix = input(''); // ex: %, +
 
-  constructor(private el: ElementRef) {}
-
+  private el = inject(ElementRef);
   ngOnInit() {
     const element = this.el.nativeElement;
 
@@ -29,11 +35,11 @@ export class CountUpDirective implements OnInit {
     const startTime = performance.now();
 
     const step = (currentTime: number) => {
-      const progress = Math.min((currentTime - startTime) / this.duration, 1);
+      const progress = Math.min((currentTime - startTime) / this.duration(), 1);
 
-      const value = Math.floor(progress * this.end);
+      const value = Math.floor(progress * this.end());
 
-      this.el.nativeElement.textContent = this.format(value) + this.suffix;
+      this.el.nativeElement.textContent = this.format(value) + this.suffix();
       if (progress < 1) {
         requestAnimationFrame(step);
       }

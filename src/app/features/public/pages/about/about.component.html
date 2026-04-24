@@ -1,0 +1,709 @@
+<main appAnimateOnScroll class="min-h-screen bg-kl-bg font-sans">
+  <!-- ══ HERO ════════════════════════════════════════════════════ -->
+  <section
+    appAnimateOnScroll
+    appAnimateOnScroll
+    class="bg-[#C0152A] px-6 py-16 md:py-24"
+  >
+    <div class="mx-auto max-w-4xl text-center">
+      <span
+        class="inline-block text-[11px] font-bold uppercase tracking-[1.5px] text-white/50 mb-4"
+      >
+        À propos de nous
+      </span>
+      <h1
+        class="font-sans text-3xl md:text-5xl font-extrabold text-white leading-tight mb-5"
+      >
+        Nous connectons les talents<br />
+        <span class="text-white/50">avec les opportunités qui comptent</span>
+      </h1>
+      <p
+        class="text-white/65 text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
+      >
+        Kay Liguey est née d'une conviction simple : chaque Sénégalais mérite un
+        accès équitable à l'emploi, sans favoritisme ni barrière invisible.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ STATS BANDE ══════════════════════════════════════════════ -->
+  <section appAnimateOnScroll class="bg-white border-b border-[#ecdcdc]">
+    <div
+      class="mx-auto max-w-5xl px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6"
+    >
+      <div class="flex flex-col items-center text-center">
+        <span
+          appCountUp
+          [end]="2400"
+          class="font-sans text-3xl font-extrabold text-[#C0152A]"
+        >
+        </span>
+        <span class="text-xs text-[#888] mt-1">Offres actives</span>
+      </div>
+      <div class="flex flex-col items-center text-center">
+        <span
+          appCountUp
+          [end]="500"
+          class="font-sans text-3xl font-extrabold text-[#C0152A]"
+          >840+</span
+        >
+        <span class="text-xs text-[#888] mt-1">Entreprises partenaires</span>
+      </div>
+      <div class="flex flex-col items-center text-center">
+        <span
+          appCountUp
+          [end]="10000"
+          
+          class="font-sans text-3xl font-extrabold text-[#C0152A]"
+        ></span>
+        <span class="text-xs text-[#888] mt-1">Candidats inscrits</span>
+      </div>
+      <div class="flex flex-col items-center text-center">
+        <span appCountUp [end]="3200" class="font-sans text-3xl font-extrabold text-[#C0152A]"
+          ></span
+        >
+        <span class="text-xs text-[#888] mt-1">Recrutements réalisés</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MISSION ════════════════════════════════════════════════ -->
+  <section appAnimateOnScroll class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <!-- Texte -->
+      <div>
+        <span
+          class="inline-block text-[11px] font-bold uppercase tracking-[1.5px] text-[#C0152A] mb-3"
+        >
+          Notre mission
+        </span>
+        <h2
+          class="font-sans text-2xl md:text-3xl font-extrabold text-[#1a1a1a] leading-tight mb-5"
+        >
+          Réduire le chômage au Sénégal,<br />
+          <span class="text-[#C0152A]">une mise en relation à la fois</span>
+        </h2>
+        <p class="text-sm text-kl-muted leading-relaxed mb-4">
+          Kay Liguey — qui signifie littéralement
+          <em>"chercher du travail"</em> en wolof — est une plateforme de
+          recrutement conçue spécifiquement pour le marché sénégalais. Nous
+          comprenons les réalités locales : les contraintes de connectivité, la
+          prédominance du mobile, et l'importance des réseaux professionnels
+          dans le processus d'embauche.
+        </p>
+        <p class="text-sm text-kl-muted leading-relaxed">
+          Notre engagement est clair : offrir à chaque chercheur d'emploi —
+          qu'il soit jeune diplômé, professionnel en reconversion ou expert
+          chevronné — les mêmes chances d'accéder aux meilleures opportunités,
+          sans piston, sans discrimination.
+        </p>
+      </div>
+
+      <!-- Bloc visuel -->
+      <div class="grid grid-cols-2 gap-4">
+        <div
+          appAnimateOnScroll
+          class="bg-[#C0152A] rounded-2xl p-5 flex flex-col justify-between min-h-35"
+        >
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="10" r="5" stroke="white" stroke-width="1.8" />
+            <path
+              d="M4 26c0-5.523 4.477-10 10-10s10 4.477 10 10"
+              stroke="white"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+          <div>
+            <p class="font-sans font-bold text-white text-lg">Candidats</p>
+            <p class="text-white/60 text-xs mt-0.5">
+              Profil + CV + candidatures
+            </p>
+          </div>
+        </div>
+
+        <div
+          appAnimateOnScroll
+          class="bg-white border border-[#ecdcdc] rounded-2xl p-5 flex flex-col justify-between min-h-35"
+        >
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect
+              x="3"
+              y="14"
+              width="22"
+              height="12"
+              rx="2.5"
+              stroke="#C0152A"
+              stroke-width="1.8"
+            />
+            <path
+              d="M9 14V10a5 5 0 0 1 10 0v4"
+              stroke="#C0152A"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+            <path
+              d="M8 20h12"
+              stroke="#C0152A"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+          <div appAnimateOnScroll>
+            <p class="font-sans font-bold text-[#1a1a1a] text-lg">Recruteurs</p>
+            <p class="text-[#888] text-xs mt-0.5">
+              Offres + pipeline candidatures
+            </p>
+          </div>
+        </div>
+
+        <div
+          appAnimateOnScroll
+          class="bg-white border border-[#ecdcdc] rounded-2xl p-5 flex flex-col justify-between min-h-35"
+        >
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path
+              d="M14 3L4 9v14h7v-6h6v6h7V9L14 3z"
+              stroke="#C0152A"
+              stroke-width="1.8"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <div>
+            <p class="font-sans font-bold text-[#1a1a1a] text-lg">Sénégal</p>
+            <p class="text-[#888] text-xs mt-0.5">
+              Dakar · Thiès · Saint-Louis…
+            </p>
+          </div>
+        </div>
+
+        <div
+          appAnimateOnScroll
+          class="bg-[#fff5f5] border border-[#fcd0d0] rounded-2xl p-5 flex flex-col justify-between min-h-35"
+        >
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle
+              cx="14"
+              cy="14"
+              r="10"
+              stroke="#C0152A"
+              stroke-width="1.8"
+            />
+            <path
+              d="M9 14l3.5 3.5L19 10"
+              stroke="#C0152A"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <div appAnimateOnScroll>
+            <p class="font-sans font-bold text-[#C0152A] text-lg">Équité</p>
+            <p class="text-[#888] text-xs mt-0.5">
+              0 favoritisme · 100% mérite
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ VALEURS ════════════════════════════════════════════════ -->
+  <section
+    appAnimateOnScroll
+    class="bg-white border-y border-[#ecdcdc] py-16 md:py-20"
+  >
+    <div class="mx-auto max-w-5xl px-6">
+      <div class="text-center mb-12">
+        <span
+          class="inline-block text-[11px] font-bold uppercase tracking-[1.5px] text-[#C0152A] mb-3"
+        >
+          Nos valeurs
+        </span>
+        <h2
+          class="font-sans text-2xl md:text-3xl font-extrabold text-[#1a1a1a]"
+        >
+          Ce qui nous guide chaque jour
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div
+          appAnimateOnScroll
+          class="flex flex-col gap-3 p-6 rounded-xl border border-[#ecdcdc] hover:border-[#C0152A] transition-colors"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#fff5f5] flex items-center justify-center"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M10 2l1.8 5.4H17l-4.5 3.3 1.7 5.3L10 13l-4.2 3 1.7-5.3L3 7.4h5.2L10 2z"
+                stroke="#C0152A"
+                stroke-width="1.5"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <h3 class="font-sans font-bold text-[#1a1a1a] text-base">Équité</h3>
+          <p class="text-sm text-kl-muted leading-relaxed">
+            Chaque candidat est évalué sur ses compétences et son potentiel,
+            jamais sur son réseau ou son origine. La plateforme est conçue pour
+            éliminer les biais de recrutement.
+          </p>
+        </div>
+
+        <div
+          class="flex flex-col gap-3 p-6 rounded-xl border border-[#ecdcdc] hover:border-[#C0152A] transition-colors"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#fff5f5] flex items-center justify-center"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle
+                cx="10"
+                cy="10"
+                r="8"
+                stroke="#C0152A"
+                stroke-width="1.5"
+              />
+              <path
+                d="M10 6v4l2.5 2.5"
+                stroke="#C0152A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+          <h3 class="font-sans font-bold text-[#1a1a1a] text-base">
+            Transparence
+          </h3>
+          <p class="text-sm text-kl-muted leading-relaxed">
+            Salaires affichés, processus clair, statuts de candidature en temps
+            réel. Nous croyons que la transparence est le fondement d'une
+            relation de confiance durable.
+          </p>
+        </div>
+
+        <div
+          appAnimateOnScroll
+          direction="left"
+          [delay]="100"
+          class="flex flex-col gap-3 p-6 rounded-xl border border-[#ecdcdc] hover:border-[#C0152A] transition-colors"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#fff5f5] flex items-center justify-center"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M3 17l4-4m0 0l3-7 4 4-7 3zm0 0l-1 1"
+                stroke="#C0152A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <circle
+                cx="15"
+                cy="5"
+                r="2"
+                stroke="#C0152A"
+                stroke-width="1.5"
+              />
+            </svg>
+          </div>
+          <h3 class="font-sans font-bold text-[#1a1a1a] text-base">
+            Impact local
+          </h3>
+          <p class="text-sm text-kl-muted leading-relaxed">
+            Conçu pour le Sénégal, optimisé pour le mobile et les connexions 3G.
+            Nous pensons d'abord aux réalités du terrain avant de penser à la
+            technologie.
+          </p>
+        </div>
+
+        <div
+          appAnimateOnScroll
+          class="flex flex-col gap-3 p-6 rounded-xl border border-[#ecdcdc] hover:border-[#C0152A] transition-colors"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#fff5f5] flex items-center justify-center"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect
+                x="3"
+                y="8"
+                width="14"
+                height="9"
+                rx="2"
+                stroke="#C0152A"
+                stroke-width="1.5"
+              />
+              <path
+                d="M7 8V6a3 3 0 0 1 6 0v2"
+                stroke="#C0152A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+              <circle cx="10" cy="12.5" r="1.5" fill="#C0152A" />
+            </svg>
+          </div>
+          <h3 class="font-sans font-bold text-[#1a1a1a] text-base">Sécurité</h3>
+          <p class="text-sm text-kl-muted leading-relaxed">
+            Chaque offre est validée manuellement avant publication. Les
+            entreprises sont vérifiées. Vos données sont protégées conformément
+            au RGPD.
+          </p>
+        </div>
+
+        <div
+          appAnimateOnScroll
+          class="flex flex-col gap-3 p-6 rounded-xl border border-[#ecdcdc] hover:border-[#C0152A] transition-colors"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#fff5f5] flex items-center justify-center"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M10 2c-4.418 0-8 3.582-8 8 0 2.5 1.146 4.732 2.95 6.218L6 18h8l1.05-1.782A7.965 7.965 0 0 0 18 10c0-4.418-3.582-8-8-8z"
+                stroke="#C0152A"
+                stroke-width="1.5"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M7 10.5l2 2 4-4"
+                stroke="#C0152A"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <h3 class="font-sans font-bold text-[#1a1a1a] text-base">
+            Accessibilité
+          </h3>
+          <p class="text-sm text-kl-muted leading-relaxed">
+            Gratuit pour les candidats. Interface simple et intuitive. Pas de CV
+            obligatoire pour postuler — votre profil Kay Liguey suffit.
+          </p>
+        </div>
+
+        <div
+          appAnimateOnScroll
+          class="flex flex-col gap-3 p-6 rounded-xl border border-[#ecdcdc] hover:border-[#C0152A] transition-colors"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#fff5f5] flex items-center justify-center"
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M10 17s-7-4.35-7-9a7 7 0 0 1 14 0c0 4.65-7 9-7 9z"
+                stroke="#C0152A"
+                stroke-width="1.5"
+                stroke-linejoin="round"
+              />
+              <circle
+                cx="10"
+                cy="8"
+                r="2"
+                stroke="#C0152A"
+                stroke-width="1.5"
+              />
+            </svg>
+          </div>
+          <h3 class="font-sans font-bold text-[#1a1a1a] text-base">
+            Ancrage sénégalais
+          </h3>
+          <p class="text-sm text-kl-muted leading-relaxed">
+            Basés à Dakar, nous connaissons le marché de l'emploi local. Nos
+            équipes sont sénégalaises et notre plateforme parle le langage de
+            nos utilisateurs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HISTOIRE ═══════════════════════════════════════════════ -->
+  <section class="mx-auto max-w-5xl px-6 py-16 md:py-20">
+    <div class="text-center mb-12">
+      <span
+        class="inline-block text-[11px] font-bold uppercase tracking-[1.5px] text-[#C0152A] mb-3"
+      >
+        Notre histoire
+      </span>
+      <h2 class="font-sans text-2xl md:text-3xl font-extrabold text-[#1a1a1a]">
+        De l'idée à la plateforme
+      </h2>
+    </div>
+
+    <div class="flex flex-col gap-0">
+      <div class="flex gap-6 pb-10">
+        <div class="flex flex-col items-center gap-0 shrink-0">
+          <div
+            class="w-10 h-10 rounded-full bg-[#C0152A] flex items-center justify-center font-sans font-bold text-white text-sm shrink-0"
+          >
+            1
+          </div>
+          <div class="w-px flex-1 bg-[#ecdcdc] mt-1"></div>
+        </div>
+        <div appAnimateOnScroll class="pb-2">
+          <span
+            class="text-[11px] font-bold text-[#C0152A] uppercase tracking-wide"
+            >Le constat</span
+          >
+          <h3 class="font-sans font-bold text-[#1a1a1a] text-base mt-1 mb-2">
+            Un marché de l'emploi opaque
+          </h3>
+          <p class="text-sm text-kl-muted leading-relaxed">
+            Au Sénégal, plus de 60% des offres d'emploi ne sont jamais publiées
+            officiellement. Elles circulent de bouche à oreille, par réseau, par
+            faveur. Kay Liguey est née pour briser ce cycle.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-6 pb-10">
+        <div class="flex flex-col items-center gap-0 shrink-0">
+          <div
+            class="w-10 h-10 rounded-full bg-[#C0152A] flex items-center justify-center font-sans font-bold text-white text-sm shrink-0"
+          >
+            2
+          </div>
+          <div class="w-px flex-1 bg-[#ecdcdc] mt-1"></div>
+        </div>
+        <div appAnimateOnScroll class="pb-2">
+          <span
+            class="text-[11px] font-bold text-[#C0152A] uppercase tracking-wide"
+            >La création</span
+          >
+          <h3 class="font-sans font-bold text-[#1a1a1a] text-base mt-1 mb-2">
+            Une plateforme pensée depuis Dakar
+          </h3>
+          <p class="text-sm text-kl-muted leading-relaxed">
+            L'équipe Kay Liguey a réuni développeurs, RH et entrepreneurs
+            sénégalais pour créer une solution 100% adaptée au contexte local :
+            mobile-first, multilingue, et accessible même avec une connexion
+            limitée.
+          </p>
+        </div>
+      </div>
+
+      <div appAnimateOnScroll class="flex gap-6">
+        <div class="flex flex-col items-center gap-0 shrink-0">
+          <div
+            class="w-10 h-10 rounded-full bg-[#C0152A] flex items-center justify-center font-sans font-bold text-white text-sm shrink-0"
+          >
+            3
+          </div>
+        </div>
+        <div>
+          <span
+            appAnimateOnScroll
+            class="text-[11px] font-bold text-[#C0152A] uppercase tracking-wide"
+            >Aujourd'hui</span
+          >
+          <h3 class="font-sans font-bold text-[#1a1a1a] text-base mt-1 mb-2">
+            La référence du recrutement au Sénégal
+          </h3>
+          <p class="text-sm text-kl-muted leading-relaxed">
+            Avec plus de 12 000 candidats, 840 entreprises partenaires et des
+            milliers de recrutements réalisés, Kay Liguey s'impose comme la
+            plateforme de confiance pour l'emploi au Sénégal et dans la
+            diaspora.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CIBLES ══════════════════════════════════════════════════ -->
+  <section appAnimateOnScroll class="bg-white border-y border-[#ecdcdc] py-16">
+    <div class="mx-auto max-w-5xl px-6">
+      <div class="text-center mb-10">
+        <span
+          class="inline-block text-[11px] font-bold uppercase tracking-[1.5px] text-[#C0152A] mb-3"
+        >
+          Pour qui ?
+        </span>
+        <h2
+          class="font-sans text-2xl md:text-3xl font-extrabold text-[#1a1a1a]"
+        >
+          Kay Liguey s'adresse à vous
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div
+          appAnimateOnScroll
+          direction="right"
+          [delay]="1000"
+          class="flex gap-4 p-5 rounded-xl border border-[#ecdcdc] bg-kl-bg"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#C0152A] flex items-center justify-center shrink-0"
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <circle cx="9" cy="6" r="3.5" stroke="white" stroke-width="1.5" />
+              <path
+                d="M2 16c0-3.314 3.134-6 7-6s7 2.686 7 6"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-[#1a1a1a] text-sm mb-1">
+              Chercheurs d'emploi
+            </h3>
+            <p class="text-xs text-kl-muted leading-relaxed">
+              Jeunes diplômés, professionnels en reconversion, experts cherchant
+              un nouveau défi. Créez votre profil, déposez votre CV et postulez
+              en quelques clics.
+            </p>
+          </div>
+        </div>
+
+        <div
+          appAnimateOnScroll
+          direction="left"
+          [delay]="1000"
+          class="flex gap-4 p-5 rounded-xl border border-[#ecdcdc] bg-kl-bg"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#C0152A] flex items-center justify-center shrink-0"
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <rect
+                x="2"
+                y="8"
+                width="14"
+                height="9"
+                rx="1.5"
+                stroke="white"
+                stroke-width="1.5"
+              />
+              <path
+                d="M6 8V6a3 3 0 0 1 6 0v2"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-[#1a1a1a] text-sm mb-1">
+              PME et startups
+            </h3>
+            <p class="text-xs text-kl-muted leading-relaxed">
+              Publiez vos offres, gérez vos candidatures et trouvez les profils
+              adaptés à votre culture d'entreprise, sans intermédiaire coûteux.
+            </p>
+          </div>
+        </div>
+
+        <div
+          appAnimateOnScroll
+          direction="right"
+          [delay]="1000"
+          class="flex gap-4 p-5 rounded-xl border border-[#ecdcdc] bg-kl-bg"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#C0152A] flex items-center justify-center shrink-0"
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path
+                d="M9 1.5L2 5.5v10h5V11h4v4.5h5v-10L9 1.5z"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-[#1a1a1a] text-sm mb-1">
+              Grandes entreprises
+            </h3>
+            <p class="text-xs text-kl-muted leading-relaxed">
+              Accédez à un vivier de talents qualifiés. Bénéficiez d'outils
+              avancés de gestion des candidatures et d'une visibilité renforcée
+              auprès des meilleurs profils.
+            </p>
+          </div>
+        </div>
+
+        <div
+          appAnimateOnScroll
+          direction="left"
+          [delay]="1000"
+          class="flex gap-4 p-5 rounded-xl border border-[#ecdcdc] bg-kl-bg"
+        >
+          <div
+            class="w-10 h-10 rounded-lg bg-[#C0152A] flex items-center justify-center shrink-0"
+          >
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <circle cx="9" cy="9" r="7" stroke="white" stroke-width="1.5" />
+              <path
+                d="M6 9l2 2 4-4"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-sans font-bold text-[#1a1a1a] text-sm mb-1">
+              Diaspora sénégalaise
+            </h3>
+            <p class="text-xs text-kl-muted leading-relaxed">
+              Vous êtes sénégalais de l'étranger et souhaitez rentrer ou trouver
+              un poste à distance ? Kay Liguey est aussi pour vous.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA FINAL ══════════════════════════════════════════════ -->
+  <section
+    appAnimateOnScroll
+    [delay]="1000"
+    class="mx-auto max-w-5xl px-6 py-16 md:py-20"
+  >
+    <div class="bg-[#C0152A] rounded-2xl px-8 py-12 text-center">
+      <h2 class="font-sans text-2xl md:text-3xl font-extrabold text-white mb-4">
+        Prêt à rejoindre Kay Liguey ?
+      </h2>
+      <p
+        class="text-white/65 text-sm md:text-base leading-relaxed mb-8 max-w-lg mx-auto"
+      >
+        Que vous cherchiez un emploi ou les meilleurs talents, commencez
+        gratuitement dès aujourd'hui.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a
+          routerLink="/auth/register"
+          class="inline-flex items-center justify-center gap-2 bg-white text-[#C0152A] font-sans font-bold text-sm rounded-lg px-6 py-3 hover:bg-white/90 transition-colors cursor-pointer"
+        >
+          Créer un compte candidat
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path
+              d="M3 7h8M7 3l4 4-4 4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+        <a
+          routerLink="/offres"
+          class="inline-flex items-center justify-center gap-2 bg-transparent text-white font-sans font-bold text-sm rounded-lg px-6 py-3 border border-white/40 hover:border-white hover:bg-white/10 transition-colors cursor-pointer"
+        >
+          Explorer les offres
+        </a>
+      </div>
+    </div>
+  </section>
+</main>

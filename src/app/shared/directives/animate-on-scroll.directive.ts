@@ -1,11 +1,18 @@
-import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  input,
+  Input,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 
 @Directive({
   selector: '[appAnimateOnScroll]',
   standalone: true,
 })
 export class AnimateOnScrollDirective implements OnInit {
-  @Input() delay = 0;
+  delay = input<number>(0);
   @Input() direction: 'up' | 'down' | 'left' | 'right' = 'up';
 
   constructor(
@@ -48,6 +55,6 @@ export class AnimateOnScrollDirective implements OnInit {
       );
 
       observer.observe(element);
-    }, this.delay);
+    }, this.delay());
   }
 }

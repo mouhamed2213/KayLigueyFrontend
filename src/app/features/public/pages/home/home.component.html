@@ -1,273 +1,275 @@
-<section class="font-kl-content bg-kl-bg py-10 md:py-16 lg:py-20">
+<main class="font-kl-content bg-kl-bg py-10 md:py-16 lg:py-20">
   <!-- HERO -->
-  <div
-    appAnimateOnScroll
-    class="mx-auto w-full max-w-6xl px-4 text-center sm:px-6 lg:px-8"
-  >
-    <!-- TITLE -->
-    <header
-      class="text-2xl leading-tight font-bold sm:text-3xl md:text-5xl lg:text-6xl"
-    >
-      L'excellence
-      <br class="hidden md:block" />
-      professionnelle au service du
-      <span class="text-kl-red-light">Sénégal</span>
-    </header>
-
-    <!-- DESCRIPTION -->
-    <p
-      class="text-kl-muted mx-auto mt-4 max-w-2xl text-sm sm:text-base md:text-lg"
-    >
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-      aliquid, expedita sequi culpa ducimus nihil vero modi beatae cum quasi.
-    </p>
-
-    <!-- SEARCH -->
-    <form
-      class="mx-auto mt-8 p-1 flex max-w-xl flex-col justify-center items-center overflow-hidden rounded-md shadow-md sm:max-w-lg sm:flex-row md:max-w-xl md:gap-2"
-    >
-      <input
-        type="search"
-        placeholder="Entreprise"
-        class="text-kl-muted focus:border-kl-primary-red focus:ring-kl-primary-red/30 w-full flex-1 border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2"
-      />
-
-      <app-button variant="primary" class="whitespace-nowrap sm:w-auto"
-        >Rechercher</app-button
+  <section appAnimateOnScroll>
+    <div class="mx-auto w-full max-w-6xl px-4 text-center sm:px-6 lg:px-8">
+      <!-- TITLE -->
+      <header
+        class="text-2xl leading-tight font-bold sm:text-3xl md:text-5xl lg:text-6xl"
       >
-    </form>
-  </div>
+        L'excellence
+        <br class="hidden md:block" />
+        professionnelle au service du
+        <span class="text-kl-red-light">Sénégal</span>
+      </header>
 
-  <!-- ABOUT SECTION -->
-  <div
-    appAnimateOnScroll
-    class="bg-kl-zinc-100 mt-16 px-4 py-10 sm:px-6 lg:px-8"
-  >
-    <!-- HEADER -->
-    <div class="mx-auto max-w-4xl">
-      <small class="text-kl-red-light font-bold">NOTRE MISSION</small>
-      <h3
-        class="text-kl-text mt-2 mb-10 text-xl font-bold sm:text-2xl md:text-3xl"
+      <!-- DESCRIPTION -->
+      <p
+        class="text-kl-muted mx-auto mt-4 max-w-2xl text-sm sm:text-base md:text-lg"
       >
-        Construire l'avenir du Travail
-      </h3>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
+        aliquid, expedita sequi culpa ducimus nihil vero modi beatae cum quasi.
+      </p>
+
+      <!-- SEARCH -->
+      <form
+        class="mx-auto mt-8 p-1 flex max-w-xl flex-col justify-center items-center overflow-hidden rounded-md shadow-md sm:max-w-lg sm:flex-row md:max-w-xl md:gap-2"
+      >
+        <input
+          type="search"
+          placeholder="Entreprise"
+          class="text-kl-muted focus:border-kl-primary-red focus:ring-kl-primary-red/30 w-full flex-1 border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:ring-2"
+        />
+
+        <app-button variant="primary" class="whitespace-nowrap sm:w-auto"
+          >Rechercher</app-button
+        >
+      </form>
     </div>
 
-    <!-- CARDS CONTAINER -->
+    <!-- ABOUT SECTION -->
+    <section
+      appAnimateOnScroll
+      class="bg-[#ffffff] mt-16 px-4 py-10 sm:px-6 lg:px-8"
+    >
+      <!-- HEADER -->
+      <div class="mx-auto max-w-4xl">
+        <small class="text-kl-red-light font-bold">NOTRE MISSION</small>
+        <h3
+          class="text-kl-text mt-2 mb-10 text-xl font-bold sm:text-2xl md:text-3xl"
+        >
+          Construire l'avenir du Travail
+        </h3>
+      </div>
+
+      <!-- CARDS CONTAINER -->
+      <div
+        appAnimateOnScroll
+        class="mx-auto grid w-full max-w-6xl gap-6 [grid-cols:repeat(auto-fit,minmax(250px,1fr))] sm:grid-cols-2 md:grid-cols-3"
+      >
+        <app-cards appAnimateOnScroll [delay]="100">
+          <lucide-icon
+            card-icon
+            name="scale"
+            [size]="25"
+            color="#97001b"
+          ></lucide-icon>
+
+          <h3 card-title>Egalité</h3>
+
+          <p card-content>
+            Nous luttons contre les barrières invisibles pour garantir que
+            chaque talent a sa chance, peu importe son parcours.
+          </p>
+        </app-cards>
+
+        <app-cards appAnimateOnScroll [delay]="200">
+          <lucide-icon
+            card-icon
+            name="user-star"
+            [size]="25"
+            color="#97001b"
+          ></lucide-icon>
+
+          <h3 card-title>Professionnalisme</h3>
+          <p card-content>
+            Un standard d'excellence pour les recruteurs comme pour les
+            candidats, assurant des recrutements de qualité
+          </p>
+        </app-cards>
+
+        <app-cards appAnimateOnScroll [delay]="300">
+          <lucide-icon
+            card-icon
+            name="trending-up"
+            [size]="25"
+            color="#97001b"
+          ></lucide-icon>
+          <h3 card-title>Impact</h3>
+          <p card-content>
+            Réduire le chômage structurel en connectant efficacement les
+            compétences aux besoins réels du marché.
+          </p>
+        </app-cards>
+      </div>
+    </section>
+
+    <!-- POSTS SECTION -->
+    <section appAnimateOnScroll class="px-4 py-10 sm:px-6 lg:px-8">
+      <!-- HEADER -->
+      <div class="mx-auto max-w-4xl">
+        <small class="text-kl-red-light font-bold">Opportunités récentes</small>
+        <h3
+          class="text-kl-text mt-2 mb-10 text-xl font-bold sm:text-2xl md:text-3xl"
+        >
+          Postes en vedette à Dakar
+        </h3>
+      </div>
+
+      <div
+        class="mx-auto grid w-full max-w-6xl grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6"
+      >
+        <!-- POST CARD-->
+        <app-cards appAnimateOnScroll [delay]="100">
+          <lucide-icon
+            card-icon
+            name="trending-up"
+            [size]="25"
+            color="#97001b"
+          ></lucide-icon>
+
+          <span
+            class="bg-kl-secondary-red-dark rounded-md px-2 py-1 text-xs font-semibold text-white"
+            card-badge
+            >NOUVEAU</span
+          >
+          <h3 card-title>Analyste Financier Senior</h3>
+          <p card-content>Banque de l'Habitat du Sénégal</p>
+
+          <span card-footer>Thiès • Dakar</span>
+        </app-cards>
+
+        <app-cards appAnimateOnScroll [delay]="200">
+          <lucide-icon
+            card-icon
+            name="trending-up"
+            [size]="25"
+            color="#97001b"
+          ></lucide-icon>
+
+          <span
+            class="bg-kl-secondary-red-dark rounded-md px-2 py-1 text-xs font-semibold text-white"
+            card-badge
+            >NOUVEAU</span
+          >
+          <h3 card-title>Développeur Fullstack React/Node</h3>
+          <p card-content>Waaw Pay S.A.</p>
+
+          <span card-footer>Mermoze • Dakar</span>
+        </app-cards>
+
+        <app-cards appAnimateOnScroll [delay]="0">
+          <lucide-icon
+            card-icon
+            name="trending-up"
+            [size]="25"
+            color="#97001b"
+          ></lucide-icon>
+
+          <span
+            class="bg-kl-secondary-red-dark rounded-md px-2 py-1 text-xs font-semibold text-white"
+            card-badge
+            >NOUVEAU</span
+          >
+          <h3 card-title>Directeur des Opérations Logistiques</h3>
+          <p card-content>Bolloré Africa Logistics</p>
+
+          <span card-footer>Thies • Mbour</span>
+        </app-cards>
+      </div>
+    </section>
+
+    <!-- SECTION STAT -->
+
     <div
       appAnimateOnScroll
-      class="mx-auto grid w-full max-w-6xl gap-6 [grid-cols:repeat(auto-fit,minmax(250px,1fr))] sm:grid-cols-2 md:grid-cols-3"
+      class="bg-kl-surface-container-dark px-4 py-10 sm:px-4 md:px-10 lg:px-8"
     >
-      <app-cards appAnimateOnScroll [delay]="100">
-        <lucide-icon
-          card-icon
-          name="scale"
-          [size]="25"
-          color="#97001b"
-        ></lucide-icon>
-
-        <h3 card-title>Egalité</h3>
-
-        <p card-content>
-          Nous luttons contre les barrières invisibles pour garantir que chaque
-          talent a sa chance, peu importe son parcours.
-        </p>
-      </app-cards>
-
-      <app-cards appAnimateOnScroll [delay]="200">
-        <lucide-icon
-          card-icon
-          name="user-star"
-          [size]="25"
-          color="#97001b"
-        ></lucide-icon>
-
-        <h3 card-title>Professionnalisme</h3>
-        <p card-content>
-          Un standard d'excellence pour les recruteurs comme pour les candidats,
-          assurant des recrutements de qualité
-        </p>
-      </app-cards>
-
-      <app-cards appAnimateOnScroll [delay]="300">
-        <lucide-icon
-          card-icon
-          name="trending-up"
-          [size]="25"
-          color="#97001b"
-        ></lucide-icon>
-        <h3 card-title>Impact</h3>
-        <p card-content>
-          Réduire le chômage structurel en connectant efficacement les
-          compétences aux besoins réels du marché.
-        </p>
-      </app-cards>
-    </div>
-  </div>
-
-  <!-- POSTS SECTION -->
-  <div appAnimateOnScroll class="px-4 py-10 sm:px-6 lg:px-8">
-    <!-- HEADER -->
-    <div class="mx-auto max-w-4xl">
-      <small class="text-kl-red-light font-bold">Opportunités récentes</small>
-      <h3
-        class="text-kl-text mt-2 mb-10 text-xl font-bold sm:text-2xl md:text-3xl"
-      >
-        Postes en vedette à Dakar
-      </h3>
-    </div>
-
-    <div
-      class="mx-auto grid w-full max-w-6xl grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6"
-    >
-      <!-- POST CARD-->
-      <app-cards appAnimateOnScroll [delay]="100">
-        <lucide-icon
-          card-icon
-          name="trending-up"
-          [size]="25"
-          color="#97001b"
-        ></lucide-icon>
-
-        <span
-          class="bg-kl-secondary-red-dark rounded-md px-2 py-1 text-xs font-semibold text-white"
-          card-badge
-          >NOUVEAU</span
-        >
-        <h3 card-title>Analyste Financier Senior</h3>
-        <p card-content>Banque de l'Habitat du Sénégal</p>
-
-        <span card-footer>Thiès • Dakar</span>
-      </app-cards>
-
-      <app-cards appAnimateOnScroll [delay]="200">
-        <lucide-icon
-          card-icon
-          name="trending-up"
-          [size]="25"
-          color="#97001b"
-        ></lucide-icon>
-
-        <span
-          class="bg-kl-secondary-red-dark rounded-md px-2 py-1 text-xs font-semibold text-white"
-          card-badge
-          >NOUVEAU</span
-        >
-        <h3 card-title>Développeur Fullstack React/Node</h3>
-        <p card-content>Waaw Pay S.A.</p>
-
-        <span card-footer>Mermoze • Dakar</span>
-      </app-cards>
-
-      <app-cards appAnimateOnScroll [delay]="00">
-        <lucide-icon
-          card-icon
-          name="trending-up"
-          [size]="25"
-          color="#97001b"
-        ></lucide-icon>
-
-        <span
-          class="bg-kl-secondary-red-dark rounded-md px-2 py-1 text-xs font-semibold text-white"
-          card-badge
-          >NOUVEAU</span
-        >
-        <h3 card-title>Directeur des Opérations Logistiques</h3>
-        <p card-content>Bolloré Africa Logistics</p>
-
-        <span card-footer>Thies • Mbour</span>
-      </app-cards>
-    </div>
-  </div>
-
-  <!-- SECTION STAT -->
-
-  <div
-    appAnimateOnScroll
-    class="bg-kl-surface-container-dark px-4 py-10 sm:px-4 md:px-10 lg:px-8"
-  >
-    <div
-      class="text-white flex w-full flex-col items-center md:flex-row md:justify-around"
-    >
-      <div [class]="statClass">
-        <p appCountUp [end]="10" suffix="K" [class]="statNbr">100</p>
-        <p [class]="statText">Placements réussis</p>
-      </div>
-      <div [class]="statClass">
-        <p appCountUp [end]="500" suffix="+" [class]="statNbr">50+</p>
-        <p [class]="statText">Partenaires officiels</p>
-      </div>
-      <div [class]="statClass">
-        <p appCountUp [end]="90" suffix="%" [class]="statNbr">10+</p>
-        <p [class]="statText">Satisfaction employeur</p>
-      </div>
-      <div [class]="statClass">
-        <p appCountUp [end]="48" suffix="H" [class]="statNbr">10+</p>
-        <p [class]="statText">Temps moyen de réponse</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- PROPOSAL SECTION  -->
-  <div appAnimateOnScroll class="mt-16 px-4 py-10 sm:px-4 md:px-10 lg:px-8">
-    <!-- PROPOSAL CONTAINER -->
-    <div class="flex flex-col items-center justify-center gap-14 md:flex-row">
       <div
-        class="flex h-full w-full max-w-md flex-col gap-3 rounded-md bg-white p-12"
+        class="text-white flex w-full flex-col items-center md:flex-row md:justify-around"
       >
-        <!-- Badge -->
-        <span
-          class="w-fit rounded-2xl bg-[#e5edf0] p-2 font-semibold text-[#00506b] uppercase"
-          >candidat</span
-        >
-        <span class="text-kl-text text-xl font-bold md:text-2xl lg:text-3xl"
-          >Propulsez votre carrière au niveau supérieur</span
-        >
-        <p class="mt-2 text-lg">
-          Déposez votre CV aujourd'hui et laissez les meilleures entreprises du
-          Sénégal vous trouver. Simple, gratuit et confidentiel.
-        </p>
-        <a
-          routerLink="/"
-          class="group bg-kl-primary-red text-md hover:border-kl-primary-red mt-4 inline-flex w-fit items-center gap-2 rounded-sm border border-transparent px-5 py-2 font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white hover:text-black"
-        >
-          <lucide-icon
-            name="plus"
-            [size]="25"
-            class="transition-transform duration-300 group-hover:translate-x-1"
-          ></lucide-icon>
-          <span>Voir les Offres</span>
-        </a>
-      </div>
-
-      <!-- CARD 2 -->
-      <div
-        class="flex h-full w-full max-w-md flex-col gap-3 rounded-md bg-[#e5edf0] p-12"
-      >
-        <!-- Badge -->
-        <span
-          class="bg-kl-trans-bg w-fit rounded-2xl p-2 font-semibold text-[#97001b] uppercase"
-          >recruteur</span
-        >
-        <span class="text-kl-text text-xl font-bold md:text-2xl lg:text-3xl"
-          >Propulsez votre carrière au niveau supérieur</span
-        >
-        <p class="mt-2 text-lg">
-          Déposez votre CV aujourd'hui et laissez les meilleures entreprises du
-          Sénégal vous trouver. Simple, gratuit et confidentiel.
-        </p>
-        <a
-          routerLink="/"
-          class="group bg-kl-text text-md hover:border-kl-primary-red mt-4 inline-flex w-fit items-center gap-2 rounded-md border border-transparent px-5 py-2 font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white hover:text-black"
-        >
-          <lucide-icon
-            name="circle-plus"
-            [size]="25"
-            class="transition-transform duration-300 group-hover:translate-x-1"
-          ></lucide-icon>
-          <span>Voir les Offres</span>
-        </a>
+        <div [class]="statClass">
+          <p appCountUp [end]="10" suffix="K" [class]="statNbr">100</p>
+          <p [class]="statText">Placements réussis</p>
+        </div>
+        <div [class]="statClass">
+          <p appCountUp [end]="500" suffix="+" [class]="statNbr">50+</p>
+          <p [class]="statText">Partenaires officiels</p>
+        </div>
+        <div [class]="statClass">
+          <p appCountUp [end]="90" suffix="%" [class]="statNbr">10+</p>
+          <p [class]="statText">Satisfaction employeur</p>
+        </div>
+        <div [class]="statClass">
+          <p appCountUp [end]="48" suffix="H" [class]="statNbr">10+</p>
+          <p [class]="statText">Temps moyen de réponse</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+
+    <!-- PROPOSAL SECTION  -->
+    <section
+      appAnimateOnScroll
+      class="mt-16 px-4 py-10 sm:px-4 md:px-10 lg:px-8"
+    >
+      <!-- PROPOSAL CONTAINER -->
+      <div class="flex flex-col items-center justify-center gap-14 md:flex-row">
+        <div
+          class="flex h-full w-full max-w-md flex-col gap-3 rounded-md bg-white p-12"
+        >
+          <!-- Badge -->
+          <span
+            class="w-fit rounded-2xl bg-[#e5edf0] p-2 font-semibold text-[#00506b] uppercase"
+            >candidat</span
+          >
+          <span class="text-kl-text text-xl font-bold md:text-2xl lg:text-3xl"
+            >Propulsez votre carrière au niveau supérieur</span
+          >
+          <p class="mt-2 text-lg">
+            Déposez votre CV aujourd'hui et laissez les meilleures entreprises
+            du Sénégal vous trouver. Simple, gratuit et confidentiel.
+          </p>
+          <a
+            routerLink="/"
+            class="group bg-kl-primary-red text-md hover:border-kl-primary-red mt-4 inline-flex w-fit items-center gap-2 rounded-sm border border-transparent px-5 py-2 font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white hover:text-black"
+          >
+            <lucide-icon
+              name="plus"
+              [size]="25"
+              class="transition-transform duration-300 group-hover:translate-x-1"
+            ></lucide-icon>
+            <span>Voir les Offres</span>
+          </a>
+        </div>
+
+        <!-- CARD 2 -->
+        <div
+          class="flex h-full w-full max-w-md flex-col gap-3 rounded-md bg-[#e5edf0] p-12"
+        >
+          <!-- Badge -->
+          <span
+            class="bg-kl-trans-bg w-fit rounded-2xl p-2 font-semibold text-[#97001b] uppercase"
+            >recruteur</span
+          >
+          <span class="text-kl-text text-xl font-bold md:text-2xl lg:text-3xl"
+            >Propulsez votre carrière au niveau supérieur</span
+          >
+          <p class="mt-2 text-lg">
+            Déposez votre CV aujourd'hui et laissez les meilleures entreprises
+            du Sénégal vous trouver. Simple, gratuit et confidentiel.
+          </p>
+          <a
+            routerLink="/"
+            class="group bg-kl-text text-md hover:border-kl-primary-red mt-4 inline-flex w-fit items-center gap-2 rounded-md border border-transparent px-5 py-2 font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white hover:text-black"
+          >
+            <lucide-icon
+              name="circle-plus"
+              [size]="25"
+              class="transition-transform duration-300 group-hover:translate-x-1"
+            ></lucide-icon>
+            <span>Voir les Offres</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </section>
+</main>
