@@ -1,4 +1,6 @@
-import { ContractType, WorkingMode, JobStatus } from '../constant/enums';
+import { ContractType } from '../constant/contract-types';
+import { WorkingMode } from '../constant/working-mode';
+import { JobStatus } from '../constant/job-status';
 
 export interface JobOffer {
   id: string;

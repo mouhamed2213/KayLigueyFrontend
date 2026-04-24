@@ -1,4 +1,4 @@
-import { ApplicationStatus } from "../constant/application-status.enum";
+import { ApplicationStatus } from "../constant/application-status";
 
 
 

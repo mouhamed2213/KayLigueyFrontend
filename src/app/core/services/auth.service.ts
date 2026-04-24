@@ -2,7 +2,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, throwError } from 'rxjs';
-import { UserRole } from '../constant/roles';
+import { UserRole } from '../constant/roles.enum';
 import { catchError, finalize, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Login, Register, Token } from '../models/auth.models';

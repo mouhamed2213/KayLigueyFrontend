@@ -1,5 +1,5 @@
-import { ContractType } from '../constant/enums';
-import { WorkingMode } from '../constant/enums';
+import { ContractType } from '../constant/contract-types';
+import { WorkingMode } from '../constant/working-mode';
 export interface IFilters {
   city: string | '';
   contract_type: ContractType | '';

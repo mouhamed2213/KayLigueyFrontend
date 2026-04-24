@@ -1,5 +1,4 @@
 import { Component, input, computed } from '@angular/core';
-import { WorkingMode, ContractType } from '../../../core/constant/enums';
 @Component({
   selector: 'app-badge',
   standalone: true,
@@ -13,7 +12,7 @@ export class BadgeComponent {
   customClass = computed(() => {
     const text = this.label();
     if (!text) return 'bg-gray-100 text-gray-700';
-    
+
     let defaultColor = 'bg-green-100 text-green-700';
     // working mode badge
     if (text.includes('Télétravail')) return 'bg-green-100 text-green-700';
