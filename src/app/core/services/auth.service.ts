@@ -1,7 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap, throwError } from 'rxjs';
+import { Observable, tap, of, throwError, shareReplay } from 'rxjs';
 import { UserRole } from '../constant/roles.enum';
 import { catchError, finalize, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -16,7 +16,8 @@ export class AuthService {
   private token!: Token;
   private getError!: string;
   readonly loading = signal<boolean>(false);
-  private user = signal<User | null | undefined>(undefined);
+  private user = signal<User | null>(null);
+  private userRequest$?: Observable<User>;
 
   // register
   register(data: Register): Observable<string> {
@@ -66,6 +67,7 @@ export class AuthService {
 
     if (!token) return false;
     try {
+      // USERjwt-decode
       const payload = JSON.parse(atob(token.split('.')[1]));
       const exp = payload.exp * 1000 > Date.now(); // conver second (exp) to miiilisecond
       return exp;
@@ -74,21 +76,20 @@ export class AuthService {
     }
   }
   // get user
-  getMe(): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/me`).pipe(
-      tap((user) => {
-        this.user.set(user);
-        console.log(this.user()?.role);
-      }),
-      catchError((err) => {
-        this.user.set(null);
-        this.getError = err.error?.message;
-        return throwError(() => err);
-      }),
-    );
-  }
-  userRole = computed(() => this.user()?.role);
+  getUser(): Observable<User | null> {
+    if (this.user()) return of(this.user());
 
+    // check if shareReplay was already triggered
+    if (!this.userRequest$) {
+      this.userRequest$ = this.http.get<User>(`${this.apiUrl}/me`).pipe(
+        tap((user) => this.user.set(user)),
+        shareReplay(1),
+      );
+    }
+    return this.userRequest$;
+  }
+
+  userRole = computed(() => this.user()?.role);
   hasRole() {
     return this.userRole();
   }

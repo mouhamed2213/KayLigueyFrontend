@@ -29,7 +29,7 @@ export class LoginComponent {
   );
 
   readonly form = this.fb.group({
-    email: ['test@test.com', [Validators.required, Validators.email]],
+    email: ['test1@test.csom', [Validators.required, Validators.email]],
     password: ['MyPassword123!', Validators.required],
     rememberMe: [false],
   });
@@ -47,7 +47,6 @@ export class LoginComponent {
     return this.authService.error();
   }
 
-  // on submitting forms
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -59,7 +58,7 @@ export class LoginComponent {
     this.authService
       .login(creds)
       .pipe(
-        switchMap(() => this.authService.getMe()),
+        switchMap(() => this.authService.getUser()),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe({
