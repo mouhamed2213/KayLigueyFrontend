@@ -1,3 +1,9 @@
+import {
+  ApplicationStatus,
+  ApplicationStatusEnum,
+} from './../../../../core/constant/application-status';
+import { JobOfferService } from './../../services/job-offer.service';
+import { JobOffer } from './../../../../core/models/job-offer.model';
 import { AuthService } from './../../../../core/services/auth.service';
 import {
   Component,
@@ -8,15 +14,7 @@ import {
   PLATFORM_ID,
   DOCUMENT,
 } from '@angular/core';
-import {
-  JsonPipe,
-  UpperCasePipe,
-  LowerCasePipe,
-  SlicePipe,
-  DatePipe,
-  isPlatformBrowser,
-} from '@angular/common';
-import { JobOfferService } from '../../services/job-offer.service';
+import { isPlatformBrowser } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
@@ -27,6 +25,7 @@ import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { RelativeTimePipe } from '../../../../shared/pipes/relative-time.pipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { IApplication, ICreateApplication } from '@core/models';
 
 @Component({
   selector: 'app-offre-detail',
@@ -52,19 +51,37 @@ export class OffreDetailComponent implements OnInit {
   protected snackBar = inject(MatSnackBar);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private userId = signal<string>('');
+  protected applicationStatus = signal<ApplicationStatus | undefined | null>(
+    null,
+  );
+  protected appliedJobOffer = signal<IApplication | null>(null);
 
   workingModeMap = WORKING_MODE_CONFIG;
   contractTypeMap = CONTRACT_TYPE_CONFIG;
 
   ngOnInit(): void {
+    // get Job offer Param
     this.route.params.subscribe({
       next: (jobOfferId) => {
-        // console.log(jobOfferId['id']);
         this.jobOfferId.set(jobOfferId['id']);
       },
     });
 
+    // Get user Id
+    this.authService
+      .getUser()
+      .subscribe((user) => this.userId.set(user?.id as string));
+
     this.fetchData();
+
+    // Selected job offer ()
+    this.jobOfferService.getAppliedJobOffer(this.jobOfferId()).subscribe({
+      next: ({ data }) => {
+        this.appliedJobOffer.set(data);
+        this.applicationStatus.set(this.appliedJobOffer()?.status);
+      },
+    });
   }
 
   private fetchData() {
@@ -75,7 +92,7 @@ export class OffreDetailComponent implements OnInit {
       .subscribe({
         next: ({ data }) => {
           this.jobOffer.set(data);
-          console.log(this.jobOffer());
+          console.log(this.jobOfferId());
         },
         error: (err) => {
           this.errors.set(
@@ -85,21 +102,45 @@ export class OffreDetailComponent implements OnInit {
       });
   }
 
-  // APPLY JOB
+  protected isApplied = signal<boolean>(false);
+
   protected onApplyClick() {
+    console.log('clicked');
     const authenticated = this.authService.isAuthenticated();
-    console.log(authenticated);
     if (!authenticated) return this.router.navigateByUrl('/register');
 
-    /**
-     true
-    show the successfull toast message
-     Redirect user to the job applied detail page
-     disable the apply button ( Rule : the user can apply many job , but cane apply only one spec )
-     */
+    const applicationInfo: ICreateApplication = {
+      candidat_id: this.userId(),
+      jobOffer_id: this.jobOfferId(),
+      // cover_letter: '', // to implemnet
+    };
+
+    // ADD APPLIED JOB INFO
+    this.jobOfferService.applyToJobOffer(applicationInfo).subscribe({
+      next: (result) => {
+        if (result.success) {
+          this.snackBar.open('offre postulee avec succes', 'Fermer', {
+            duration: 2000,
+          });
+          this.isApplied.set(result.success);
+        }
+      },
+    });
+
     return;
   }
 
+  //  Display a message depending on the application status
+  // Each statut has his own personalized message and can be displayed in many place
+  // Dependending on the condition
+  statusMessage() {
+    switch (this.applicationStatus()) {
+      case 'SUBMITTED':
+        return `Votre demande pour cette offre a etait pris bien envoye. Nous allons vous vour retourner dans les prochain jours`;
+    }
+
+    return;
+  }
   // SHARE JOB
   onShare(sharedType: 'copy' | 'whatsapp' | 'linkedin') {
     if (!isPlatformBrowser(this.platformId)) return;

@@ -15,14 +15,14 @@ export interface IApplication {
 }
 
 // Correspond à ton CreateApplicationDto (Entrée POST)
-export interface CreateApplicationDto {
+export interface ICreateApplication {
   candidat_id: string;
   jobOffer_id: string;
   cover_letter?: string;
 }
 
 // Correspond à ton UpdateApplicationInputDto (Entrée PATCH)
-export interface UpdateApplicationDto {
+export interface IUpdateApplication {
   status?: ApplicationStatus;
   recruiter_note?: string;
   interview_date?: Date | string;

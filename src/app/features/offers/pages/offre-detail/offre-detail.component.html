@@ -9,7 +9,7 @@
       >
       <span>/</span>
       <a
-        routerLink="/offres"
+        routerLink="/offers"
         class="hover:text-kl-primary-red transition-colors cursor-pointer"
         >Offres</a
       >
@@ -22,6 +22,13 @@
     <div class="grid gap-6 md:grid-cols-[1fr_340px]">
       <!-- ══ COLONNE PRINCIPALE ═════════════════════════════════ -->
       <div class="flex flex-col gap-5">
+        @if (applicationStatus() === "SUBMITTED") {
+          <div>
+            <p>
+              {{ statusMessage() }}
+            </p>
+          </div>
+        }
         <!-- HEADER CARD -->
         <div class="bg-white rounded-xl border border-kl-border p-6">
           <!-- Top : logo + titre + badges -->
@@ -261,22 +268,29 @@
           </p>
 
           <!-- Bouton principal -->
-          <app-button
-            type="button"
-            variant="primary_dark"
-            (click)="onApplyClick()"
-          >
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-              <path
-                d="M2 7.5h9M8 4l3.5 3.5L8 11"
-                stroke="white"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            Postuler maintenant
-          </app-button>
+
+          @if (applicationStatus() !== "SUBMITTED") {
+            <app-button
+              type="button"
+              variant="primary_dark"
+              (click)="onApplyClick()"
+            >
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <path
+                  d="M2 7.5h9M8 4l3.5 3.5L8 11"
+                  stroke="white"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Postuler maintenant
+            </app-button>
+          } @else {
+            <div>
+              <span> Demande Envoyer</span>
+            </div>
+          }
 
           <!-- Bouton secondaire : sauvegarder -->
           <button
