@@ -4,17 +4,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
-import {
-  LucideAngularModule,
-  User,
-  Phone,
-  Building,
-  Menu,
-  X,
-  Search,
-  MoveRight,
-  Scale,
-} from 'lucide-angular';
+import { LucideAngularModule } from 'lucide-angular';
 import { provideRouter } from '@angular/router';
 import {
   provideHttpClient,
@@ -24,6 +14,7 @@ import {
 import { routes } from './app.routes';
 import { errorInterceptor } from './core/interceptor/errors/error-interceptor';
 import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
+import { apiResponseInterceptor } from './core/interceptor/api-response.interceptor';
 import { withComponentInputBinding } from '@angular/router';
 import icons from './shared/icons/icons';
 
@@ -32,7 +23,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(
       withFetch(),
-      withInterceptors([errorInterceptor, authInterceptor]),
+      withInterceptors([
+        errorInterceptor,
+        authInterceptor,
+        apiResponseInterceptor,
+      ]),
     ),
     importProvidersFrom(LucideAngularModule.pick(icons())),
     provideBrowserGlobalErrorListeners(),
