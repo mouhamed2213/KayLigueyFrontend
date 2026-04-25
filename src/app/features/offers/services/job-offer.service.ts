@@ -6,7 +6,6 @@ import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { JobOffer } from '../../../core/models/job-offer.model';
 import { IOfferResponse } from '../../../core/models/offer-respose.model';
 import { IFilters } from '../../../core/models/filter.model';
-import { IApplication, ICreateApplication } from '@core/models';
 @Injectable({
   providedIn: 'root',
 })
@@ -59,34 +58,5 @@ export class JobOfferService {
     );
   }
 
-  applyToJobOffer(applicationInfo: ICreateApplication): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/apply`, applicationInfo).pipe(
-      tap((response) => {
-        console.log(response);
 
-        catchError((err) => {
-          console.error(err.err.message);
-          return throwError(() => err);
-        });
-      }),
-    );
-  }
-
-  getAppliedJobOffer(
-    appliedJobbOfferId: string,
-  ): Observable<ApiResponse<IApplication>> {
-    return this.http.get<ApiResponse<IApplication>>(
-      `${this.apiUrl}/apply/${appliedJobbOfferId}`,
-    );
-  }
-
-  allAppliedsByUser(userId: string): Observable<ApiResponse<IApplication[]>> {
-    return this.http
-      .get<ApiResponse<IApplication[]>>(`${this.apiUrl}/apply/c_all/${userId}`)
-      .pipe(
-        tap((data) => {
-          console.log(data.data);
-        }),
-      );
-  }
 }

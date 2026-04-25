@@ -26,6 +26,7 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 import { RelativeTimePipe } from '../../../../shared/pipes/relative-time.pipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IApplication, ICreateApplication } from '@core/models';
+import { ApplicationService } from '@core/services/application.service';
 
 @Component({
   selector: 'app-offre-detail',
@@ -41,6 +42,7 @@ import { IApplication, ICreateApplication } from '@core/models';
 })
 export class OffreDetailComponent implements OnInit {
   private jobOfferService = inject(JobOfferService);
+  private applicationService = inject(ApplicationService);
   private document = inject(DOCUMENT); // access dom document
   private platformId = inject(PLATFORM_ID);
   private destroyRef = inject(DestroyRef);
@@ -76,7 +78,7 @@ export class OffreDetailComponent implements OnInit {
     this.fetchData();
 
     // Selected job offer ()
-    this.jobOfferService.getAppliedJobOffer(this.jobOfferId()).subscribe({
+    this.applicationService.getAppliedJobOffer(this.jobOfferId()).subscribe({
       next: ({ data }) => {
         this.appliedJobOffer.set(data);
         this.applicationStatus.set(this.appliedJobOffer()?.status);
@@ -116,7 +118,7 @@ export class OffreDetailComponent implements OnInit {
     };
 
     // ADD APPLIED JOB INFO
-    this.jobOfferService.applyToJobOffer(applicationInfo).subscribe({
+    this.applicationService.applyToJobOffer(applicationInfo).subscribe({
       next: (result) => {
         if (result.success) {
           this.snackBar.open('offre postulee avec succes', 'Fermer', {
