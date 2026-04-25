@@ -26,9 +26,10 @@ export class ApplicationService {
 
   getAppliedJobOffer(
     appliedJobbOfferId: string,
+    userId: string,
   ): Observable<ApiResponse<IApplication>> {
     return this.http.get<ApiResponse<IApplication>>(
-      `${this.apiUrl}/apply/${appliedJobbOfferId}`,
+      `${this.apiUrl}/apply/${appliedJobbOfferId}/${userId}`,
     );
   }
 

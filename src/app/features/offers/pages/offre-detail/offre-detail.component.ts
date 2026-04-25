@@ -77,13 +77,15 @@ export class OffreDetailComponent implements OnInit {
 
     this.fetchData();
 
-    // Selected job offer ()
-    this.applicationService.getAppliedJobOffer(this.jobOfferId()).subscribe({
-      next: ({ data }) => {
-        this.appliedJobOffer.set(data);
-        this.applicationStatus.set(this.appliedJobOffer()?.status);
-      },
-    });
+    //  Request to check the status of the job offer
+    this.applicationService
+      .getAppliedJobOffer(this.jobOfferId(), this.userId())
+      .subscribe({
+        next: ({ data }) => {
+          this.appliedJobOffer.set(data);
+          this.applicationStatus.set(this.appliedJobOffer()?.status);
+        },
+      });
   }
 
   private fetchData() {
