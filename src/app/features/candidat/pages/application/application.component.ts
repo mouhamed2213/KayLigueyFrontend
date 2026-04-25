@@ -2,6 +2,7 @@ import { inject, Component, OnInit } from '@angular/core';
 import { JobOfferService } from '../../../../features/offers/services/job-offer.service';
 import { ApplicationService } from '@core/services/application.service';
 
+
 @Component({
   selector: 'app-application',
   imports: [],
@@ -10,7 +11,7 @@ import { ApplicationService } from '@core/services/application.service';
 })
 export class ApplicationComponent implements OnInit {
   private jobOfferService = inject(JobOfferService);
-  private applicationService = inject (ApplicationService)
+  private applicationService = inject(ApplicationService);
 
   ngOnInit(): void {
     this.applicationService
