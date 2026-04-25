@@ -34,7 +34,7 @@ export class ApplicationService {
 
   allAppliedsByUser(userId: string): Observable<ApiResponse<IApplication[]>> {
     return this.http
-      .get<ApiResponse<IApplication[]>>(`${this.apiUrl}/apply/c_all/${userId}`)
+      .get<ApiResponse<IApplication[]>>(`${this.apiUrl}/apply/all/${userId}`)
       .pipe(
         tap((data) => {
           console.log(data.data);
