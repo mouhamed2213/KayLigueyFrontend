@@ -1,13 +1,12 @@
 import { Routes } from '@angular/router';
-
 import { RegisterComponent } from './features/auth/register/register.component';
 import { LoginComponent } from './features/auth/login/login.component';
-
 import { authGuard } from './core/guard/auth/auth.guard';
 import { candidatGuard } from './core/guard/roles/user.guard';
 import { ErrorPageComponent } from './shared/pages/error-page/error-page.component';
 import { PUBLIC_ROUTE } from './features/public/public.route';
 import { OffresComponent } from './features/offers/pages/offres/offres.component';
+import { OFFERS_ROUTES } from './features/offers/offers.routes';
 
 export const routes: Routes = [
   // 1. PUBLIC LAYOUT
