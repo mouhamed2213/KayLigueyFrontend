@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink } from "@angular/router";
-
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { AuthService } from '@core/services/auth.service';
 @Component({
   selector: 'app-candidate-nav',
   imports: [RouterLink],
@@ -8,5 +8,9 @@ import { RouterLink } from "@angular/router";
   styleUrl: './candidate-nav.component.css',
 })
 export class CandidateNavComponent {
+  private authservice = inject(AuthService);
 
+  logout() {
+    return this.authservice.logout();
+  }
 }

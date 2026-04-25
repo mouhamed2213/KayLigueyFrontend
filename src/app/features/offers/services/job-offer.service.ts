@@ -79,4 +79,14 @@ export class JobOfferService {
       `${this.apiUrl}/apply/${appliedJobbOfferId}`,
     );
   }
+
+  allAppliedsByUser(userId: string): Observable<ApiResponse<IApplication[]>> {
+    return this.http
+      .get<ApiResponse<IApplication[]>>(`${this.apiUrl}/apply/c_all/${userId}`)
+      .pipe(
+        tap((data) => {
+          console.log(data.data);
+        }),
+      );
+  }
 }

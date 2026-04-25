@@ -19,10 +19,10 @@ import { AuthService } from '@core/services/auth.service';
 })
 export class PublicLayoutComponent {
   protected authservice = inject(AuthService);
-  protected state = signal<boolean>(this.authservice.isAuthenticated());
 
   protected isAuthenticated = computed(() => {
-    console.log(this.state());
-    return this.state();
+    const state = signal<boolean>(this.authservice.isAuthenticated());
+    // console.log(state());
+    return state();
   });
 }
