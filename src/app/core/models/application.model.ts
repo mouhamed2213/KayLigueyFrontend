@@ -1,6 +1,4 @@
-import { ApplicationStatus } from "../constant/application-status";
-
-
+import { ApplicationStatus } from '../constant/application-status';
 
 export interface IApplication {
   id: string;
@@ -16,9 +14,9 @@ export interface IApplication {
 
 // Correspond à ton CreateApplicationDto (Entrée POST)
 export interface ICreateApplication {
-  candidat_id: string;
-  jobOffer_id: string;
-  cover_letter?: string;
+  candidat_id: string | null;
+  jobOffer_id: string | null;
+  cover_letter?: string | null;
 }
 
 // Correspond à ton UpdateApplicationInputDto (Entrée PATCH)

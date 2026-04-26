@@ -13,14 +13,12 @@ export const apiResponseErrorInterceptor: HttpInterceptorFn = (
 
   next: HttpHandlerFn,
 ): Observable<HttpEvent<unknown>> => {
-  // console.log(req);
+  console.log(req.url);
 
   return next(req).pipe(
     tap((event) => {
       if (event instanceof HttpResponse) {
-        if (event.status === 401) {
-          console.log(req.url);
-        }
+        console.log(event);
       }
     }),
   );

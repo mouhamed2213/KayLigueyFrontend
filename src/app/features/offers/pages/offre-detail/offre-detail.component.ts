@@ -27,6 +27,7 @@ import { RelativeTimePipe } from '../../../../shared/pipes/relative-time.pipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IApplication, ICreateApplication } from '@core/models';
 import { ApplicationService } from '@core/services/application.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-offre-detail',
@@ -48,12 +49,12 @@ export class OffreDetailComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private route = inject(ActivatedRoute);
   protected jobOffer = signal<any>('');
-  private jobOfferId = signal<string>('');
   protected errors = signal<string | null>(null);
   protected snackBar = inject(MatSnackBar);
   private authService = inject(AuthService);
   private router = inject(Router);
   private userId = signal<string>('');
+  private jobOfferId = signal<string>('');
   protected applicationStatus = signal<ApplicationStatus | undefined | null>(
     null,
   );
@@ -70,22 +71,30 @@ export class OffreDetailComponent implements OnInit {
       },
     });
 
-    // Get user Id
-    this.authService
-      .getUser()
-      .subscribe((user) => this.userId.set(user?.id as string));
+    if (this.authService.isAuthenticated()) {
+      // Get user Id
+      this.authService.getUser().subscribe({
+        next: (user) => {
+          this.userId.set(user?.id as string);
+
+          // ============ if out the user id become null (Should Be fix itt)
+          this.applicationService
+            .currentJobOffer(this.jobOfferId(), this.userId())
+            .subscribe({
+              next: ({ data }) => {
+                this.appliedJobOffer.set(data);
+                this.applicationStatus.set(this.appliedJobOffer()?.status);
+              },
+            });
+        },
+      });
+
+      console.log(this.userId());
+    }
 
     this.fetchData();
 
     //  Request to check the status of the job offer
-    this.applicationService
-      .getAppliedJobOffer(this.jobOfferId(), this.userId())
-      .subscribe({
-        next: ({ data }) => {
-          this.appliedJobOffer.set(data);
-          this.applicationStatus.set(this.appliedJobOffer()?.status);
-        },
-      });
   }
 
   private fetchData() {
@@ -96,7 +105,7 @@ export class OffreDetailComponent implements OnInit {
       .subscribe({
         next: ({ data }) => {
           this.jobOffer.set(data);
-          console.log(this.jobOfferId());
+          // console.log(this.jobOfferId());
         },
         error: (err) => {
           this.errors.set(

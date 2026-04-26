@@ -82,7 +82,9 @@ export class AuthService {
     // check if shareReplay was already triggered
     if (!this.userRequest$) {
       this.userRequest$ = this.http.get<User>(`${this.apiUrl}/me`).pipe(
-        tap((user) => this.user.set(user)),
+        tap((user) => {
+          this.user.set(user);
+        }),
         shareReplay(1),
       );
     }

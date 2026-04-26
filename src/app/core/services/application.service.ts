@@ -24,10 +24,11 @@ export class ApplicationService {
     );
   }
 
-  getAppliedJobOffer(
+  currentJobOffer(
     appliedJobbOfferId: string,
     userId: string,
   ): Observable<ApiResponse<IApplication>> {
+    console.log({ appliedJobbOfferId, userId });
     return this.http.get<ApiResponse<IApplication>>(
       `${this.apiUrl}/apply/${appliedJobbOfferId}/${userId}`,
     );
