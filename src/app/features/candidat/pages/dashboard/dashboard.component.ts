@@ -28,14 +28,11 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class DashboardComponent {
   private authService = inject(AuthService);
-  userName() {}
+
 
   notifPanel = {
     toggle: () => {},
   };
-  unreadCount() {
-    return 0;
-  }
   recentNotifications() {
     return [];
   }
@@ -64,6 +61,8 @@ export class DashboardComponent {
   onApplicationClick(id: string) {
     return [];
   }
+
+  unreadCount(){return 2}
 
   getStatusClass(classd: string) {}
 

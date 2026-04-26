@@ -1,1 +1,74 @@
-<!--  CANDIDAT NAV BAR -->
+<!-- ══ DASHBOARD CANDIDAT ═════════════════════════════════════════ -->
+  <!-- ══ TOPBAR ════════════════════════════════════════════════ -->
+  <header
+    class="sticky top-0 z-50 bg-white border-b border-[#ecdcdc] px-6 h-16 flex items-center justify-between"
+  >
+    <!-- Logo + titre page -->
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2">
+        <div
+          class="w-8 h-8 bg-[#C0152A] rounded-lg flex items-center justify-center shrink-0"
+        >
+          <svg width="16" height="16" viewBox="0 0 22 22" fill="none">
+            <path d="M11 2L2.5 8v12h6V14h5v6h6V8L11 2z" fill="white" />
+          </svg>
+        </div>
+        <span
+          class="font-display font-bold text-[16px] text-[#1a1a1a] hidden md:block"
+        >
+          Kay<span class="text-[#C0152A]">Liguey</span>
+        </span>
+      </div>
+      <div class="hidden md:block w-px h-5 bg-[#ecdcdc]"></div>
+      <span class="hidden md:block text-sm text-[#888]">Espace Candidat</span>
+    </div>
+
+    <!-- Actions topbar -->
+    <div class="flex items-center gap-3">
+      <!-- Notifications -->
+      <button
+        mat-icon-button
+        [matBadge]="unreadCount()"
+        matBadgeColor="warn"
+        [matBadgeHidden]="unreadCount() === 0"
+        matTooltip="Notifications"
+        (click)="notifPanel.toggle()"
+        class="relative"
+      >
+        <mat-icon class="text-[#6b6b6b]">notifications_none</mat-icon>
+      </button>
+
+      <!-- Avatar + menu -->
+      <button
+        mat-button
+        [matMenuTriggerFor]="profileMenu"
+        class="flex items-center gap-2 px-2 rounded-lg hover:bg-[#f7f4f4] transition-colors"
+      >
+        <div
+          class="w-8 h-8 rounded-full bg-[#fff5f5] border border-[#fcd0d0] flex items-center justify-center text-xs font-bold text-[#C0152A]"
+        >
+          {{ userInitials() }}
+        </div>
+        <span class="hidden md:block text-sm font-medium text-[#1a1a1a]">
+          {{ userName() }}
+        </span>
+        <mat-icon class="text-[#888] text-[18px]">expand_more</mat-icon>
+      </button>
+
+      <mat-menu #profileMenu="matMenu" xPosition="before">
+        <button mat-menu-item routerLink="/candidat/profil">
+          <mat-icon>person_outline</mat-icon>
+          <span>Mon profil</span>
+        </button>
+        <button mat-menu-item routerLink="/candidat/parametres">
+          <mat-icon>settings</mat-icon>
+          <span>Paramètres</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="onLogout()" class="text-[#C0152A]">
+          <mat-icon class="text-[#C0152A]">logout</mat-icon>
+          <span>Se déconnecter</span>
+        </button>
+      </mat-menu>
+    </div>
+  </header>

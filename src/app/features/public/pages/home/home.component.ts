@@ -3,8 +3,8 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 import { LucideAngularModule } from 'lucide-angular';
 import { CardsComponent } from '../../../../shared/components/cards/cards.component';
 import { RouterLink } from '@angular/router';
-import { AnimateOnScrollDirective } from '../../../../shared/directives/animate-on-scroll.directive';
-import { CountUpDirective } from '../../../../shared/directives/count-up.directive';
+import { AnimateOnScrollDirective } from '../../../../core/directives/animate-on-scroll.directive';
+import { CountUpDirective } from '../../../../core/directives/count-up.directive';
 
 @Component({
   selector: 'app-home',

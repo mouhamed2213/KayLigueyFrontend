@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AnimateOnScrollDirective } from '../../../../shared/directives/animate-on-scroll.directive';
-import { CountUpDirective } from '../../../../shared/directives/count-up.directive';
+import { AnimateOnScrollDirective } from '../../../../core/directives/animate-on-scroll.directive';
+import { CountUpDirective } from '../../../../core/directives/count-up.directive';
 @Component({
   selector: 'app-about',
   imports: [AnimateOnScrollDirective, CountUpDirective],
