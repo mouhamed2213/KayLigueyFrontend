@@ -15,6 +15,7 @@ import { routes } from './app.routes';
 import { errorInterceptor } from './core/interceptor/errors/error-interceptor';
 import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
 import { apiResponseErrorInterceptor } from './core/interceptor/api-interceptor/errors/api-response.interceptor';
+import { loggingInterceptor } from './core/interceptor/logging/logging.interceptor';
 import { withComponentInputBinding } from '@angular/router';
 import icons from './shared/icons/icons';
 
@@ -25,6 +26,7 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([
         errorInterceptor,
+        loggingInterceptor,
         authInterceptor,
         apiResponseErrorInterceptor,
       ]),

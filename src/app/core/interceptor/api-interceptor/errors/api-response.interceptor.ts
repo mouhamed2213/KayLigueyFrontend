@@ -18,7 +18,7 @@ export const apiResponseErrorInterceptor: HttpInterceptorFn = (
   return next(req).pipe(
     tap((event) => {
       if (event instanceof HttpResponse) {
-        console.log(event);
+        // console.log(event);
       }
     }),
   );
