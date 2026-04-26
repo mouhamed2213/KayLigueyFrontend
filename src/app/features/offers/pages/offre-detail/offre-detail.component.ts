@@ -25,8 +25,8 @@ import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { RelativeTimePipe } from '../../../../shared/pipes/relative-time.pipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IApplication, ICreateApplication } from '@core/models';
-import { ApplicationService } from '@core/services/application.service';
+import { IApplication, ICreateApplication } from '../../../../core/models';
+import { ApplicationService } from '../../../../core/services/application.service';
 import { tap } from 'rxjs';
 
 @Component({

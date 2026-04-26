@@ -3,7 +3,7 @@ import { NavbarPublicComponent } from '../../shared/components/navbar-public/nav
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { CandidateNavComponent } from '../../shared/components/candidate-nav/candidate-nav.component';
-import { AuthService } from '@core/services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-public-layout',

@@ -1,7 +1,6 @@
 import { inject, Component, OnInit } from '@angular/core';
 import { JobOfferService } from '../../../../features/offers/services/job-offer.service';
-import { ApplicationService } from '@core/services/application.service';
-
+import { ApplicationService } from '../../../../core/services/application.service';
 
 @Component({
   selector: 'app-application',
@@ -14,6 +13,7 @@ export class ApplicationComponent implements OnInit {
   private applicationService = inject(ApplicationService);
 
   ngOnInit(): void {
+    console.log('LOAD APPLIED JOB FOR THE USER ');
     this.applicationService
       .allAppliedsByUser('e91668c2-839a-43f5-8203-5a392a9643b4')
       .subscribe({
