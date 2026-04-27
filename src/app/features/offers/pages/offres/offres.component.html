@@ -219,7 +219,7 @@
         <!-- ══ ROWS ══════════════════════════════════════════════ -->
         @for (job of jobOffers(); track job.id) {
           <article
-            class="group relative flex gap-4 items-start bg-white border rounded-2xl px-5 py-4 cursor-pointer transition-all duration-200 hover:shadow-md hover:-translate-y-px hover:border-red-400"
+            class="group relative flex gap-4 items-start bg-white border rounded-2xl px-5 py-4 cursor-pointer transition-all duration-200 hover:shadow-md hover:-translate-y-px hover:border-kl-border-hover"
             [class.border-kl-primary-red]="job.is_featured"
             [class.border-l-[3px]]="job.is_featured"
             [class.border-kl-border]="!job.is_featured"

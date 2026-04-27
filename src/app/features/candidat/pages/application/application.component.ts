@@ -3,13 +3,12 @@ import { JobOfferService } from '../../../../features/offers/services/job-offer.
 import { ApplicationService } from '../../../../core/services/application.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { IApplication } from '../../../../core/models';
-import { MatCardModule } from '@angular/material/card';
-import { JsonPipe } from '@angular/common';
 import { createRepositionScrollStrategy } from '@angular/cdk/overlay';
-
+import { LucideAngularModule } from 'lucide-angular';
+import { RouterLink } from "@angular/router";
 @Component({
   selector: 'app-application',
-  imports: [MatCardModule],
+  imports: [LucideAngularModule, RouterLink],
   templateUrl: './application.component.html',
   styleUrl: './application.component.css',
 })

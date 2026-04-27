@@ -22,6 +22,7 @@
   --color-kl-muted: #6b6b6b;
   --color-kl-muted-dark: #000000d8;
   --color-kl-icon: #6b6b6b58;
+  --color-kl-text-red: #e8354a;
 
   /* ── BRAND ── */
   --color-kl-primary-red: #c0152a;
@@ -32,7 +33,7 @@
 
   /* ── BORDER ── */
   --color-kl-border: #94949463;
-  --color-kl-border-hover: #94949428;
+  --color-kl-border-hover: #f87171;
   --color-kl-active: #949494f3;
 
   /* ── EFFECTS ── */
