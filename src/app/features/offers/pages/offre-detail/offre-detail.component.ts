@@ -83,13 +83,12 @@ export class OffreDetailComponent implements OnInit {
             .subscribe({
               next: ({ data }) => {
                 this.appliedJobOffer.set(data);
-                this.applicationStatus.set(this.appliedJobOffer()?.status);
+                // this.applicationStatus.set(this.appliedJobOffer()?.status);
+                // console.log(this.appliedJobOffer());
               },
             });
         },
       });
-
-      console.log(this.userId());
     }
 
     this.fetchData();

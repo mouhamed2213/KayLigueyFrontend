@@ -4,31 +4,20 @@ import { JobStatus } from '../constant/job-status';
 
 export interface JobOffer {
   id: string;
-  company_id?: string;
   title: string;
   description: string;
-  profile_required?: string | null;
-
-  contract_type: ContractType;
-  working_mode: WorkingMode;
-
-  city?: string | null;
-
-  salary_min?: number | null;
-  salary_max?: number | null;
-
-  experience_years?: number | null;
-  education_level?: string | null;
-
-  status: JobStatus;
+  profile_required: string;
+  contract_type: string;
+  working_mode: string;
+  city: string;
+  salary_min: number;
+  salary_max: number;
+  experience_years: number;
+  education_level: string;
+  status: string;
   is_featured: boolean;
-
-  published_at?: string | null; // ISO string
-  expires_at?: string | null;
-
+  published_at: string;
+  expires_at: string;
   view_count: number;
   application_count: number;
-
-  created_at: string;
-  updated_at: string;
 }

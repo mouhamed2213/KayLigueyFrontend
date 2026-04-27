@@ -1,6 +1,11 @@
+import { LoggerService } from './logger/logger.service';
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { IApplication, ICreateApplication } from '../../core/models';
+import {
+  IApplication,
+  ICreateApplication,
+  IPaginatedResponse,
+} from '../../core/models';
 import { ApiResponse } from '../../core/api/api.interface';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -10,6 +15,8 @@ import { environment } from '../../../environments/environment';
 export class ApplicationService {
   private apiUrl = `${environment.apiUrl}`;
   private http = inject(HttpClient);
+
+  private logger = inject(LoggerService);
 
   applyToJobOffer(applicationInfo: ICreateApplication): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/apply`, applicationInfo).pipe(
@@ -39,16 +46,23 @@ export class ApplicationService {
     userId: string,
     page: number = 1,
     limit: number = 3,
-  ): Observable<any> {
+  ): Observable<IPaginatedResponse<IApplication>> {
     const params = new HttpParams()
       .set('page', page.toString())
       .set('limit', limit.toString());
+
     return this.http
-      .get<any>(`${this.apiUrl}/apply/all/${userId}`, { params })
+      .get<
+        IPaginatedResponse<IApplication>
+      >(`${this.apiUrl}/apply/all/${userId}`, { params })
       .pipe(
         tap((data) => {
-          // console.log(data);
+          console.log(data);
         }),
+
+        // map((res) => {
+        //   return { data: res.data, meta: res.meta };
+        // }),
       );
   }
 }

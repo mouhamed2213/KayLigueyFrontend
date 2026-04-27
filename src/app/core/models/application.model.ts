@@ -1,5 +1,5 @@
 import { ApplicationStatus } from '../constant/application-status';
-
+import { JobOffer as IJobOffer } from './job-offer.model';
 export interface IApplication {
   id: string;
   candidat_id: string;
@@ -7,21 +7,31 @@ export interface IApplication {
   cover_letter?: string | null;
   status: ApplicationStatus;
   recruiter_note?: string | null;
-  interview_date?: Date | string | null; // Date peut arriver en string via JSON
-  createdAt: Date | string;
-  updatedAt: Date | string;
+  interview_date: string | null;
+  createdAt: string;
+
+  jobOffer?: IJobOffer;
 }
 
-// Correspond à ton CreateApplicationDto (Entrée POST)
+export interface IPaginatedResponse<T> {
+  data: T[];
+  meta: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}
+//  (Entrée POST)
 export interface ICreateApplication {
-  candidat_id: string | null;
-  jobOffer_id: string | null;
+  candidat_id: string;
+  jobOffer_id: string;
   cover_letter?: string | null;
 }
 
-// Correspond à ton UpdateApplicationInputDto (Entrée PATCH)
+// (Entrée PATCH)
 export interface IUpdateApplication {
-  status?: ApplicationStatus;
+  status: ApplicationStatus;
   recruiter_note?: string;
   interview_date?: Date | string;
 }

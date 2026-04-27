@@ -2,10 +2,14 @@ import { inject, Component, OnInit, signal } from '@angular/core';
 import { JobOfferService } from '../../../../features/offers/services/job-offer.service';
 import { ApplicationService } from '../../../../core/services/application.service';
 import { AuthService } from '../../../../core/services/auth.service';
+import { IApplication } from '../../../../core/models';
+import { MatCardModule } from '@angular/material/card';
+import { JsonPipe } from '@angular/common';
+import { createRepositionScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-application',
-  imports: [],
+  imports: [MatCardModule],
   templateUrl: './application.component.html',
   styleUrl: './application.component.css',
 })
@@ -13,26 +17,34 @@ export class ApplicationComponent implements OnInit {
   private authService = inject(AuthService);
   private applicationService = inject(ApplicationService);
 
+  protected allAppliedJob: IApplication[] = [];
+
   protected page = signal(1);
   protected limit = signal(3);
-  paginationValue = {
-    page: this.page(),
-    limit: this.limit(),
-  };
+  protected total = signal(0);
+  protected totalPages = signal(1);
 
-  // remove any on application service
-  // create interceptor to format API response
-  // IMPLETE APPLICATION INTERFAACE
   ngOnInit(): void {
+    this.loadApplications();
+  }
+
+  loadApplications() {
     this.applicationService
       .allAppliedsByUser(
         'e91668c2-839a-43f5-8203-5a392a9643b4',
-        this.paginationValue.page,
-        this.paginationValue.limit,
+        this.page(),
+        this.limit(),
       )
       .subscribe({
-        next: (data) => {
-          // console.log(data);
+        next: (res) => {
+          this.allAppliedJob = res.data;
+
+          this.page.set(res.meta.page);
+          this.limit.set(res.meta.limit);
+          this.total.set(res.meta.total);
+          this.totalPages.set(res.meta.totalPages);
+
+          console.log(this.allAppliedJob);
         },
       });
   }

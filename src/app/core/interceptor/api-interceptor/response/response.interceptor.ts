@@ -6,28 +6,30 @@ import {
 import { map } from 'rxjs';
 
 export const responseInterceptor: HttpInterceptorFn = (req, next) => {
-  return next(req).pipe(
-    map((event) => {
-      if (event.type !== HttpEventType.Response) {
-        return event;
-      }
+  return next(req);
 
-      const response = event as HttpResponse<any>;
-      const body = response.body;
+  // .pipe(
+  //   map((event) => {
+  //     if (event.type !== HttpEventType.Response) {
+  //       return event;
+  //     }
 
-      if (!body?.data) return response;
+  //     const response = event as HttpResponse<any>;
+  //     const body = response.body;
 
-      // this is for response without paginiation data.data
-      if (!body.data.meta) {
-        return response.clone({
-          body: body.data.data,
-        });
-      }
+  //     if (!body?.data) return response;
 
-      // meta is meta dat for pagination
-      return response.clone({
-        body: body.data,
-      });
-    }),
-  );
+  //     // this is for response without pagination
+  //     if (!body.data.meta) {
+  //       return response.clone({
+  //         body: body.data,
+  //       });
+  //     }
+
+  //     // meta is meta dat for pagination
+  //     return response.clone({
+  //       body: body,
+  //     });
+  //   }),
+  // );
 };
