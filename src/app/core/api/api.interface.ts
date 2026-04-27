@@ -1,5 +1,6 @@
 // APi Response
 export interface ApiResponse<T> {
-  message: string;
+  succes?: string;
   data: T;
+  meta?: any;
 }

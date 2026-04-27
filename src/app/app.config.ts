@@ -17,6 +17,7 @@ import { authInterceptor } from './core/interceptor/auth/auth.interceptor';
 import { apiResponseErrorInterceptor } from './core/interceptor/api-interceptor/errors/api-response.interceptor';
 import { loggingInterceptor } from './core/interceptor/logging/logging.interceptor';
 import { withComponentInputBinding } from '@angular/router';
+import { responseInterceptor } from './core/interceptor/api-interceptor/response/response.interceptor';
 import icons from './shared/icons/icons';
 
 export const appConfig: ApplicationConfig = {
@@ -29,6 +30,7 @@ export const appConfig: ApplicationConfig = {
         loggingInterceptor,
         authInterceptor,
         apiResponseErrorInterceptor,
+        responseInterceptor,
       ]),
     ),
     importProvidersFrom(LucideAngularModule.pick(icons())),

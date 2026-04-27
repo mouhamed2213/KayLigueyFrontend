@@ -23,16 +23,16 @@ export class JobOfferService {
   ): Observable<IOfferResponse<JobOffer[]>> {
     const { city, working_mode, contract_type, education_level } = filters;
 
-    const queriesParam = new HttpParams()
-      .set('page', page)
-      .set('limit', limit)
+    const queriesParams = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString())
       .set('city', city)
       .set('working_mode', working_mode)
       .set('contract_type', contract_type)
       .set('education_level', education_level);
     return this.http
       .get<IOfferResponse<JobOffer[]>>(`${this.apiUrl}/offers`, {
-        params: queriesParam,
+        params: queriesParams,
       })
       .pipe(
         // tap((result) => console.log(result)),
@@ -57,6 +57,4 @@ export class JobOfferService {
       }),
     );
   }
-
-
 }

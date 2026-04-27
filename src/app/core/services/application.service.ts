@@ -34,12 +34,20 @@ export class ApplicationService {
     );
   }
 
-  allAppliedsByUser(userId: string): Observable<ApiResponse<IApplication[]>> {
+  // Get all job applied by the user(CANDIDAT)
+  allAppliedsByUser(
+    userId: string,
+    page: number = 1,
+    limit: number = 3,
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
     return this.http
-      .get<ApiResponse<IApplication[]>>(`${this.apiUrl}/apply/all/${userId}`)
+      .get<any>(`${this.apiUrl}/apply/all/${userId}`, { params })
       .pipe(
         tap((data) => {
-          console.log(data.data);
+          // console.log(data);
         }),
       );
   }

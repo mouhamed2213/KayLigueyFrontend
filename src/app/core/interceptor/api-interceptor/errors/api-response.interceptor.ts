@@ -13,7 +13,7 @@ export const apiResponseErrorInterceptor: HttpInterceptorFn = (
 
   next: HttpHandlerFn,
 ): Observable<HttpEvent<unknown>> => {
-  console.log(req.url);
+  console.log(" From Api Response Errror ", req.url);
 
   return next(req).pipe(
     tap((event) => {
