@@ -8,10 +8,17 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { IApplication } from '../../../../core/models';
 import { LucideAngularModule } from 'lucide-angular';
 import { RouterLink } from '@angular/router';
+import { WorkingModeLabelPipe } from '../../../../core/pipes/workingMode/working-mode.pipe';
+import { ContractLabelPipe } from '../../../../core/pipes/contractLabel/contract-label.pipe';
 
 @Component({
   selector: 'app-application',
-  imports: [LucideAngularModule, RouterLink],
+  imports: [
+    LucideAngularModule,
+    RouterLink,
+    WorkingModeLabelPipe,
+    ContractLabelPipe,
+  ],
   templateUrl: './application.component.html',
   styleUrl: './application.component.css',
 })

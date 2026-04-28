@@ -112,53 +112,59 @@
 
   <!-- APPLICATIONN CARD -->
   <div class="mt-5 grid">
-    <div
-      class="group card hover:border-kl-border-hover w-full cursor-pointer space-y-7 rounded-md border border-transparent bg-white p-3 transition-all duration-300 shadow-md hover:shadow-xl"
-    >
-      <div class="flex gap-3">
-        <span class="logo_style_min">W</span>
+    @for (app of allAppliedJob; track app.id) {
+      <div
+        class="group card hover:border-kl-border-hover w-full cursor-pointer space-y-7 rounded-md border border-transparent bg-white p-3 transition-all duration-300 shadow-md hover:shadow-xl"
+      >
+        <div class="flex gap-3">
+          <span class="logo_style_min">W</span>
 
-        <div class="flex w-full flex-col">
-          <div class="flex w-full justify-between">
-            <h3>Job name</h3>
-            <p>Entretien prevue</p>
-          </div>
-
-          <div class="flex justify-between">
-            <div class="flex text-kl-muted space-x-2">
-              <small class="text-xs">Wave senegal </small>
-              <small class="text-xs">Dakar </small>
-              <small class="text-xs">Remote </small>
-              <small class="text-xs">Freelance</small>
+          <div class="flex w-full flex-col">
+            <div class="flex w-full justify-between">
+              <h3>{{ app.jobOffer?.title }}</h3>
+              <p>{{ app.status }}</p>
             </div>
 
-            <div><p>publie le 16 avril</p></div>
-          </div>
-        </div>
-      </div>
+            <div class="flex justify-between">
+              <div class="flex text-kl-muted space-x-2">
+                <small class="text-xs">Wave senegal </small>
+                <small class="text-xs"> {{ app.jobOffer?.city }} </small>
+                <small class="text-xs">{{
+                  app.jobOffer?.contract_type | contractLabel
+                }}</small>
+                <small class="text-xs">
+                  {{ app.jobOffer?.working_mode | workingModelabel }}</small
+                >
+              </div>
 
-      <div class="card-body">
-        <!-- Si ENtretien planifier  affichier .....-->
-
-        <!--   Job Skill-->
-
-        <div>
-          <div class="flex justify-between">
-            <div class="mx-5 flex gap-4">
-              <p>Figma</p>
-              <p>Adobe XD</p>
-              <p>CV joint</p>
-            </div>
-
-            <div
-              class="hidden space-x-4 group-hover:block transition-all duration-300 md:ml-6"
-            >
-              <a routerLink="offer/id_x">Voir l'offre</a>
-              <a routerLink="#" class="text-kl-text-red">Retirer</a>
+              <div><p>publie le 16 avril</p></div>
             </div>
           </div>
         </div>
+
+        <div class="card-body">
+          <!-- Si ENtretien planifier  affichier .....-->
+
+          <!--   Job Skill-->
+
+          <div>
+            <div class="flex justify-between">
+              <div class="mx-5 flex gap-4">
+                <p>Figma</p>
+                <p>Adobe XD</p>
+                <p>CV joint</p>
+              </div>
+
+              <div
+                class="hidden space-x-4 group-hover:block transition-all duration-300 md:ml-6"
+              >
+                <a routerLink="offer/id_x">Voir l'offre</a>
+                <a routerLink="#" class="text-kl-text-red">Retirer</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    }
   </div>
 </div>
