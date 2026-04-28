@@ -62,7 +62,7 @@ export class ApplicationService {
       );
   }
 
-  appliedStatsCount(userId: string) {
+  appliedStatsCount(userId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/apply/stats/${userId}`).pipe(
       tap((res) => {
         console.log(res);

@@ -29,13 +29,20 @@
     >
       <div class="card-body rounded-lg p-6">
         <div class="mb-2 flex items-center gap-2">
-          <span class="h-3 w-3 rounded-full bg-red-700"></span>
-          <h2 class="text-sm font-medium text-gray-500 uppercase">Statut</h2>
+          <span
+            class="h-3 w-3 rounded-full"
+            [class]="appConfig['SUBMITTED']?.class"
+          ></span>
+          <!-- <h2 class="text-sm font-medium text-gray-500 uppercase">Statut</h2> -->
         </div>
 
-        <p class="text-4xl font-bold text-gray-800">{{ totalInReview() }}</p>
+        <p class="text-4xl font-bold text-gray-800">
+          {{ globalStats.SUBMITTED || 0 }}
+        </p>
 
-        <p class="mt-2 text-sm text-gray-400">En cours</p>
+        <p class="mt-2 text-sm text-gray-400">
+          {{ appConfig["SUBMITTED"]?.label }}
+        </p>
       </div>
     </div>
 
@@ -44,13 +51,19 @@
     >
       <div class="card-body rounded-lg p-6">
         <div class="mb-2 flex items-center gap-2">
-          <span class="h-3 w-3 rounded-full bg-red-700"></span>
-          <h2 class="text-sm font-medium text-gray-500 uppercase">Statut</h2>
+          <span
+            class="h-3 w-3 rounded-full"
+            [class]="appConfig['SHORTLISTED']?.class"
+          ></span>
         </div>
 
-        <p class="text-4xl font-bold text-gray-800">8</p>
+        <p class="text-4xl font-bold text-gray-800">
+          {{ globalStats.SHORTLISTED || 0 }}
+        </p>
 
-        <p class="mt-2 text-sm text-gray-400">Retenu</p>
+        <p class="mt-2 text-sm text-gray-400">
+          {{ appConfig["SHORTLISTED"]?.label }}
+        </p>
       </div>
     </div>
 
@@ -59,13 +72,19 @@
     >
       <div class="card-body rounded-lg p-6">
         <div class="mb-2 flex items-center gap-2">
-          <span class="h-3 w-3 rounded-full bg-red-700"></span>
-          <h2 class="text-sm font-medium text-gray-500 uppercase">Statut</h2>
+          <span
+            class="h-3 w-3 rounded-full"
+            [class]="appConfig['INTERVIEW']?.class"
+          ></span>
         </div>
 
-        <p class="text-4xl font-bold text-gray-800">8</p>
+        <p class="text-4xl font-bold text-gray-800">
+          {{ globalStats.INTERVIEW || 0 }}
+        </p>
 
-        <p class="mt-2 text-sm text-gray-400">Entretien</p>
+        <p class="mt-2 text-sm text-gray-400">
+          {{ appConfig["INTERVIEW"]?.label }}
+        </p>
       </div>
     </div>
   </div>
