@@ -59,10 +59,19 @@ export class ApplicationService {
         tap((data) => {
           console.log(data);
         }),
-
-        // map((res) => {
-        //   return { data: res.data, meta: res.meta };
-        // }),
       );
+  }
+
+  appliedStatsCount(userId: string) {
+    return this.http.get(`${this.apiUrl}/apply/stats/${userId}`).pipe(
+      tap((res) => {
+        console.log(res);
+      }),
+
+      catchError((err) => {
+        this.logger.error('Error fetching stats');
+        return throwError(() => err);
+      }),
+    );
   }
 }

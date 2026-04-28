@@ -1,3 +1,4 @@
+import { ApplicationStatus } from './../../../../core/constant/application-status';
 import { inject, Component, OnInit, signal } from '@angular/core';
 import { JobOfferService } from '../../../../features/offers/services/job-offer.service';
 import { ApplicationService } from '../../../../core/services/application.service';
@@ -5,7 +6,8 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { IApplication } from '../../../../core/models';
 import { createRepositionScrollStrategy } from '@angular/cdk/overlay';
 import { LucideAngularModule } from 'lucide-angular';
-import { RouterLink } from "@angular/router";
+import { RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-application',
   imports: [LucideAngularModule, RouterLink],
@@ -22,9 +24,12 @@ export class ApplicationComponent implements OnInit {
   protected limit = signal(3);
   protected total = signal(0);
   protected totalPages = signal(1);
+  // protected totalInReview: number[] = [];
+  protected totalInReview = signal<number>(0);
 
   ngOnInit(): void {
     this.loadApplications();
+    this.laodCountedStats();
   }
 
   loadApplications() {
@@ -46,5 +51,12 @@ export class ApplicationComponent implements OnInit {
           console.log(this.allAppliedJob);
         },
       });
+  }
+
+  // get all all applied statut with status INREVIEW
+  laodCountedStats() {
+    this.applicationService
+      .appliedStatsCount('e91668c2-839a-43f5-8203-5a392a9643b4')
+      .subscribe();
   }
 }

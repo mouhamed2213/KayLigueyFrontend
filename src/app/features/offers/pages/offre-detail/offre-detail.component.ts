@@ -1,6 +1,5 @@
 import {
   ApplicationStatus,
-  ApplicationStatusEnum,
 } from './../../../../core/constant/application-status';
 import { JobOfferService } from './../../services/job-offer.service';
 import { JobOffer } from './../../../../core/models/job-offer.model';
