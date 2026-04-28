@@ -269,7 +269,7 @@
 
           <!-- Bouton principal -->
 
-          @if (applicationStatus() !== "SUBMITTED") {
+          @if (applicationStatus() === "UNSUBMITTED") {
             <app-button
               type="button"
               variant="primary_dark"

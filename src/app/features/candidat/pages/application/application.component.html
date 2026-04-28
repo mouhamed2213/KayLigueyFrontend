@@ -128,7 +128,7 @@
                 <p>{{ app.status }}</p>
               </div>
 
-              <div class="flex justify-between">
+              <div class="flex justify-between mt-0.5">
                 <div class="flex text-kl-muted space-x-2">
                   <small class="text-xs"> {{ app.jobOffer?.city }} </small>
                   <small class="text-xs">{{
@@ -140,7 +140,9 @@
                 </div>
 
                 <div>
-                  <p>Publier le {{ app.createdAt | date: "dd MMM " }}</p>
+                  <p class="text-xs">
+                    Publier le {{ app.createdAt | date: "dd MMM " }}
+                  </p>
                 </div>
               </div>
             </div>

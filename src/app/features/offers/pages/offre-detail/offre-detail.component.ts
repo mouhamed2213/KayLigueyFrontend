@@ -2,8 +2,7 @@ import {
   ApplicationStatus,
 } from './../../../../core/constant/application-status';
 import { JobOfferService } from './../../services/job-offer.service';
-import { JobOffer } from './../../../../core/models/job-offer.model';
-import { AuthService } from './../../../../core/services/auth.service';
+ import { AuthService } from './../../../../core/services/auth.service';
 import {
   Component,
   inject,
@@ -82,7 +81,7 @@ export class OffreDetailComponent implements OnInit {
             .subscribe({
               next: ({ data }) => {
                 this.appliedJobOffer.set(data);
-                // this.applicationStatus.set(this.appliedJobOffer()?.status);
+                this.applicationStatus.set(this.appliedJobOffer()?.status);
                 // console.log(this.appliedJobOffer());
               },
             });
