@@ -8,7 +8,7 @@ import { ApplicationService } from '../../../../core/services/application.servic
 import { AuthService } from '../../../../core/services/auth.service';
 import { IApplication } from '../../../../core/models';
 import { LucideAngularModule } from 'lucide-angular';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { WorkingModeLabelPipe } from '../../../../core/pipes/workingMode/working-mode.pipe';
 import { ContractLabelPipe } from '../../../../core/pipes/contractLabel/contract-label.pipe';
 import { DatePipe } from '@angular/common';
@@ -33,6 +33,7 @@ import { LoggerService } from '../../../../core/services/logger/logger.service';
 export class ApplicationComponent implements OnInit {
   private authService = inject(AuthService);
   private applicationService = inject(ApplicationService);
+  private router = inject(Router);
   private loggerService = inject(LoggerService);
   protected allAppliedJob: IApplication[] = [];
   protected currentPage = signal(1);
@@ -44,8 +45,21 @@ export class ApplicationComponent implements OnInit {
   protected globalStats!: Partial<Record<ApplicationStatus, number>>;
   protected isLoading = signal<boolean>(true);
   protected appConfig = APPLICATION_STATUS_CONFIG;
-  userId = 'e91668c2-839a-43f5-8203-5a392a9643b4';
+  protected userId = signal<string>('');
+
   ngOnInit(): void {
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigateByUrl('/register');
+      return;
+    }
+
+    this.authService.getUser().subscribe({
+      next: (user) => {
+        this.userId.set(user?.id as string);
+        // console.log(user);
+      },
+    });
+
     this.fetchApplication();
   }
 
@@ -64,7 +78,7 @@ export class ApplicationComponent implements OnInit {
   // LOAD APPLICATION DATA
   loadApplications() {
     this.applicationService
-      .allAppliedsByUser(this.userId, this.currentPage(), this.limit())
+      .allAppliedsByUser(this.userId(), this.currentPage(), this.limit())
       .subscribe({
         next: (res) => {
           this.allAppliedJob = res.data;
@@ -87,7 +101,7 @@ export class ApplicationComponent implements OnInit {
   // LOAD STATS
   loadStats() {
     this.isLoading.set(true);
-    this.applicationService.appliedStatsCount(this.userId).subscribe({
+    this.applicationService.appliedStatsCount(this.userId()).subscribe({
       next: (res) => {
         // console.log(res.data);
         this.totalStats.push(res.data);
@@ -112,7 +126,7 @@ export class ApplicationComponent implements OnInit {
   // PAGINATION
   loadApplicationDetails() {
     this.applicationService
-      .allAppliedsByUser(this.userId, this.currentPage(), this.limit())
+      .allAppliedsByUser(this.userId(), this.currentPage(), this.limit())
       .subscribe({
         next: (res) => {
           // console.log(res);

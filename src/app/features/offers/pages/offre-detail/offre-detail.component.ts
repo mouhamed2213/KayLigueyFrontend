@@ -1,8 +1,6 @@
-import {
-  ApplicationStatus,
-} from './../../../../core/constant/application-status';
+import { ApplicationStatus } from './../../../../core/constant/application-status';
 import { JobOfferService } from './../../services/job-offer.service';
- import { AuthService } from './../../../../core/services/auth.service';
+import { AuthService } from './../../../../core/services/auth.service';
 import {
   Component,
   inject,
@@ -69,25 +67,27 @@ export class OffreDetailComponent implements OnInit {
       },
     });
 
-    if (this.authService.isAuthenticated()) {
-      // Get user Id
-      this.authService.getUser().subscribe({
-        next: (user) => {
-          this.userId.set(user?.id as string);
-
-          // ============ if out the user id become null (Should Be fix itt)
-          this.applicationService
-            .currentJobOffer(this.jobOfferId(), this.userId())
-            .subscribe({
-              next: ({ data }) => {
-                this.appliedJobOffer.set(data);
-                this.applicationStatus.set(this.appliedJobOffer()?.status);
-                // console.log(this.appliedJobOffer());
-              },
-            });
-        },
-      });
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigateByUrl('/register');
+      return;
     }
+    // Get user Id
+    this.authService.getUser().subscribe({
+      next: (user) => {
+        this.userId.set(user?.id as string);
+
+        // ============ if out the user id become null (Should Be fix itt)
+        this.applicationService
+          .currentJobOffer(this.jobOfferId(), this.userId())
+          .subscribe({
+            next: ({ data }) => {
+              this.appliedJobOffer.set(data);
+              this.applicationStatus.set(this.appliedJobOffer()?.status);
+              // console.log(this.appliedJobOffer());
+            },
+          });
+      },
+    });
 
     this.fetchData();
 

@@ -8,7 +8,7 @@ export const APPLICATION_STATUS = [
   'WITHDRAWN', // by the candidata
   'INTERVIEW',
   'OFFERED',
-  
+  'UNSUBMITTED',
 ] as const;
 
 export type ApplicationStatus = (typeof APPLICATION_STATUS)[number];
@@ -60,6 +60,10 @@ export const APPLICATION_STATUS_CONFIG: Partial<
     class: 'bg-red-100 text-red-700', // Rouge : Échec
   },
   WITHDRAWN: {
+    label: 'Retirée',
+    class: 'bg-gray-100 text-gray-700', // Gris : Annulé par le candidat
+  },
+  UNSUBMITTED: {
     label: 'Retirée',
     class: 'bg-gray-100 text-gray-700', // Gris : Annulé par le candidat
   },
