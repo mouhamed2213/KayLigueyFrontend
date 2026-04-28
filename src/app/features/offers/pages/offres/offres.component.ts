@@ -112,17 +112,16 @@ export class OffresComponent implements OnInit {
 
   ngOnInit(): void {
     // Initial data fetch
-    this.fetch();
+    this.fetchJobOffer();
   }
 
   /* =========================================================
    * CORE FETCH LOGIC
    * ========================================================= */
 
-  fetch() {
+  fetchJobOffer() {
     // Always enable loading before API call
     this.isLoading.set(true);
-
     this.loadJobOffer(this.currentPage(), this.jobPerPage(), this.filters());
   }
 
@@ -175,7 +174,7 @@ export class OffresComponent implements OnInit {
     this.currentPage.set(1);
 
     // Refetch data
-    this.fetch();
+    this.fetchJobOffer();
   }
 
   // Reset all filters
@@ -189,7 +188,7 @@ export class OffresComponent implements OnInit {
     });
 
     this.currentPage.set(1);
-    this.fetch();
+    this.fetchJobOffer();
   }
 
   /* =========================================================
@@ -200,7 +199,6 @@ export class OffresComponent implements OnInit {
     this.currentPage.set(page);
 
     // Fetch with current filters
-    this.fetch();
 
     // UX: scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
