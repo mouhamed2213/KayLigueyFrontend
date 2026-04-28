@@ -12,6 +12,8 @@ import { DatePipe, SlicePipe, UpperCasePipe } from '@angular/common';
 import { IPagination } from '../../../../core/models/offer-respose.model';
 import { IFilters } from '../../../../core/models/filter.model';
 import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
+import { ContractLabelPipe } from '../../../../core/pipes/contractLabel/contract-label.pipe';
+import { WorkingModeLabelPipe } from '../../../../core/pipes/workingMode/working-mode.pipe';
 import {
   CONTRACT_TYPE_CONFIG,
   CONTRACT_TYPES,
@@ -40,7 +42,11 @@ import { SN_REGIONS } from '../../../../core/constant/regions';
     FormatSalaryPipe,
     SlicePipe,
     UpperCasePipe,
+    ContractLabelPipe,
     RouterLink,
+    ContractLabelPipe,
+    WorkingModeLabelPipe,
+    WorkingModeLabelPipe,
   ],
   templateUrl: './offres.component.html',
   styleUrl: './offres.component.css',
