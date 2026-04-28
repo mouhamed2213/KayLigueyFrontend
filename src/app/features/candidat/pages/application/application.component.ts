@@ -12,14 +12,20 @@ import { RouterLink } from '@angular/router';
 import { WorkingModeLabelPipe } from '../../../../core/pipes/workingMode/working-mode.pipe';
 import { ContractLabelPipe } from '../../../../core/pipes/contractLabel/contract-label.pipe';
 import { DatePipe } from '@angular/common';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
+import { LoggerService } from '../../../../core/services/logger/logger.service';
+
 @Component({
   selector: 'app-application',
   imports: [
     LucideAngularModule,
+    LoaderComponent,
     RouterLink,
     WorkingModeLabelPipe,
     ContractLabelPipe,
     DatePipe,
+    MatProgressSpinner,
   ],
   templateUrl: './application.component.html',
   styleUrl: './application.component.css',
@@ -27,18 +33,16 @@ import { DatePipe } from '@angular/common';
 export class ApplicationComponent implements OnInit {
   private authService = inject(AuthService);
   private applicationService = inject(ApplicationService);
-
+  private loggerService = inject(LoggerService);
   protected allAppliedJob: IApplication[] = [];
-
   protected currentPage = signal(1);
   protected limit = signal(3);
   protected totalApplications = signal(0);
   protected totalPages = signal(1);
   protected totalStats: any[] = [];
-  protected totalInReview = signal<number>(0);
   protected submitted = signal<number>(0);
   protected globalStats!: Partial<Record<ApplicationStatus, number>>;
-
+  protected isLoading = signal<boolean>(true);
   protected appConfig = APPLICATION_STATUS_CONFIG;
   userId = 'e91668c2-839a-43f5-8203-5a392a9643b4';
   ngOnInit(): void {
@@ -49,11 +53,15 @@ export class ApplicationComponent implements OnInit {
    * CORE FETCH LOGIC
    * ========================================================= */
   private fetchApplication() {
+    this.isLoading.set(true);
+
     this.loadApplications();
     this.loadApplicationDetails();
     this.loadStats();
+    this.isLoading.set(false);
   }
 
+  // LOAD APPLICATION DATA
   loadApplications() {
     this.applicationService
       .allAppliedsByUser(this.userId, this.currentPage(), this.limit())
@@ -66,12 +74,19 @@ export class ApplicationComponent implements OnInit {
           this.totalApplications.set(res.meta.total);
           this.totalPages.set(res.meta.totalPages);
           // console.log(this.allAppliedJob);
+
+          this.isLoading.set(false);
+        },
+        error: (err) => {
+          this.loggerService.error(err);
+          this.isLoading.set(false);
         },
       });
   }
 
-  // get all all applied statut with status INREVIEW
+  // LOAD STATS
   loadStats() {
+    this.isLoading.set(true);
     this.applicationService.appliedStatsCount(this.userId).subscribe({
       next: (res) => {
         // console.log(res.data);
@@ -81,9 +96,9 @@ export class ApplicationComponent implements OnInit {
     });
   }
 
+  // FORMAT STATS DEFAULT RESPONS
   formatGlobalappliedStats(stats: any[]) {
     // console.log(stats);
-
     const globalStats = stats[0].reduce((acc: any, item: any) => {
       acc[item.status] = item._count.status;
       return acc;
@@ -91,13 +106,10 @@ export class ApplicationComponent implements OnInit {
 
     this.globalStats = globalStats;
 
-    console.log(this.globalStats);
+    // console.log(this.globalStats);
   }
 
-  /* =========================================================
-   * PAGINATION
-   * ========================================================= */
-
+  // PAGINATION
   loadApplicationDetails() {
     this.applicationService
       .allAppliedsByUser(this.userId, this.currentPage(), this.limit())
@@ -109,7 +121,11 @@ export class ApplicationComponent implements OnInit {
   }
 
   pageNumbers() {
-    return [];
+    let Tpage = [];
+    for (let i = 1; i <= this.totalPages(); i++) {
+      Tpage.push(i);
+    }
+    return Tpage;
   }
 
   onPageChange(page: number) {

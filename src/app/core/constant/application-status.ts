@@ -8,6 +8,7 @@ export const APPLICATION_STATUS = [
   'WITHDRAWN', // by the candidata
   'INTERVIEW',
   'OFFERED',
+  
 ] as const;
 
 export type ApplicationStatus = (typeof APPLICATION_STATUS)[number];

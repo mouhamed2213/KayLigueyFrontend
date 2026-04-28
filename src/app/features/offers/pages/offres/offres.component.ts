@@ -222,6 +222,10 @@ export class OffresComponent implements OnInit {
   formatedDate = signal<any>('');
 
   pageNumbers() {
-    return [];
+    let Tpage = [];
+    for (let i = 1; i <= this.totalPages(); i++) {
+      Tpage.push(i);
+    }
+    return Tpage;
   }
 }

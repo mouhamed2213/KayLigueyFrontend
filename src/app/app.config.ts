@@ -3,6 +3,7 @@ import {
   importProvidersFrom,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
+  LOCALE_ID,
 } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { provideRouter } from '@angular/router';
@@ -19,9 +20,13 @@ import { loggingInterceptor } from './core/interceptor/logging/logging.intercept
 import { withComponentInputBinding } from '@angular/router';
 import { responseInterceptor } from './core/interceptor/api-interceptor/response/response.interceptor';
 import icons from './shared/icons/icons';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeFr, 'en-FR');
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: LOCALE_ID, useValue: 'en-FR' },
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(
       withFetch(),
@@ -33,6 +38,7 @@ export const appConfig: ApplicationConfig = {
         responseInterceptor,
       ]),
     ),
+
     importProvidersFrom(LucideAngularModule.pick(icons())),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
