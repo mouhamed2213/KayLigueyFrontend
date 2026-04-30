@@ -11,6 +11,7 @@ export interface IApplication {
   createdAt: string;
 
   jobOffer?: IJobOffer;
+
 }
 
 export interface IPaginatedResponse<T> {

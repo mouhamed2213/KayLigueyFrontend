@@ -84,6 +84,11 @@ export class OffreDetailComponent implements OnInit {
               this.appliedJobOffer.set(data);
               this.applicationStatus.set(this.appliedJobOffer()?.status);
               // console.log(this.appliedJobOffer());
+              this.fetchData();
+            },
+
+            error: (err) => {
+              console.log('error while applied job');
             },
           });
       },
@@ -102,7 +107,7 @@ export class OffreDetailComponent implements OnInit {
       .subscribe({
         next: ({ data }) => {
           this.jobOffer.set(data);
-          // console.log(this.jobOfferId());
+          console.log(this.jobOffer());
         },
         error: (err) => {
           this.errors.set(
@@ -197,11 +202,11 @@ export class OffreDetailComponent implements OnInit {
   }
 
   formatExperience(experience: number) {
-    if (experience === 0) {
-      const formated = `${0} ans (Debutant) `;
+    if (experience === 0 || experience === 1) {
+      const formated = `Debutant `;
       return formated;
     }
-    return;
+    return experience;
   }
 
   formatExpiry(expiryDate: any) {

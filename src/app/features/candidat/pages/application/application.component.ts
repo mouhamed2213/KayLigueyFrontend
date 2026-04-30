@@ -87,7 +87,7 @@ export class ApplicationComponent implements OnInit {
           this.limit.set(res.meta.limit);
           this.totalApplications.set(res.meta.total);
           this.totalPages.set(res.meta.totalPages);
-          // console.log(this.allAppliedJob);
+          console.log(this.allAppliedJob);
 
           this.isLoading.set(false);
         },

@@ -5,3 +5,4 @@ export * from './job-offer.model';
 export * from './filter.model';
 export * from './offer-respose.model';
 export * from './user.model';
+export * from './company.model';

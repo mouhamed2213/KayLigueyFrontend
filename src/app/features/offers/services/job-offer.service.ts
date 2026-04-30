@@ -5,7 +5,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { JobOffer } from '../../../core/models/job-offer.model';
 import { IOfferResponse } from '../../../core/models/offer-respose.model';
-import { IFilters } from '../../../core/models/filter.model';
+import { IFilters } from '../../../core/models/filter.model'
+import { JobOfferWithDetail } from '../../../core/models/job-offer.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -20,7 +21,7 @@ export class JobOfferService {
     page: number,
     limit: number,
     filters: IFilters,
-  ): Observable<IOfferResponse<JobOffer[]>> {
+  ): Observable<IOfferResponse<JobOfferWithDetail[]>> {
     const { city, working_mode, contract_type, education_level } = filters;
 
     const queriesParams = new HttpParams()
@@ -31,11 +32,11 @@ export class JobOfferService {
       .set('contract_type', contract_type)
       .set('education_level', education_level);
     return this.http
-      .get<IOfferResponse<JobOffer[]>>(`${this.apiUrl}/offers`, {
+      .get<IOfferResponse<JobOfferWithDetail[]>>(`${this.apiUrl}/offers`, {
         params: queriesParams,
       })
       .pipe(
-        // tap((result) => console.log(result)),
+        tap((result) => console.log(result)),
         map((res) => {
           return { data: res.data, meta: res.meta };
         }),

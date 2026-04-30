@@ -1,3 +1,4 @@
+import { JobOffer } from './../models/job-offer.model';
 import { LoggerService } from './logger/logger.service';
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -57,7 +58,7 @@ export class ApplicationService {
       >(`${this.apiUrl}/apply/all/${userId}`, { params })
       .pipe(
         tap((data) => {
-          console.log(data);
+          console.log(data.data[0].jobOffer);
         }),
       );
   }

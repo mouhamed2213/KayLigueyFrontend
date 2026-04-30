@@ -14,6 +14,8 @@ import { IFilters } from '../../../../core/models/filter.model';
 import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
 import { ContractLabelPipe } from '../../../../core/pipes/contractLabel/contract-label.pipe';
 import { WorkingModeLabelPipe } from '../../../../core/pipes/workingMode/working-mode.pipe';
+import { JobOfferWithDetail } from '../../../../core/models';
+
 import {
   CONTRACT_TYPE_CONFIG,
   CONTRACT_TYPES,
@@ -58,7 +60,6 @@ export class OffresComponent implements OnInit {
 
   protected workingModeMap = WORKING_MODE_CONFIG;
   protected workingModes = WORKING_MODES;
-
   protected contractTypeMap = CONTRACT_TYPE_CONFIG;
   protected contractTypes = CONTRACT_TYPES;
 
@@ -71,33 +72,22 @@ export class OffresComponent implements OnInit {
   private jobOfferService = inject(JobOfferService);
   private destroyRef = inject(DestroyRef);
 
-  /* =========================================================
-   * STATE MANAGEMENT (Signals)
-   * ========================================================= */
-
-  // Job data
-  protected jobOffers = signal<JobOffer[]>([]);
-
-  // Loading state (for UX)
+  protected jobOffers = signal<JobOfferWithDetail[]>([]);
   protected isLoading = signal(true);
 
-  // Pagination state
   protected currentPage = signal<number>(1);
   protected jobPerPage = signal<number>(10);
   protected totalJobs = signal<number>(0);
   protected totalPages = signal<number>(0);
 
-  // Select filte
   city = signal<string>('');
 
-  // Backend pagination metadata
   protected pagination = signal<IPagination>({
     page: 1,
     limit: 10,
     total: 0,
   });
 
-  // Filters state (single source of truth)
   protected filters = signal<IFilters>({
     city: this.city(),
     contract_type: '',
@@ -106,18 +96,9 @@ export class OffresComponent implements OnInit {
     experience: '',
   });
 
-  /* =========================================================
-   * LIFECYCLE
-   * ========================================================= */
-
   ngOnInit(): void {
-    // Initial data fetch
     this.fetchJobOffer();
   }
-
-  /* =========================================================
-   * CORE FETCH LOGIC
-   * ========================================================= */
 
   fetchJobOffer() {
     // Always enable loading before API call
@@ -134,16 +115,13 @@ export class OffresComponent implements OnInit {
           // Update job list
           this.jobOffers.set(data);
 
-          // Sync pagination from backend
           this.pagination.set(meta);
 
-          // Update derived state
           this.currentPage.set(meta.page);
           this.jobPerPage.set(meta.limit);
           this.totalJobs.set(meta.total);
           this.totalPages.set(Math.ceil(meta.total / meta.limit));
 
-          // Stop loading
           this.isLoading.set(false);
         },
         error: (err) => {
@@ -158,11 +136,7 @@ export class OffresComponent implements OnInit {
     console.log(value);
   }
 
-  /* =========================================================
-   * FILTER MANAGEMENT
-   * ========================================================= */
-
-  // Generic filter updater (scalable)
+  // Generic filter updater
   updateFilter<K extends keyof IFilters>(key: K, value: IFilters[K]) {
     this.filters.update((current) => ({
       ...current,
@@ -173,11 +147,10 @@ export class OffresComponent implements OnInit {
     // Reset to first page when filters change
     this.currentPage.set(1);
 
-    // Refetch data
+    // RefrechData data
     this.fetchJobOffer();
   }
 
-  // Reset all filters
   resetFilters() {
     this.filters.set({
       city: '',
@@ -191,22 +164,13 @@ export class OffresComponent implements OnInit {
     this.fetchJobOffer();
   }
 
-  /* =========================================================
-   * PAGINATION
-   * ========================================================= */
 
   onPageChange(page: number) {
     this.currentPage.set(page);
 
-    // Fetch with current filters
-
-    // UX: scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  /* =========================================================
-   * HELPERS (optional)
-   * ========================================================= */
 
   // Example: format salary
   formatSalary(min?: number, max?: number): string {
@@ -219,6 +183,7 @@ export class OffresComponent implements OnInit {
     if (!date) return '';
     return new Date(date).toLocaleDateString();
   }
+  
   formatedDate = signal<any>('');
 
   pageNumbers() {
