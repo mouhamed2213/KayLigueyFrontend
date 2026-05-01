@@ -4,8 +4,9 @@ import { JobStatus } from '../constant/job-status';
 import { Company } from '../models/company.model';
 import { Skills } from './skills-model';
 import { IPagination } from './offer-respose.model';
+import { IApplicationValues } from './application.model';
 
-export type JobOffer = {
+export type IJobOffer = {
   id: string;
   title: string;
   description: string;
@@ -25,8 +26,11 @@ export type JobOffer = {
   application_count: number;
 };
 
-export type JobOfferWithDetail = JobOffer & {
+export type JobOfferWithDetail = IJobOffer & {
+  applications: IApplicationValues[];
   company: Company;
   skills: Skills[];
-  meta: IPagination;
+  meta?: IPagination;
 };
+
+

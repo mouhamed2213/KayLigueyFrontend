@@ -35,7 +35,7 @@ export class ApplicationComponent implements OnInit {
   private applicationService = inject(ApplicationService);
   private router = inject(Router);
   private loggerService = inject(LoggerService);
-  protected allAppliedJob: IApplication[] = [];
+  protected allAppliedJob: any[] = [];
   protected currentPage = signal(1);
   protected limit = signal(3);
   protected totalApplications = signal(0);
@@ -63,9 +63,6 @@ export class ApplicationComponent implements OnInit {
     this.fetchApplication();
   }
 
-  /* =========================================================
-   * CORE FETCH LOGIC
-   * ========================================================= */
   private fetchApplication() {
     this.isLoading.set(true);
 

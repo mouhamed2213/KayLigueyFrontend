@@ -1,4 +1,3 @@
-import { JobOffer } from './../models/job-offer.model';
 import { LoggerService } from './logger/logger.service';
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -37,9 +36,15 @@ export class ApplicationService {
     userId: string,
   ): Observable<ApiResponse<IApplication>> {
     console.log({ appliedJobbOfferId, userId });
-    return this.http.get<ApiResponse<IApplication>>(
-      `${this.apiUrl}/apply/${appliedJobbOfferId}/${userId}`,
-    );
+    return this.http
+      .get<
+        ApiResponse<IApplication>
+      >(`${this.apiUrl}/apply/${appliedJobbOfferId}/${userId}`)
+      .pipe(
+        tap((res) => {
+          console.log(res.data);
+        }),
+      );
   }
 
   // Get all job applied by the user(CANDIDAT)
@@ -58,7 +63,7 @@ export class ApplicationService {
       >(`${this.apiUrl}/apply/all/${userId}`, { params })
       .pipe(
         tap((data) => {
-          console.log(data.data[0].jobOffer);
+          console.log(data.data[0]);
         }),
       );
   }

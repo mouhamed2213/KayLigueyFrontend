@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, signal, DestroyRef } from '@angular/core';
 import { JobOfferService } from '../../services/job-offer.service';
-import { JobOffer } from '../../../../core/models/job-offer.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -183,7 +182,7 @@ export class OffresComponent implements OnInit {
     if (!date) return '';
     return new Date(date).toLocaleDateString();
   }
-  
+
   formatedDate = signal<any>('');
 
   pageNumbers() {

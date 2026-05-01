@@ -1,245 +1,251 @@
-@if (!isLoading()) {
-  <div class="container mx-auto px-5 font-sans">
-    <!-- Header -->
-    <!-- <div class="flex flex-col w-full"> -->
-    <div class="w-full">
-      <h3>Mes Candidatures</h3>
-      <p>Suivez l'avancement de toutes vos candidatures en temps réel.</p>
-    </div>
-
-    <!-- CARDS ================================= -->
-
-    <div class="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4">
-      <div
-        class="card cursor-pointer border border-gray-100 bg-white shadow-md transition-shadow hover:shadow-lg"
-      >
-        <div class="card-body rounded-lg p-6">
-          <div class="mb-2 flex items-center gap-2">
-            <span class="h-3 w-3 rounded-full bg-red-700"></span>
-            <h2 class="text-sm font-medium text-gray-500 uppercase"></h2>
-          </div>
-
-          <p class="text-4xl font-bold text-gray-800">
-            {{ totalApplications() }}
-          </p>
-
-          <p class="mt-2 text-sm text-gray-400">Total Envoyees</p>
-        </div>
+@if (allAppliedJob.length > 0) {
+  @if (!isLoading()) {
+    <div class="container mx-auto px-5 font-sans">
+      <!-- Header -->
+      <!-- <div class="flex flex-col w-full"> -->
+      <div class="w-full">
+        <h3>Mes Candidatures</h3>
+        <p>Suivez l'avancement de toutes vos candidatures en temps réel.</p>
       </div>
 
-      <div
-        class="card cursor-pointer border border-gray-100 bg-white shadow-md transition-shadow hover:shadow-lg"
-      >
-        <div class="card-body rounded-lg p-6">
-          <div class="mb-2 flex items-center gap-2">
-            <span
-              class="h-3 w-3 rounded-full"
-              [class]="appConfig['SUBMITTED']?.class"
-            ></span>
-            <!-- <h2 class="text-sm font-medium text-gray-500 uppercase">Statut</h2> -->
-          </div>
+      <!-- CARDS ================================= -->
 
-          <p class="text-4xl font-bold text-gray-800">
-            {{ globalStats.SUBMITTED || 0 }}
-          </p>
-
-          <p class="mt-2 text-sm text-gray-400">
-            {{ appConfig["SUBMITTED"]?.label }}
-          </p>
-        </div>
-      </div>
-
-      <div
-        class="card cursor-pointer border border-gray-100 bg-white shadow-md transition-shadow hover:shadow-lg"
-      >
-        <div class="card-body rounded-lg p-6">
-          <div class="mb-2 flex items-center gap-2">
-            <span
-              class="h-3 w-3 rounded-full"
-              [class]="appConfig['SHORTLISTED']?.class"
-            ></span>
-          </div>
-
-          <p class="text-4xl font-bold text-gray-800">
-            {{ globalStats.SHORTLISTED || 0 }}
-          </p>
-
-          <p class="mt-2 text-sm text-gray-400">
-            {{ appConfig["SHORTLISTED"]?.label }}
-          </p>
-        </div>
-      </div>
-
-      <div
-        class="card cursor-pointer border border-gray-100 bg-white shadow-md transition-shadow hover:shadow-lg"
-      >
-        <div class="card-body rounded-lg p-6">
-          <div class="mb-2 flex items-center gap-2">
-            <span
-              class="h-3 w-3 rounded-full"
-              [class]="appConfig['INTERVIEW']?.class"
-            ></span>
-          </div>
-
-          <p class="text-4xl font-bold text-gray-800">
-            {{ globalStats.INTERVIEW || 0 }}
-          </p>
-
-          <p class="mt-2 text-sm text-gray-400">
-            {{ appConfig["INTERVIEW"]?.label }}
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!--  SEARCH BAR ================================= -->
-    <div class="group relative flex w-full max-w-md items-center">
-      <!-- Conteneur de l'icône (Positionné à gauche à l'intérieur) -->
-      <div
-        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
-      >
-        <lucide-icon
-          name="search"
-          class="h-5 w-5 text-gray-400 transition-colors group-focus-within:text-[#C0152A]"
-        ></lucide-icon>
-      </div>
-
-      <!-- L'Input -->
-      <input
-        type="search"
-        placeholder="Rechercher une application..."
-        class="block w-full rounded-xl border border-gray-200 bg-gray-50 py-2.5 pr-3 pl-10 text-sm text-gray-900 transition-all duration-200 outline-none focus:border-[#C0152A] focus:bg-white focus:ring-2 focus:ring-[#C0152A]/20"
-        aria-label="Search"
-      />
-    </div>
-
-    <!-- APPLICATIONN CARD -->
-    <div class="mt-5 grid gap-4">
-      @for (app of allAppliedJob; track app.id) {
+      <div class="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4">
         <div
-          class="group card hover:border-kl-border-hover w-full cursor-pointer space-y-7 rounded-md border border-transparent bg-white p-3 transition-all duration-300 shadow-md hover:shadow-xl"
+          class="card cursor-pointer border border-gray-100 bg-white shadow-md transition-shadow hover:shadow-lg"
         >
-          <div class="flex gap-3">
-            <span class="logo_style_min">W</span>
-
-            <div class="flex w-full flex-col">
-              <div class="flex w-full justify-between">
-                <h3>{{ app.jobOffer?.title }}</h3>
-                <p>{{ app.status }}</p>
-              </div>
-
-              <div class="flex justify-between mt-0.5">
-                <div class="flex text-kl-muted space-x-2">
-                  <small class="text-xs"> {{ app.jobOffer?.city }} </small>
-                  <small class="text-xs">{{
-                    app.jobOffer?.contract_type | contractLabel
-                  }}</small>
-                  <small class="text-xs">
-                    {{ app.jobOffer?.working_mode | workingModelabel }}</small
-                  >
-                </div>
-
-                <div>
-                  <p class="text-xs">
-                    Publier le {{ app.createdAt | date: "dd MMM " }}
-                  </p>
-                </div>
-              </div>
+          <div class="card-body rounded-lg p-6">
+            <div class="mb-2 flex items-center gap-2">
+              <span class="h-3 w-3 rounded-full bg-red-700"></span>
+              <h2 class="text-sm font-medium text-gray-500 uppercase"></h2>
             </div>
-          </div>
 
-          <div class="card-body">
-            <!-- Si ENtretien planifier  affichier .....-->
+            <p class="text-4xl font-bold text-gray-800">
+              {{ totalApplications() }}
+            </p>
 
-            <!--   Job Skill-->
-
-            <div>
-              <div class="flex justify-between">
-                <div class="mx-5 flex gap-4">
-                  <p>Figma</p>
-                  <p>Adobe XD</p>
-                  <p>CV joint</p>
-                </div>
-
-                <div
-                  class="hidden space-x-4 group-hover:block transition-all duration-300 md:ml-6"
-                >
-                  <a routerLink="/offers/offer/{{ app.jobOffer_id }}"
-                    >Voir l'offre</a
-                  >
-                  <a routerLink="#" class="text-kl-text-red">Retirer</a>
-                </div>
-              </div>
-            </div>
+            <p class="mt-2 text-sm text-gray-400">Total Envoyees</p>
           </div>
         </div>
-      }
 
-      <div>
-        @if (totalPages() > 1) {
-          <div class="flex items-center justify-center gap-1.5 mt-4">
-            <button
-              type="button"
-              (click)="onPageChange(currentPage() - 1)"
-              [disabled]="currentPage() === 1"
-              class="flex items-center gap-1 px-4 py-2 rounded-[9px] border border-kl-border bg-white text-xs text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-kl-border disabled:hover:text-kl-muted cursor-pointer"
-            >
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-                <path
-                  d="M9 11L5 7l4-4"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              Précédent
-            </button>
+        <div
+          class="card cursor-pointer border border-gray-100 bg-white shadow-md transition-shadow hover:shadow-lg"
+        >
+          <div class="card-body rounded-lg p-6">
+            <div class="mb-2 flex items-center gap-2">
+              <span
+                class="h-3 w-3 rounded-full"
+                [class]="appConfig['SUBMITTED']?.class"
+              ></span>
+              <!-- <h2 class="text-sm font-medium text-gray-500 uppercase">Statut</h2> -->
+            </div>
 
-            @for (page of pageNumbers(); track page) {
-              @if (page === -1) {
-                <span class="text-kl-muted px-1 text-xs">…</span>
-              } @else {
-                <button
-                  type="button"
-                  (click)="onPageChange(page)"
-                  [class]="
-                    page === currentPage()
-                      ? 'w-8 h-8 rounded-[9px] bg-kl-primary-red text-white text-xs font-bold cursor-pointer'
-                      : 'w-8 h-8 rounded-[9px] border border-kl-border bg-white text-xs text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors cursor-pointer'
-                  "
-                >
-                  {{ page }}
-                </button>
-              }
-            }
+            <p class="text-4xl font-bold text-gray-800">
+              {{ globalStats.SUBMITTED || 0 }}
+            </p>
 
-            <button
-              type="button"
-              (click)="onPageChange(currentPage() + 1)"
-              [disabled]="currentPage() >= totalPages()"
-              class="flex items-center gap-1 px-4 py-2 rounded-[9px] border border-kl-border bg-white text-xs text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-kl-border disabled:hover:text-kl-muted cursor-pointer"
-            >
-              Suivant
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-                <path
-                  d="M5 3l4 4-4 4"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
+            <p class="mt-2 text-sm text-gray-400">
+              {{ appConfig["SUBMITTED"]?.label }}
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="card cursor-pointer border border-gray-100 bg-white shadow-md transition-shadow hover:shadow-lg"
+        >
+          <div class="card-body rounded-lg p-6">
+            <div class="mb-2 flex items-center gap-2">
+              <span
+                class="h-3 w-3 rounded-full"
+                [class]="appConfig['SHORTLISTED']?.class"
+              ></span>
+            </div>
+
+            <p class="text-4xl font-bold text-gray-800">
+              {{ globalStats.SHORTLISTED || 0 }}
+            </p>
+
+            <p class="mt-2 text-sm text-gray-400">
+              {{ appConfig["SHORTLISTED"]?.label }}
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="card cursor-pointer border border-gray-100 bg-white shadow-md transition-shadow hover:shadow-lg"
+        >
+          <div class="card-body rounded-lg p-6">
+            <div class="mb-2 flex items-center gap-2">
+              <span
+                class="h-3 w-3 rounded-full"
+                [class]="appConfig['INTERVIEW']?.class"
+              ></span>
+            </div>
+
+            <p class="text-4xl font-bold text-gray-800">
+              {{ globalStats.INTERVIEW || 0 }}
+            </p>
+
+            <p class="mt-2 text-sm text-gray-400">
+              {{ appConfig["INTERVIEW"]?.label }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!--  SEARCH BAR ================================= -->
+      <div class="group relative flex w-full max-w-md items-center">
+        <!-- Conteneur de l'icône (Positionné à gauche à l'intérieur) -->
+        <div
+          class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
+        >
+          <lucide-icon
+            name="search"
+            class="h-5 w-5 text-gray-400 transition-colors group-focus-within:text-[#C0152A]"
+          ></lucide-icon>
+        </div>
+
+        <!-- L'Input -->
+        <input
+          type="search"
+          placeholder="Rechercher une application..."
+          class="block w-full rounded-xl border border-gray-200 bg-gray-50 py-2.5 pr-3 pl-10 text-sm text-gray-900 transition-all duration-200 outline-none focus:border-[#C0152A] focus:bg-white focus:ring-2 focus:ring-[#C0152A]/20"
+          aria-label="Search"
+        />
+      </div>
+
+      <!-- APPLICATIONN CARD -->
+      <div class="mt-5 grid gap-4">
+        @for (app of allAppliedJob; track app.id) {
+          <div
+            class="group card hover:border-kl-border-hover w-full cursor-pointer space-y-7 rounded-md border border-transparent bg-white p-3 transition-all duration-300 shadow-md hover:shadow-xl"
+          >
+            <div class="flex gap-3">
+              <span class="logo_style_min">W</span>
+
+              <div class="flex w-full flex-col">
+                <div class="flex w-full justify-between">
+                  <h3>{{ app.jobOffer?.title }}</h3>
+                  <p>{{ app.status }}</p>
+                </div>
+
+                <div class="flex justify-between mt-0.5">
+                  <div class="flex text-kl-muted space-x-2">
+                    <small class="text-xs"> {{ app.jobOffer?.city }} </small>
+                    <small class="text-xs">{{
+                      app.jobOffer?.contract_type | contractLabel
+                    }}</small>
+                    <small class="text-xs">
+                      {{ app.jobOffer?.working_mode | workingModelabel }}</small
+                    >
+                  </div>
+
+                  <div>
+                    <p class="text-xs">
+                      Publier le {{ app.createdAt | date: "dd MMM " }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <!-- Si ENtretien planifier  affichier .....-->
+
+              <!--   Job Skill-->
+
+              <div>
+                <div class="flex justify-between">
+                  <div class="mx-5 flex gap-4">
+                    <p>Figma</p>
+                    <p>Adobe XD</p>
+                    <p>CV joint</p>
+                  </div>
+
+                  <div
+                    class="hidden space-x-4 group-hover:block transition-all duration-300 md:ml-6"
+                  >
+                    <a routerLink="/offers/offer/{{ app.jobOffer_id }}"
+                      >Voir l'offre</a
+                    >
+                    <a routerLink="#" class="text-kl-text-red">Retirer</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         }
+
+        <div>
+          @if (totalPages() > 1) {
+            <div class="flex items-center justify-center gap-1.5 mt-4">
+              <button
+                type="button"
+                (click)="onPageChange(currentPage() - 1)"
+                [disabled]="currentPage() === 1"
+                class="flex items-center gap-1 px-4 py-2 rounded-[9px] border border-kl-border bg-white text-xs text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-kl-border disabled:hover:text-kl-muted cursor-pointer"
+              >
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M9 11L5 7l4-4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                Précédent
+              </button>
+
+              @for (page of pageNumbers(); track page) {
+                @if (page === -1) {
+                  <span class="text-kl-muted px-1 text-xs">…</span>
+                } @else {
+                  <button
+                    type="button"
+                    (click)="onPageChange(page)"
+                    [class]="
+                      page === currentPage()
+                        ? 'w-8 h-8 rounded-[9px] bg-kl-primary-red text-white text-xs font-bold cursor-pointer'
+                        : 'w-8 h-8 rounded-[9px] border border-kl-border bg-white text-xs text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors cursor-pointer'
+                    "
+                  >
+                    {{ page }}
+                  </button>
+                }
+              }
+
+              <button
+                type="button"
+                (click)="onPageChange(currentPage() + 1)"
+                [disabled]="currentPage() >= totalPages()"
+                class="flex items-center gap-1 px-4 py-2 rounded-[9px] border border-kl-border bg-white text-xs text-kl-muted hover:border-kl-primary-red hover:text-kl-primary-red transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:border-kl-border disabled:hover:text-kl-muted cursor-pointer"
+              >
+                Suivant
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M5 3l4 4-4 4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          }
+        </div>
       </div>
     </div>
-  </div>
+  } @else {
+    <div class="flex items-center justify-center min-h-[60vh]">
+      <app-loader>
+        <mat-spinner></mat-spinner>
+      </app-loader>
+    </div>
+  }
 } @else {
-  <div class="flex items-center justify-center min-h-[60vh]">
-    <app-loader>
-      <mat-spinner></mat-spinner>
-    </app-loader>
+  <div>
+    <p>Aucune candidature Effectuer</p>
   </div>
 }

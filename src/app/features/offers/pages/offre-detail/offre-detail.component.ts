@@ -1,3 +1,4 @@
+import { JobOfferWithDetail } from './../../../../core/models/job-offer.model';
 import { ApplicationStatus } from './../../../../core/constant/application-status';
 import { JobOfferService } from './../../services/job-offer.service';
 import { AuthService } from './../../../../core/services/auth.service';
@@ -23,8 +24,6 @@ import { RelativeTimePipe } from '../../../../shared/pipes/relative-time.pipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IApplication, ICreateApplication } from '../../../../core/models';
 import { ApplicationService } from '../../../../core/services/application.service';
-import { tap } from 'rxjs';
-
 @Component({
   selector: 'app-offre-detail',
   imports: [
@@ -41,21 +40,19 @@ export class OffreDetailComponent implements OnInit {
   private jobOfferService = inject(JobOfferService);
   private applicationService = inject(ApplicationService);
   private document = inject(DOCUMENT); // access dom document
+
   private platformId = inject(PLATFORM_ID);
   private destroyRef = inject(DestroyRef);
   private route = inject(ActivatedRoute);
-  protected jobOffer = signal<any>('');
+  // protected jobOffer = signal<JobOfferWithDetail | null>(null);
+  protected jobOffer = signal<JobOfferWithDetail | null>(null);
   protected errors = signal<string | null>(null);
   protected snackBar = inject(MatSnackBar);
   private authService = inject(AuthService);
   private router = inject(Router);
   private userId = signal<string>('');
   private jobOfferId = signal<string>('');
-  protected applicationStatus = signal<ApplicationStatus | undefined | null>(
-    null,
-  );
-  protected appliedJobOffer = signal<IApplication | null>(null);
-
+  protected applicationStatus = signal<ApplicationStatus | null>(null);
   workingModeMap = WORKING_MODE_CONFIG;
   contractTypeMap = CONTRACT_TYPE_CONFIG;
 
@@ -71,32 +68,7 @@ export class OffreDetailComponent implements OnInit {
       this.router.navigateByUrl('/register');
       return;
     }
-    // Get user Id
-    this.authService.getUser().subscribe({
-      next: (user) => {
-        this.userId.set(user?.id as string);
-
-        // ============ if out the user id become null (Should Be fix itt)
-        this.applicationService
-          .currentJobOffer(this.jobOfferId(), this.userId())
-          .subscribe({
-            next: ({ data }) => {
-              this.appliedJobOffer.set(data);
-              this.applicationStatus.set(this.appliedJobOffer()?.status);
-              // console.log(this.appliedJobOffer());
-              this.fetchData();
-            },
-
-            error: (err) => {
-              console.log('error while applied job');
-            },
-          });
-      },
-    });
-
     this.fetchData();
-
-    //  Request to check the status of the job offer
   }
 
   private fetchData() {
@@ -107,11 +79,16 @@ export class OffreDetailComponent implements OnInit {
       .subscribe({
         next: ({ data }) => {
           this.jobOffer.set(data);
-          console.log(this.jobOffer());
+          this.jobOffer()?.applications.map((app) => {
+            // job offer application status
+            app.status;
+            this.applicationStatus.set(app.status);
+          });
         },
+
         error: (err) => {
           this.errors.set(
-            'An error has occurred. We are unable . Please try again.',
+            'An error has occurred. We are unable  . Please try again.',
           );
         },
       });
@@ -127,7 +104,7 @@ export class OffreDetailComponent implements OnInit {
     const applicationInfo: ICreateApplication = {
       candidat_id: this.userId(),
       jobOffer_id: this.jobOfferId(),
-      // cover_letter: '', // to implemnet
+      // cover_letter: '', // to implemnet with an input field
     };
 
     // ADD APPLIED JOB INFO
@@ -140,14 +117,16 @@ export class OffreDetailComponent implements OnInit {
           this.isApplied.set(result.success);
         }
       },
+      error: (err) => {
+        this.errors.set(
+          'Votre demande de candidature pour cette offre a echouer veuiller Reessayer dans quelque minut ', // toast
+        );
+      },
     });
 
     return;
   }
 
-  //  Display a message depending on the application status
-  // Each statut has his own personalized message and can be displayed in many place
-  // Dependending on the condition
   statusMessage() {
     switch (this.applicationStatus()) {
       case 'SUBMITTED':
@@ -201,7 +180,7 @@ export class OffreDetailComponent implements OnInit {
     return false;
   }
 
-  formatExperience(experience: number) {
+  formatExperience(experience: number | undefined) {
     if (experience === 0 || experience === 1) {
       const formated = `Debutant `;
       return formated;
@@ -209,7 +188,8 @@ export class OffreDetailComponent implements OnInit {
     return experience;
   }
 
-  formatExpiry(expiryDate: any) {
+  formatExpiry(expiryDate: string | undefined) {
+    if (!expiryDate) return 'Nom spécifié';
     const date = new Date(expiryDate);
     return date.toLocaleDateString('fr-FR');
   }

@@ -1,6 +1,5 @@
 import { ApplicationStatus } from '../constant/application-status';
-import { JobOffer as IJobOffer } from './job-offer.model';
-export interface IApplication {
+export type IApplication = {
   id: string;
   candidat_id: string;
   jobOffer_id: string;
@@ -9,10 +8,12 @@ export interface IApplication {
   recruiter_note?: string | null;
   interview_date: string | null;
   createdAt: string;
+};
 
-  jobOffer?: IJobOffer;
-
-}
+export type IApplicationValues = Pick<
+  IApplication,
+  'status' | 'interview_date' | 'cover_letter' | 'createdAt'
+>;
 
 export interface IPaginatedResponse<T> {
   data: T[];
