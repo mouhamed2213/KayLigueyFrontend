@@ -4,8 +4,9 @@ import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { IOfferResponse } from '../../../core/models/offer-respose.model';
-import { IFilters } from '../../../core/models/filter.model'
+import { IFilters } from '../../../core/models/filter.model';
 import { JobOfferWithDetail } from '../../../core/models/job-offer.model';
+import { ICreateApplication } from '../../../core/models';
 @Injectable({
   providedIn: 'root',
 })
@@ -47,6 +48,7 @@ export class JobOfferService {
       );
   }
 
+  // Type this
   getOneJobOffer(id: string): Observable<any> {
     const query = this.http.get<any>(`${this.apiUrl}/offers/${id}`);
     return query.pipe(
@@ -56,5 +58,20 @@ export class JobOfferService {
         return throwError(() => err);
       }),
     );
+  }
+
+  //  Type this function
+  onApplyJobOffer(
+    jobOfferId: string,
+    applicationData: ICreateApplication,
+  ): Observable<any> {
+    const query = this.http
+      .post<any>(`${this.apiUrl}/offers/apply/${jobOfferId}`, applicationData)
+      .pipe(
+        tap((result) => {
+          console.log(result);
+        }),
+      );
+    return query;
   }
 }

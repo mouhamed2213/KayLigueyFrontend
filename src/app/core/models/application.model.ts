@@ -7,12 +7,12 @@ export type IApplication = {
   status: ApplicationStatus;
   recruiter_note?: string | null;
   interview_date: string | null;
-  createdAt: string;
+  created_at: string;
 };
 
 export type IApplicationValues = Pick<
   IApplication,
-  'status' | 'interview_date' | 'cover_letter' | 'createdAt'
+  'status' | 'interview_date' | 'cover_letter' | 'created_at'
 >;
 
 export interface IPaginatedResponse<T> {
@@ -29,6 +29,7 @@ export interface ICreateApplication {
   candidat_id: string;
   jobOffer_id: string;
   cover_letter?: string | null;
+  status: ApplicationStatus;
 }
 
 // (Entrée PATCH)

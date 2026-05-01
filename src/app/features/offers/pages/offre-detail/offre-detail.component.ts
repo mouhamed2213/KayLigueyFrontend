@@ -1,7 +1,9 @@
+import { LoggerService } from './../../../../core/services/logger/logger.service';
 import { JobOfferWithDetail } from './../../../../core/models/job-offer.model';
 import { ApplicationStatus } from './../../../../core/constant/application-status';
 import { JobOfferService } from './../../services/job-offer.service';
 import { AuthService } from './../../../../core/services/auth.service';
+
 import {
   Component,
   inject,
@@ -22,7 +24,7 @@ import { FormatSalaryPipe } from '../../../../shared/pipes/format-salary.pipe';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { RelativeTimePipe } from '../../../../shared/pipes/relative-time.pipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IApplication, ICreateApplication } from '../../../../core/models';
+import { ICreateApplication } from '../../../../core/models';
 import { ApplicationService } from '../../../../core/services/application.service';
 @Component({
   selector: 'app-offre-detail',
@@ -68,6 +70,19 @@ export class OffreDetailComponent implements OnInit {
       this.router.navigateByUrl('/register');
       return;
     }
+
+    this.authService.getUser().subscribe({
+      next: (user) => {
+        //  avoid undefined error
+        if (user?.id) {
+          this.userId.set(user?.id);
+        }
+      },
+      error: (err) => {
+        console.error('Cannot loaad job of id ', this.jobOfferId());
+      },
+    });
+
     this.fetchData();
   }
 
@@ -104,25 +119,30 @@ export class OffreDetailComponent implements OnInit {
     const applicationInfo: ICreateApplication = {
       candidat_id: this.userId(),
       jobOffer_id: this.jobOfferId(),
+      status: 'SUBMITTED',
       // cover_letter: '', // to implemnet with an input field
     };
 
+    console.log(applicationInfo);
+
     // ADD APPLIED JOB INFO
-    this.applicationService.applyToJobOffer(applicationInfo).subscribe({
-      next: (result) => {
-        if (result.success) {
-          this.snackBar.open('offre postulee avec succes', 'Fermer', {
-            duration: 2000,
-          });
-          this.isApplied.set(result.success);
-        }
-      },
-      error: (err) => {
-        this.errors.set(
-          'Votre demande de candidature pour cette offre a echouer veuiller Reessayer dans quelque minut ', // toast
-        );
-      },
-    });
+    this.jobOfferService
+      .onApplyJobOffer(this.jobOfferId(), applicationInfo)
+      .subscribe({
+        next: (result) => {
+          if (result.success) {
+            this.snackBar.open('offre postulee avec succes', 'Fermer', {
+              duration: 2000,
+            });
+            this.isApplied.set(result.success);
+          }
+        },
+        error: (err) => {
+          this.errors.set(
+            'Votre demande de candidature pour cette offre a echouer veuiller Reessayer dans quelque minute ', // toast
+          );
+        },
+      });
 
     return;
   }

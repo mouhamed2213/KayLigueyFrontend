@@ -56,9 +56,10 @@ export class ApplicationComponent implements OnInit {
     this.authService.getUser().subscribe({
       next: (user) => {
         this.userId.set(user?.id as string);
-        // console.log(user);
+        console.log(user);
       },
     });
+    this.loadApplications();
 
     this.fetchApplication();
   }
@@ -66,7 +67,6 @@ export class ApplicationComponent implements OnInit {
   private fetchApplication() {
     this.isLoading.set(true);
 
-    this.loadApplications();
     this.loadApplicationDetails();
     this.loadStats();
     this.isLoading.set(false);
@@ -79,6 +79,7 @@ export class ApplicationComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.allAppliedJob = res.data;
+          console.log(res);
 
           this.currentPage.set(res.meta.page);
           this.limit.set(res.meta.limit);
@@ -100,9 +101,13 @@ export class ApplicationComponent implements OnInit {
     this.isLoading.set(true);
     this.applicationService.appliedStatsCount(this.userId()).subscribe({
       next: (res) => {
-        // console.log(res.data);
+        console.log(res);
         this.totalStats.push(res.data);
         this.formatGlobalappliedStats(this.totalStats);
+      },
+      error: (err) => {
+        console.log(err);
+        return err;
       },
     });
   }
@@ -122,6 +127,7 @@ export class ApplicationComponent implements OnInit {
 
   // PAGINATION
   loadApplicationDetails() {
+    //-----------------------------------------------///?????????????????????????????????????????????????????????????????????????????????????????
     this.applicationService
       .allAppliedsByUser(this.userId(), this.currentPage(), this.limit())
       .subscribe({

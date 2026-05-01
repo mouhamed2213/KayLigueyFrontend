@@ -62,8 +62,9 @@ export class ApplicationService {
         IPaginatedResponse<IApplication>
       >(`${this.apiUrl}/apply/all/${userId}`, { params })
       .pipe(
-        tap((data) => {
-          console.log(data.data[0]);
+        catchError((err) => {
+          console.log(err);
+          return throwError(() => 'Error Occurse while loading Applications');
         }),
       );
   }
