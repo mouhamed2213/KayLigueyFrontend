@@ -6,7 +6,7 @@ import {
 import { inject, Component, OnInit, signal } from '@angular/core';
 import { ApplicationService } from '../../../../core/services/application.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { IApplication } from '../../../../core/models';
+import { IApplication, JobOfferWithDetail } from '../../../../core/models';
 import { LucideAngularModule } from 'lucide-angular';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { WorkingModeLabelPipe } from '../../../../core/pipes/workingMode/working-mode.pipe';
@@ -56,7 +56,7 @@ export class ApplicationComponent implements OnInit {
     this.authService.getUser().subscribe({
       next: (user) => {
         this.userId.set(user?.id as string);
-        console.log(user);
+        // console.log(user);
       },
     });
     this.loadApplications();
@@ -79,7 +79,7 @@ export class ApplicationComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.allAppliedJob = res.data;
-          console.log(res);
+          // console.log(res);
 
           this.currentPage.set(res.meta.page);
           this.limit.set(res.meta.limit);
@@ -101,7 +101,7 @@ export class ApplicationComponent implements OnInit {
     this.isLoading.set(true);
     this.applicationService.appliedStatsCount(this.userId()).subscribe({
       next: (res) => {
-        console.log(res);
+        // console.log(res);
         this.totalStats.push(res.data);
         this.formatGlobalappliedStats(this.totalStats);
       },
